@@ -56,8 +56,7 @@ public class TowerFiringSystem : IEcsPreInitSystem, IEcsRunSystem
             ProjectileView projectileView = GameObject.Instantiate(sharedData.Settings.ProjectilePrefab, Vector3.zero, Quaternion.identity);
             
             // Init components
-            projectilePosition.x = 0;
-            projectilePosition.y = 0;
+            projectilePosition = Vector2.zero;
             projectileMovement.Velocity = ((Vector2)positionPool.Get(towerTargetSelector.CurrentTarget)).normalized;
             projectileMovement.StopRadius = 0;
             

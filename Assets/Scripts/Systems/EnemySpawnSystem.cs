@@ -44,8 +44,7 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
         Vector2 randomPosition = Random.insideUnitCircle.normalized * sharedData.Settings.SpawnRadius;
 
         // Init Components
-        position.x = randomPosition.x;
-        position.y = randomPosition.y;
+        position = randomPosition;
 
         movement.Velocity = -randomPosition.normalized;
         movement.StopRadius = 1;

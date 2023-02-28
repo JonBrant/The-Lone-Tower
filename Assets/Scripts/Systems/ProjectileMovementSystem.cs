@@ -30,8 +30,7 @@ public class ProjectileMovementSystem : IEcsPreInitSystem, IEcsRunSystem
             ref Movement projectileMovement = ref movementPool.Get(entity);
 
             var newPosition = projectilePosition + Time.deltaTime * projectileMovement.Velocity;
-            projectilePosition.x = newPosition.x;
-            projectilePosition.y = newPosition.y;
+            projectilePosition = newPosition;
         }
     }
 }
