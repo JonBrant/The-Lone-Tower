@@ -1,3 +1,4 @@
+using Guirao.UltimateTextDamage;
 using Leopotam.EcsLite;
 using UnityEngine;
 
@@ -55,9 +56,11 @@ public class TowerFiringSystem : IEcsPreInitSystem, IEcsRunSystem
 
             // Init components
             projectile.Damage = projectileView.Damage;
+            // projectile.OnDamageDealt += (damage, transform) => UltimateTextDamageManager.Instance.AddStack(damage, transform, "normal");
             projectilePosition = ((Vector2)positionPool.Get(towerTargetSelector.CurrentTarget)).normalized * 0.05f; 
             projectileMovement.Velocity = ((Vector2)positionPool.Get(towerTargetSelector.CurrentTarget)).normalized * projectileView.MovementSpeed;
             projectileMovement.StopRadius = 0;
+            
 
 
             // Init View
