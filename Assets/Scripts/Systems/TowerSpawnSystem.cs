@@ -22,19 +22,24 @@ public class TowerSpawnSystem : IEcsPreInitSystem, IEcsInitSystem
         EcsPool<Tower> towerPool = world.GetPool<Tower>();
         EcsPool<TowerWeapon> towerWeaponPool = world.GetPool<TowerWeapon>();
         EcsPool<TowerTargetSelector> towerTargetingPool = world.GetPool<TowerTargetSelector>();
+        EcsPool<Health> healthPool = world.GetPool<Health>();
         ref Tower tower = ref towerPool.Add(entity);
         ref TowerWeapon towerWeapon = ref towerWeaponPool.Add(entity);
         ref TowerTargetSelector towerTargetSelector = ref towerTargetingPool.Add(entity);
+        ref Health towerHealth = ref healthPool.Add(entity);
         
         // Setup View
         TowerView towerView = GameObject.Instantiate(sharedData.Settings.TowerPrefab, Vector3.zero, Quaternion.identity);
         
         // Init components
+        towerHealth.MaxHealth = towerView.StartingHealth;
+        towerHealth.CurrentHealth = towerView.StartingHealth;
         towerWeapon.AttackCooldown = towerView.AttackCooldown;
         towerTargetSelector.TargetingRange = towerView.TargetingRange;
         
         
         // Init View
         towerView.packedEntity = packedEntity;
+        towerView.world = world;
     }
 }

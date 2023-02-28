@@ -46,8 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5fec0e497a31f41a7a01c2929e7ae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartingHealth: 500
   AttackCooldown: 0.3
   TargetingRange: 5
+  HealthBar: {fileID: 463204742845015056}
 --- !u!212 &2203159105387169486
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -111,7 +113,7 @@ GameObject:
   - component: {fileID: 3132049419099964836}
   - component: {fileID: 463204742845015056}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

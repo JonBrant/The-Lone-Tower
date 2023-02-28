@@ -6,6 +6,8 @@ public class EnemyView : MonoBehaviour
 {
     public float MovementSpeed = 5;
     public float StartingHealth = 10;
+    public float Damage = 1;
+    public float DamageCooldown = 1;
 
     [SerializeField] private SpriteRenderer healthBar;
     

@@ -27,8 +27,13 @@ public class MovementSystem : IEcsPreInitSystem, IEcsRunSystem
 
             if (((Vector2)position).magnitude > movement.StopRadius)
             {
+                movement.Stopped = false;
                 var newPosition = position + Time.deltaTime * movement.Velocity;
                 position = newPosition;
+            }
+            else
+            {
+                movement.Stopped = true;
             }
         }
 
