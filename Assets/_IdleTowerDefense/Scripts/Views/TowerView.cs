@@ -13,6 +13,8 @@ public class TowerView : MonoBehaviour
 
 
     [SerializeField] private SpriteRenderer HealthBar;
+    [SerializeField] private LineRenderer RadiusRenderer;
+
     public EcsPackedEntity packedEntity;
     public EcsWorld world;
 
@@ -26,6 +28,30 @@ public class TowerView : MonoBehaviour
 
             HealthBar.sharedMaterial.SetFloat("_Arc2", Mathf.Lerp(360, 0, towerHealth.CurrentHealth / towerHealth.MaxHealth));
             HealthBar.color = Color.Lerp(Color.red, Color.green, towerHealth.CurrentHealth / towerHealth.MaxHealth);
+        }
+    }
+
+    private void OnValidate()
+    {
+        UpdateTargetingRange(TargetingRange);
+    }
+
+    private void UpdateTargetingRange(float range)
+    {
+        int numSegments = 80;
+        float deltaTheta = (2 * Mathf.PI) / numSegments;
+        float theta = 0f;
+
+        RadiusRenderer.positionCount = numSegments + 1;
+
+        for (int i = 0; i < numSegments + 1; i++)
+        {
+            float x = range * Mathf.Cos(theta);
+            float y = range * Mathf.Sin(theta);
+
+            RadiusRenderer.SetPosition(i, new Vector3(x, y, 0f));
+
+            theta += deltaTheta;
         }
     }
 }
