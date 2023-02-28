@@ -41,8 +41,6 @@ public class TowerFiringSystem : IEcsPreInitSystem, IEcsRunSystem
             }
 
             towerWeapon.AttackCooldownRemaining = towerWeapon.AttackCooldown;
-
-            Debug.Log($"{nameof(TowerFiringSystem)}.{nameof(Run)}() - FIYAH");
             
             // Spawn projectile
             int projectileEntity = world.NewEntity();

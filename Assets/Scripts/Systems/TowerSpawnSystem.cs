@@ -32,7 +32,7 @@ public class TowerSpawnSystem : IEcsPreInitSystem, IEcsInitSystem, IEcsRunSystem
         
         // Init components
         towerWeapon.AttackCooldown = 1; // ToDo: Pull from game settings or something
-        towerTargetSelector.TargetingRange = 10;
+        towerTargetSelector.TargetingRange = 5;
         
         
         // Init View

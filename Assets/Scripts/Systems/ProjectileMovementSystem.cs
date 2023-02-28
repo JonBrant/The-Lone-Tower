@@ -23,9 +23,6 @@ public class ProjectileMovementSystem : IEcsPreInitSystem, IEcsRunSystem
             .Inc<Position>()
             .End();
 
-
-        //Debug.Log($"{nameof(ProjectileMovementSystem)}.{nameof(Run)}() - Count: {projectileFilter.GetEntitiesCount()}");
-
         foreach (int entity in projectileFilter)
         {
 
@@ -37,15 +34,10 @@ public class ProjectileMovementSystem : IEcsPreInitSystem, IEcsRunSystem
 
             if (Vector2.Distance(projectilePosition, enemyPosition) > 0)
             {
-                Debug.Log($"{nameof(ProjectileMovementSystem)}.{nameof(Run)}() - Moving!");
-                var direction = new Vector2(enemyPosition.x, enemyPosition.y);
+                var direction = new Vector2(enemyPosition.x, enemyPosition.y).normalized;
                 var newPosition = projectilePosition + direction * Time.deltaTime * projectileMovement.Speed;
                 projectilePosition.x = newPosition.x;
                 projectilePosition.y = newPosition.y;
-            }
-            else
-            {
-                Debug.Log($"{nameof(ProjectileMovementSystem)}.{nameof(Run)}() - Not moving!");
             }
         }
     }

@@ -29,7 +29,7 @@ public class EnemyMovementSystem : IEcsPreInitSystem, IEcsRunSystem
 
             if (((Vector2)position).magnitude > movement.StopRadius)
             {
-                var direction = new Vector2(-position.x, -position.y);
+                var direction = new Vector2(-position.x, -position.y).normalized;
                 var newPosition = position + direction * Time.deltaTime*movement.Speed;
                 position.x = newPosition.x;
                 position.y = newPosition.y;

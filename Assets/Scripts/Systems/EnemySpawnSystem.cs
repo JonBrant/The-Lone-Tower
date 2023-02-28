@@ -49,7 +49,7 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
         position.y = randomPosition.y;
 
         movement.Speed = 1;
-        movement.StopRadius = 3;
+        movement.StopRadius = 1;
         
         // Init View
         enemyView.transform.position = randomPosition;

@@ -45,7 +45,6 @@ public class TowerTargetingSystem : IEcsPreInitSystem, IEcsRunSystem
                     shortestDistance = enemyDistance;
                     closestEnemy = enemy;
                     towerTargetSelector.CurrentTarget = enemy;
-                    Debug.Log($"{nameof(TowerTargetingSystem)}.{nameof(Run)}() - New target acquired: {closestEnemy}");
                 }
             }
         }
