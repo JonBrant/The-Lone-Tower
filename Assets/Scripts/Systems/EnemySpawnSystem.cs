@@ -41,8 +41,6 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
         // Setup View
         GameObject enemyViewGameObject = GameObject.Instantiate(sharedData.Settings.EnemyPrefab);
         EnemyView enemyView = enemyViewGameObject.AddComponent<EnemyView>();
-        enemyView.packedEntity = packedEntity;
-        enemyView.world = world;
 
         // Give Entity a random starting position
         Vector2 randomPosition = Random.insideUnitCircle.normalized * sharedData.Settings.SpawnRadius;
@@ -56,5 +54,7 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
         
         // Init View
         enemyView.transform.position = randomPosition;
+        enemyView.packedEntity = packedEntity;
+        enemyView.world = world;
     }
 }

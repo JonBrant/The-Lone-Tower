@@ -7,7 +7,6 @@ using UnityEngine;
 public class EnemyView : MonoBehaviour
 {
     public EcsWorld world;
-    //public int entity;
     public EcsPackedEntity packedEntity;
 
     private void Update()

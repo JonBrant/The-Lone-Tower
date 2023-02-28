@@ -17,7 +17,10 @@ public class EnemyMovementSystem : IEcsPreInitSystem, IEcsRunSystem
         EcsPool<Position> positionPool = world.GetPool<Position>();
         EcsPool<Movement> movementPool = world.GetPool<Movement>();
 
-        EcsFilter filter = world.Filter<Movement>().Inc<Position>().End();
+        EcsFilter filter = world.Filter<Enemy>()
+            .Inc<Position>()
+            .Inc<Movement>()
+            .End();
 
         foreach (int entity in filter)
         {
