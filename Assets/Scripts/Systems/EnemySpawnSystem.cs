@@ -43,7 +43,7 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
 
         // Init Components
         position = randomPosition;
-        movement.Velocity = -randomPosition.normalized;
+        movement.Velocity = -randomPosition.normalized*enemyView.MovementSpeed;
         movement.StopRadius = 1;
         
         // Init View

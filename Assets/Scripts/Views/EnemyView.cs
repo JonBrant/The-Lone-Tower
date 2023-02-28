@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class EnemyView : MonoBehaviour
 {
+    public float MovementSpeed = 5;
+    
     public EcsPackedEntity packedEntity;
     public EcsWorld world;
     
