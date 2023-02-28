@@ -27,8 +27,7 @@ public class TowerSpawnSystem : IEcsPreInitSystem, IEcsInitSystem, IEcsRunSystem
         ref TowerTargetSelector towerTargetSelector = ref towerTargetingPool.Add(entity);
         
         // Setup View
-        GameObject towerViewGameObject = GameObject.Instantiate(sharedData.Settings.TowerPrefab, Vector3.zero, Quaternion.identity);
-        TowerView towerView = towerViewGameObject.AddComponent<TowerView>();
+        TowerView towerView = GameObject.Instantiate(sharedData.Settings.TowerPrefab, Vector3.zero, Quaternion.identity);
         
         // Init components
         towerWeapon.AttackCooldown = 1; // ToDo: Pull from game settings or something

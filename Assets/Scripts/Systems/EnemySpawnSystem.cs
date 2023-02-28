@@ -38,8 +38,7 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
         ref Movement movement = ref movementPool.Add(entity);
 
         // Setup View
-        GameObject enemyViewGameObject = GameObject.Instantiate(sharedData.Settings.EnemyPrefab);
-        EnemyView enemyView = enemyViewGameObject.AddComponent<EnemyView>();
+        EnemyView enemyView = GameObject.Instantiate(sharedData.Settings.EnemyPrefab);
 
         // Give Entity a random starting position
         Vector2 randomPosition = Random.insideUnitCircle.normalized * sharedData.Settings.SpawnRadius;

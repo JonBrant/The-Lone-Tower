@@ -53,8 +53,7 @@ public class TowerFiringSystem : IEcsPreInitSystem, IEcsRunSystem
             ref Position projectilePosition = ref positionPool.Add(projectileEntity);
             
             // Setup View
-            GameObject projectileViewGameObject = GameObject.Instantiate(sharedData.Settings.ProjectilePrefab, Vector3.zero, Quaternion.identity);
-            ProjectileView projectileView = projectileViewGameObject.AddComponent<ProjectileView>();
+            ProjectileView projectileView = GameObject.Instantiate(sharedData.Settings.ProjectilePrefab, Vector3.zero, Quaternion.identity);
             
             // Init components
             projectilePosition.x = 0;
