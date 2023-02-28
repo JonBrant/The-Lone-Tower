@@ -4,5 +4,5 @@ using UnityEngine;
 
 public struct Projectile
 {
-    public int TargetEntity;
+    //public int TargetEntity;
 }

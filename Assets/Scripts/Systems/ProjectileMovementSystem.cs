@@ -25,20 +25,13 @@ public class ProjectileMovementSystem : IEcsPreInitSystem, IEcsRunSystem
 
         foreach (int entity in projectileFilter)
         {
-
-            
             ref Projectile projectile = ref projectilePool.Get(entity);
             ref Position projectilePosition = ref positionPool.Get(entity);
             ref Movement projectileMovement = ref movementPool.Get(entity);
-            ref Position enemyPosition = ref positionPool.Get(projectile.TargetEntity);
 
-            if (Vector2.Distance(projectilePosition, enemyPosition) > 0)
-            {
-                var direction = new Vector2(enemyPosition.x, enemyPosition.y).normalized;
-                var newPosition = projectilePosition + direction * Time.deltaTime * projectileMovement.Speed;
-                projectilePosition.x = newPosition.x;
-                projectilePosition.y = newPosition.y;
-            }
+            var newPosition = projectilePosition + Time.deltaTime * projectileMovement.Velocity;
+            projectilePosition.x = newPosition.x;
+            projectilePosition.y = newPosition.y;
         }
     }
 }

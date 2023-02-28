@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Leopotam.EcsLite;
@@ -16,5 +17,10 @@ public class ProjectileView : MonoBehaviour
             ref Position position = ref positionPool.Get(unpackedEntity);
             transform.position = new Vector3(position.x, position.y, 0);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log($"{nameof(ProjectileView)}.{nameof(OnTriggerEnter2D)}() - Collision!");
     }
 }

@@ -58,8 +58,7 @@ public class TowerFiringSystem : IEcsPreInitSystem, IEcsRunSystem
             // Init components
             projectilePosition.x = 0;
             projectilePosition.y = 0;
-            projectile.TargetEntity = towerTargetSelector.CurrentTarget;
-            projectileMovement.Speed = 5;
+            projectileMovement.Velocity = ((Vector2)positionPool.Get(towerTargetSelector.CurrentTarget)).normalized;
             projectileMovement.StopRadius = 0;
             
             
