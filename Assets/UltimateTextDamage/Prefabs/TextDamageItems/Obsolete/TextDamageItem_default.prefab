@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224542520347080992}
   - component: {fileID: 222663235511457590}
-  - component: {fileID: 8358797925008149847}
+  - component: {fileID: 3623777947105456757}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -46,7 +46,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1152705080841834}
   m_CullTransparentMesh: 1
---- !u!114 &8358797925008149847
+--- !u!114 &3623777947105456757
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -186,10 +186,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3271ff202fb4a374d93d829affcbba99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  labelTMP: {fileID: 8358797925008149847}
+  labelTMP: {fileID: 3623777947105456757}
   stackToStringType: 1
-  toStringFormat: 0
-  stackReusableTime: 9999
+  toStringFormat: N0
+  stackReusableTime: 1
   onItemStackUse:
     m_PersistentCalls:
       m_Calls: []

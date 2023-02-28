@@ -150,7 +150,6 @@ namespace Guirao.UltimateTextDamage
 
         private void Update( )
         {
-            Debug.Log($"{nameof(UITextDamage)}.{nameof(Update)}() - StackReuseTime: {stackReusableTime}");
             if( m_IsStackReUsable )
             {
                 m_currentTime += Time.deltaTime;
