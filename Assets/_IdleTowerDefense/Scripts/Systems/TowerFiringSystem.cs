@@ -29,7 +29,7 @@ public class TowerFiringSystem : IEcsPreInitSystem, IEcsRunSystem
             ref TowerWeapon towerWeapon = ref towerWeaponPool.Get(tower);
             towerWeapon.AttackCooldownRemaining -= Time.deltaTime;
 
-            if (towerTargetSelector.CurrentTarget == -1)
+            if (towerTargetSelector.CurrentTargets == null || towerTargetSelector.CurrentTargets.Count == 0)
             {
                 continue;
             }
@@ -40,33 +40,39 @@ public class TowerFiringSystem : IEcsPreInitSystem, IEcsRunSystem
             }
 
             towerWeapon.AttackCooldownRemaining = towerWeapon.AttackCooldown;
-
-            // Spawn projectile
-            int projectileEntity = world.NewEntity();
-            EcsPackedEntity packedProjectileEntity = world.PackEntity(projectileEntity);
-            EcsPool<Projectile> projectilePool = world.GetPool<Projectile>();
-            EcsPool<Movement> movementPool = world.GetPool<Movement>();
-            EcsPool<Position> positionPool = world.GetPool<Position>();
-            ref Projectile projectile = ref projectilePool.Add(projectileEntity);
-            ref Movement projectileMovement = ref movementPool.Add(projectileEntity);
-            ref Position projectilePosition = ref positionPool.Add(projectileEntity);
-
-            // Setup View
-            ProjectileView projectileView = GameObject.Instantiate(sharedData.Settings.ProjectilePrefab, Vector3.zero, Quaternion.identity);
-
-            // Init components
-            projectile.Damage = projectileView.Damage;
-            projectile.OnDamageDealt += (damage, transform) => UltimateTextDamageManager.Instance.AddStack(damage, transform, "normal");
-            projectilePosition = ((Vector2)positionPool.Get(towerTargetSelector.CurrentTarget)).normalized * 0.05f; 
-            projectileMovement.Velocity = ((Vector2)positionPool.Get(towerTargetSelector.CurrentTarget)).normalized * projectileView.MovementSpeed;
-            projectileMovement.StopRadius = 0;
-            
+            for (int i = 0; i < towerTargetSelector.CurrentTargets.Count; i++)
+            {
+                // Spawn projectile
+                int projectileEntity = world.NewEntity();
+                EcsPackedEntity packedProjectileEntity = world.PackEntity(projectileEntity);
+                EcsPool<Projectile> projectilePool = world.GetPool<Projectile>();
+                EcsPool<Movement> movementPool = world.GetPool<Movement>();
+                EcsPool<Position> positionPool = world.GetPool<Position>();
+                ref Projectile projectile = ref projectilePool.Add(projectileEntity);
+                ref Movement projectileMovement = ref movementPool.Add(projectileEntity);
+                ref Position projectilePosition = ref positionPool.Add(projectileEntity);
 
 
-            // Init View
-            projectileView.packedEntity = packedProjectileEntity;
-            projectileView.transform.position = (Vector2)projectilePosition;
-            projectileView.world = world;
+                // Setup View
+                ProjectileView projectileView = GameObject.Instantiate(sharedData.Settings.ProjectilePrefab, Vector3.zero, Quaternion.identity);
+
+                // Init components
+
+
+
+                projectile.Damage = projectileView.Damage;
+                projectile.OnDamageDealt += (damage, transform) => UltimateTextDamageManager.Instance.AddStack(damage, transform, "normal");
+                projectilePosition = ((Vector2)positionPool.Get(towerTargetSelector.CurrentTargets[i])).normalized * 0.05f;
+                projectileMovement.Velocity = ((Vector2)positionPool.Get(towerTargetSelector.CurrentTargets[i])).normalized * projectileView.MovementSpeed;
+                projectileMovement.StopRadius = 0;
+
+
+
+                // Init View
+                projectileView.packedEntity = packedProjectileEntity;
+                projectileView.transform.position = (Vector2)projectilePosition;
+                projectileView.world = world;
+            }
         }
     }
 }

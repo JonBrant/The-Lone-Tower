@@ -39,6 +39,7 @@ public class TowerSpawnSystem : IEcsPreInitSystem, IEcsInitSystem
             .OnComplete(() => towerView.transform.position = Vector3.zero);
         towerWeapon.AttackCooldown = towerView.AttackCooldown;
         towerTargetSelector.TargetingRange = towerView.TargetingRange;
+        towerTargetSelector.MaxTargets = towerView.MaxTargets;
 
 
         // Init View

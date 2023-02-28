@@ -1,5 +1,8 @@
+using System.Collections.Generic;
+
 public struct TowerTargetSelector
 {
     public float TargetingRange;
-    public int CurrentTarget;
+    public int MaxTargets;
+    public List<int> CurrentTargets;
 }

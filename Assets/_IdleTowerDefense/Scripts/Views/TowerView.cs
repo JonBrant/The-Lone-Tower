@@ -10,6 +10,7 @@ public class TowerView : MonoBehaviour
     public float StartingHealth = 50;
     public float AttackCooldown = 1;
     public float TargetingRange = 5;
+    public int MaxTargets = 1;
 
 
     [SerializeField] private SpriteRenderer HealthBar;

@@ -47,9 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5fec0e497a31f41a7a01c2929e7ae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartingHealth: 50
-  AttackCooldown: 0.1
+  StartingHealth: 500
+  AttackCooldown: 0.5
   TargetingRange: 3
+  MaxTargets: 1
   HealthBar: {fileID: 463204742845015056}
   RadiusRenderer: {fileID: 8403903296476473551}
 --- !u!212 &2203159105387169486
