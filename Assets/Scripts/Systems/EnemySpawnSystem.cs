@@ -11,7 +11,6 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
 
     public void PreInit(EcsSystems systems)
     {
-        // Will be called once during EcsSystems.Init() call and before IEcsInitSystem.Init().
         sharedData = systems.GetShared<SharedData>();
         world = systems.GetWorld();
     }
