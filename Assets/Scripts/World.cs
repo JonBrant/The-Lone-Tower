@@ -20,7 +20,8 @@ class World : MonoBehaviour
         _world = new EcsWorld ();
         _systems = new EcsSystems(_world, sharedData)
             .Add (new EnemySpawnSystem())
-            .Add(new WorldDebugSystem("Main World"));
+            .Add(new WorldDebugSystem("Main World"))
+            .Add(new EnemyMovementSystem());
         _systems.Init ();
     }
     

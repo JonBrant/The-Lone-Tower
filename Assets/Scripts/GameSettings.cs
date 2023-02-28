@@ -7,4 +7,5 @@ public class GameSettings : ScriptableObject
 {
     public GameObject EnemyPrefab;
     public float SpawnRadius = 10;
+    public float EnemySpawnDelay = 0.5f;
 }
