@@ -1,3 +1,4 @@
+using Guirao.UltimateTextDamage;
 using Leopotam.EcsLite;
 using UnityEngine;
 
@@ -54,6 +55,7 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
         health.CurrentHealth = enemyView.StartingHealth;
         meleeDamage.Damage = enemyView.Damage;
         meleeDamage.DamageCooldown = enemyView.DamageCooldown;
+        meleeDamage.OnDamageDealt += (damage, transform) => UltimateTextDamageManager.Instance.AddStack(damage, transform, "normal");
         
         // Init View
         enemyView.transform.position = randomPosition;

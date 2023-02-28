@@ -8,9 +8,11 @@ public class EnemyDamageSystem : IEcsPreInitSystem, IEcsRunSystem
     private EcsWorld world;
     private EcsFilter enemyFilter;
     private EcsFilter towerFilter;
+    private SharedData sharedData;
 
     public void PreInit(EcsSystems systems)
     {
+        sharedData = systems.GetShared<SharedData>();
         world = systems.GetWorld();
         enemyFilter = world.Filter<Enemy>()
             .Inc<Movement>()
@@ -23,13 +25,13 @@ public class EnemyDamageSystem : IEcsPreInitSystem, IEcsRunSystem
 
     public void Run(EcsSystems systems)
     {
-        EcsPool<Health> towerPool = world.GetPool<Health>();
+        EcsPool<Health> healthPool = world.GetPool<Health>();
         EcsPool<MeleeDamage> meleeDamagePool = world.GetPool<MeleeDamage>();
         EcsPool<Movement> movementPool = world.GetPool<Movement>();
-
+        
         foreach (int tower in towerFilter)
         {
-            ref Health towerHealth = ref towerPool.Get(tower);
+            ref Health towerHealth = ref healthPool.Get(tower);
             
             foreach (int enemy in enemyFilter)
             {
@@ -44,7 +46,9 @@ public class EnemyDamageSystem : IEcsPreInitSystem, IEcsRunSystem
                 if (enemyMeleeDamage.DamageCooldownRemaining <= 0)
                 {
                     enemyMeleeDamage.DamageCooldownRemaining = enemyMeleeDamage.DamageCooldown;
+                    
                     towerHealth.CurrentHealth -= enemyMeleeDamage.Damage;
+                    enemyMeleeDamage.OnDamageDealt?.Invoke(enemyMeleeDamage.Damage, sharedData.TowerView.transform);
                     towerHealth.OnDamaged?.Invoke();
                 }
             }
