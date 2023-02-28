@@ -2,16 +2,22 @@ using System;
 using Leopotam.EcsLite;
 using UnityEngine;
 using System.Linq;
+
 public class ProjectileView : MonoBehaviour
 {
     public float MovementSpeed = 5;
+    public float Damage = 1;
+    public float MaxLifetime = 10;
 
     public EcsPackedEntity packedEntity;
     public EcsWorld world;
     private EcsFilter destroyFilter;
+
     private void Start()
     {
-         destroyFilter = world.Filter<Destroy>().End();
+        destroyFilter = world.Filter<Destroy>()
+            .End();
+        Destroy(gameObject, MaxLifetime);
     }
 
     private void Update()
@@ -30,6 +36,15 @@ public class ProjectileView : MonoBehaviour
         {
             if (enemyView.packedEntity.Unpack(world, out int unpackedEnemy) && packedEntity.Unpack(world, out int unpackedProjectile))
             {
+                // ToDo: Projectiles currently have no lifetime, separate destruction to allow for GameObject.Destroy(lifeTime)
+                EcsPool<Destroy> destroyPool = world.GetPool<Destroy>();
+                EcsPool<Health> healthPool = world.GetPool<Health>();
+                EcsPool<Projectile> projectilePool = world.GetPool<Projectile>();
+                ref Health enemyHealth = ref healthPool.Get(unpackedEnemy);
+                ref Projectile projectile = ref projectilePool.Get(unpackedProjectile);
+
+                enemyHealth.CurrentHealth -= projectile.Damage;
+
                 // Check if entities are already marked for deletion
                 // ToDo: There has to be better way to go about this
                 bool enemyMarkedForDeletion = false;
@@ -46,23 +61,43 @@ public class ProjectileView : MonoBehaviour
                         projectileMarkedForDeletion = true;
                     }
                 }
-                
-                // Mark entities for deletion
-                EcsPool<Destroy> destroyPool = world.GetPool<Destroy>();
-                if (!enemyMarkedForDeletion)
+
+                // Check enemy health and mark for deletion if necessary
+                if (enemyHealth.CurrentHealth <= 0 && !enemyMarkedForDeletion)
                 {
                     destroyPool.Add(unpackedEnemy);
+                    Destroy(other.gameObject);
                 }
 
+                // Mark projectile for deletion
                 if (!projectileMarkedForDeletion)
                 {
                     destroyPool.Add(unpackedProjectile);
+                    Destroy(gameObject);
                 }
-
-                // Destroy views
-                Destroy(other.gameObject);
-                Destroy(gameObject);
             }
+        }
+    }
+    
+    private void OnDestroy()
+    {
+        if (!packedEntity.Unpack(world, out int unpackedProjectile))
+            return;
+
+        EcsPool<Destroy> destroyPool = world.GetPool<Destroy>();
+        bool projectileMarkedForDeletion = false;
+        
+        foreach (int i in destroyFilter)
+        {
+            if (unpackedProjectile == i)
+            {
+                projectileMarkedForDeletion = true;
+            }
+        }
+
+        if (!projectileMarkedForDeletion)
+        {
+            destroyPool.Add(unpackedProjectile);
         }
     }
 }

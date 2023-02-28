@@ -31,20 +31,25 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
         EcsPool<Enemy> enemyPool = world.GetPool<Enemy>();
         EcsPool<Position> positionPool = world.GetPool<Position>();
         EcsPool<Movement> movementPool = world.GetPool<Movement>();
+        EcsPool<Health> healthPool = world.GetPool<Health>();
+        
         ref Enemy enemy = ref enemyPool.Add(entity);
         ref Position position = ref positionPool.Add(entity);
         ref Movement movement = ref movementPool.Add(entity);
+        ref Health health = ref healthPool.Add(entity);
 
         // Setup View
         EnemyView enemyView = GameObject.Instantiate(sharedData.Settings.EnemyPrefab);
 
-        // Give Entity a random starting position
+        // Calculate a random starting position
         Vector2 randomPosition = Random.insideUnitCircle.normalized * sharedData.Settings.SpawnRadius;
 
         // Init Components
         position = randomPosition;
         movement.Velocity = -randomPosition.normalized*enemyView.MovementSpeed;
         movement.StopRadius = 1;
+        health.MaxHealth = enemyView.StartingHealth;
+        health.CurrentHealth = enemyView.StartingHealth;
         
         // Init View
         enemyView.transform.position = randomPosition;
