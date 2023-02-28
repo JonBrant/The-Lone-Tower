@@ -1,4 +1,7 @@
 using System;
+using System.Collections;
+using System.Linq;
+using DG.Tweening;
 using Leopotam.EcsLite;
 using UnityEngine;
 
@@ -7,7 +10,7 @@ public class TowerView : MonoBehaviour
     public float StartingHealth = 50;
     public float AttackCooldown = 1;
     public float TargetingRange = 5;
-    
+
 
     [SerializeField] private SpriteRenderer HealthBar;
     public EcsPackedEntity packedEntity;
@@ -20,8 +23,9 @@ public class TowerView : MonoBehaviour
         {
             EcsPool<Health> healthPool = world.GetPool<Health>();
             ref Health towerHealth = ref healthPool.Get(unpackedTower);
-            
-            HealthBar.sharedMaterial.SetFloat("_Arc2", Mathf.Lerp(360, 0, towerHealth.CurrentHealth/towerHealth.MaxHealth));
+
+            HealthBar.sharedMaterial.SetFloat("_Arc2", Mathf.Lerp(360, 0, towerHealth.CurrentHealth / towerHealth.MaxHealth));
+            HealthBar.color = Color.Lerp(Color.red, Color.green, towerHealth.CurrentHealth / towerHealth.MaxHealth);
         }
     }
 }
