@@ -21,6 +21,7 @@ class World : MonoBehaviour
         _systems = new EcsSystems(_world, sharedData)
             .Add(new TowerSpawnSystem())
             .Add(new TowerTargetingSystem())
+            .Add(new TowerFiringSystem())
             .Add(new EnemySpawnSystem())
             .Add(new WorldDebugSystem("Main World"))
             .Add(new EnemyMovementSystem());

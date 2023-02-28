@@ -32,6 +32,7 @@ public class TowerTargetingSystem : IEcsPreInitSystem, IEcsRunSystem
         foreach (int tower in towerTargetSelectorFilter)
         {
             ref TowerTargetSelector towerTargetSelector = ref towerTargetSelectorPool.Get(tower);
+            towerTargetSelector.CurrentTarget = -1;
             int closestEnemy = -1;
             float shortestDistance = Single.PositiveInfinity;
             
