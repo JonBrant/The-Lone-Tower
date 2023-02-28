@@ -1,7 +1,7 @@
 using Leopotam.EcsLite;
 using UnityEngine;
 
-public class TowerSpawnSystem : IEcsPreInitSystem, IEcsInitSystem, IEcsRunSystem
+public class TowerSpawnSystem : IEcsPreInitSystem, IEcsInitSystem
 {
     private EcsWorld world;
     private SharedData sharedData;
@@ -30,19 +30,12 @@ public class TowerSpawnSystem : IEcsPreInitSystem, IEcsInitSystem, IEcsRunSystem
         TowerView towerView = GameObject.Instantiate(sharedData.Settings.TowerPrefab, Vector3.zero, Quaternion.identity);
         
         // Init components
-        towerWeapon.AttackCooldown = 1; // ToDo: Pull from game settings or something
-        towerTargetSelector.TargetingRange = 5;
+        towerWeapon.AttackCooldown = towerView.AttackCooldown;
+        towerTargetSelector.TargetingRange = towerView.TargetingRange;
         
         
         // Init View
         towerView.packedEntity = packedEntity;
         
     }
-
-    public void Run(EcsSystems systems)
-    {
-
-    }
-
-    
 }

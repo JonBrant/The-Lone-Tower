@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5fec0e497a31f41a7a01c2929e7ae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AttackCooldown: 0.5
+  TargetingRange: 5
 --- !u!212 &2203159105387169486
 SpriteRenderer:
   m_ObjectHideFlags: 0

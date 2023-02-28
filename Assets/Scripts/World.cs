@@ -16,12 +16,12 @@ class World : MonoBehaviour
 
         // create ecs environment.
         _world = new EcsWorld();
-        _systems = new EcsSystems(_world, sharedData)
-            .Add(new TowerSpawnSystem())
+        _systems = new EcsSystems(_world, sharedData).Add(new TowerSpawnSystem())
             .Add(new TowerTargetingSystem())
             .Add(new TowerFiringSystem())
             .Add(new ProjectileMovementSystem())
             .Add(new EnemySpawnSystem())
+            .Add(new DestroySystem())
             .Add(new WorldDebugSystem("Main World"))
             .Add(new EnemyMovementSystem());
         _systems.Init();

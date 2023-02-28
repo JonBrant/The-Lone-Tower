@@ -4,10 +4,10 @@ using UnityEngine;
 public class ProjectileView : MonoBehaviour
 {
     public float MovementSpeed = 5;
-    
+
     public EcsPackedEntity packedEntity;
     public EcsWorld world;
-    
+
     private void Update()
     {
         if (packedEntity.Unpack(world, out int unpackedEntity))
@@ -22,7 +22,17 @@ public class ProjectileView : MonoBehaviour
     {
         if (other.TryGetComponent(out EnemyView enemyView))
         {
-            Debug.Log($"{nameof(ProjectileView)}.{nameof(OnTriggerEnter2D)}() - Collision!");
+            if (enemyView.packedEntity.Unpack(world, out int unpackedEnemy) && packedEntity.Unpack(world, out int unpackedProjectile))
+            {
+                // Mark entities for deletion
+                EcsPool<Destroy> destroyPool = world.GetPool<Destroy>();
+                destroyPool.Add(unpackedEnemy);
+                destroyPool.Add(unpackedProjectile);
+
+                // Destroy views
+                Destroy(other.gameObject);
+                Destroy(gameObject);
+            }
         }
     }
 }
