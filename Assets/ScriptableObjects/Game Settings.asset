@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d08e71e700ce1643bc8200c53357f8a, type: 3}
   m_Name: Game Settings
   m_EditorClassIdentifier: 
-  EnemyPrefab: {fileID: 0}
+  EnemyPrefab: {fileID: 7918579136678062904, guid: 57aebfda2cf49994f8c1f723ffb0d64a, type: 3}
+  SpawnRadius: 50
+  EnemySpawnDelay: 0.5
