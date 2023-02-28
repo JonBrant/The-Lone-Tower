@@ -1,7 +1,7 @@
 using Leopotam.EcsLite;
 using UnityEngine;
 
-public class EnemyMovementSystem : IEcsPreInitSystem, IEcsRunSystem
+public class MovementSystem : IEcsPreInitSystem, IEcsRunSystem
 {
     private EcsWorld world;
 
@@ -15,8 +15,7 @@ public class EnemyMovementSystem : IEcsPreInitSystem, IEcsRunSystem
         EcsPool<Position> positionPool = world.GetPool<Position>();
         EcsPool<Movement> movementPool = world.GetPool<Movement>();
 
-        EcsFilter enemyFilter = world.Filter<Enemy>()
-            .Inc<Position>()
+        EcsFilter enemyFilter = world.Filter<Position>()
             .Inc<Movement>()
             .End();
 

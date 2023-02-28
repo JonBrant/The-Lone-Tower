@@ -19,11 +19,10 @@ class World : MonoBehaviour
         _systems = new EcsSystems(_world, sharedData).Add(new TowerSpawnSystem())
             .Add(new TowerTargetingSystem())
             .Add(new TowerFiringSystem())
-            .Add(new ProjectileMovementSystem())
             .Add(new EnemySpawnSystem())
             .Add(new DestroySystem())
             .Add(new WorldDebugSystem("Main World"))
-            .Add(new EnemyMovementSystem());
+            .Add(new MovementSystem());
         _systems.Init();
     }
 
