@@ -46,6 +46,7 @@ public class EnemyDamageSystem : IEcsPreInitSystem, IEcsRunSystem
                     enemyMeleeDamage.DamageCooldownRemaining = enemyMeleeDamage.DamageCooldown;
                     // ToDo: Add health system instead of checking here (do the same for ProjectileView)
                     towerHealth.CurrentHealth -= enemyMeleeDamage.Damage;
+                    towerHealth.OnDamaged?.Invoke();
                 }
             }
         }

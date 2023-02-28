@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Leopotam.EcsLite;
 using UnityEngine;
 
@@ -5,13 +6,13 @@ public class TowerSpawnSystem : IEcsPreInitSystem, IEcsInitSystem
 {
     private EcsWorld world;
     private SharedData sharedData;
-    
+
     public void PreInit(EcsSystems systems)
     {
         sharedData = systems.GetShared<SharedData>();
         world = systems.GetWorld();
     }
-    
+
     public void Init(EcsSystems systems)
     {
         world = systems.GetWorld();
@@ -27,17 +28,19 @@ public class TowerSpawnSystem : IEcsPreInitSystem, IEcsInitSystem
         ref TowerWeapon towerWeapon = ref towerWeaponPool.Add(entity);
         ref TowerTargetSelector towerTargetSelector = ref towerTargetingPool.Add(entity);
         ref Health towerHealth = ref healthPool.Add(entity);
-        
+
         // Setup View
         TowerView towerView = GameObject.Instantiate(sharedData.Settings.TowerPrefab, Vector3.zero, Quaternion.identity);
-        
+
         // Init components
         towerHealth.MaxHealth = towerView.StartingHealth;
         towerHealth.CurrentHealth = towerView.StartingHealth;
+        towerHealth.OnDamaged += () => towerView.transform.DOPunchPosition(Random.insideUnitCircle / 10f, 0.1f, 3, 1, false)
+            .OnComplete(() => towerView.transform.position = Vector3.zero);
         towerWeapon.AttackCooldown = towerView.AttackCooldown;
         towerTargetSelector.TargetingRange = towerView.TargetingRange;
-        
-        
+
+
         // Init View
         towerView.packedEntity = packedEntity;
         towerView.world = world;
