@@ -63,11 +63,13 @@ public class TowerFiringSystem : IEcsPreInitSystem, IEcsRunSystem
             projectilePosition.y = 0;
             projectile.TargetEntity = towerTargetSelector.CurrentTarget;
             projectileMovement.Speed = 5;
+            projectileMovement.StopRadius = 0;
             
             
             // Init View
             projectileView.packedEntity = packedProjectileEntity;
             projectileView.transform.position = Vector3.zero;
+            projectileView.world = world;
         }
     }
 }

@@ -22,6 +22,7 @@ class World : MonoBehaviour
             .Add(new TowerSpawnSystem())
             .Add(new TowerTargetingSystem())
             .Add(new TowerFiringSystem())
+            .Add(new ProjectileMovementSystem())
             .Add(new EnemySpawnSystem())
             .Add(new WorldDebugSystem("Main World"))
             .Add(new EnemyMovementSystem());
