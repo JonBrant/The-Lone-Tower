@@ -12,9 +12,10 @@ public struct Position
 
     public static implicit operator Position(Vector2 position)
     {
-        Position returnValue = new Position();
-        returnValue.x = position.x;
-        returnValue.y = position.y;
+        Position returnValue = new Position {
+            x = position.x,
+            y = position.y
+        };
         return returnValue;
     }
 }

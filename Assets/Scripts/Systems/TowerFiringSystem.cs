@@ -5,20 +5,20 @@ public class TowerFiringSystem : IEcsPreInitSystem, IEcsRunSystem
 {
     private SharedData sharedData;
     private EcsWorld world;
+    private EcsFilter towerTargetSelectorFilter;
 
     public void PreInit(EcsSystems systems)
     {
         sharedData = systems.GetShared<SharedData>();
         world = systems.GetWorld();
+        towerTargetSelectorFilter = world.Filter<Tower>()
+            .Inc<TowerTargetSelector>()
+            .Inc<TowerWeapon>()
+            .End();
     }
 
     public void Run(EcsSystems systems)
     {
-        EcsFilter towerTargetSelectorFilter = world.Filter<Tower>()
-            .Inc<TowerTargetSelector>()
-            .Inc<TowerWeapon>()
-            .End();
-
         EcsPool<TowerTargetSelector> towerTargetSelectorPool = world.GetPool<TowerTargetSelector>();
         EcsPool<TowerWeapon> towerWeaponPool = world.GetPool<TowerWeapon>();
 

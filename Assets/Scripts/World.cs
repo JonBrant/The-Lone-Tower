@@ -14,7 +14,6 @@ class World : MonoBehaviour
         SharedData sharedData = new SharedData();
         sharedData.InitDefaultValues(gameSettings);
 
-        // create ecs environment.
         _world = new EcsWorld();
         _systems = new EcsSystems(_world, sharedData).Add(new TowerSpawnSystem())
             .Add(new TowerTargetingSystem())
@@ -23,29 +22,18 @@ class World : MonoBehaviour
             .Add(new DestroySystem())
             .Add(new WorldDebugSystem("Main World"))
             .Add(new MovementSystem());
+
         _systems.Init();
     }
 
     void Update()
     {
-        // process all dependent systems.
         _systems?.Run();
     }
 
     void OnDestroy()
     {
-        // destroy systems logical group.
-        if (_systems != null)
-        {
-            _systems.Destroy();
-            _systems = null;
-        }
-
-        // destroy world.
-        if (_world != null)
-        {
-            _world.Destroy();
-            _world = null;
-        }
+        _world?.Destroy();
+        _systems?.Destroy();
     }
 }

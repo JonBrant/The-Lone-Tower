@@ -36,6 +36,5 @@ public class TowerSpawnSystem : IEcsPreInitSystem, IEcsInitSystem
         
         // Init View
         towerView.packedEntity = packedEntity;
-        
     }
 }

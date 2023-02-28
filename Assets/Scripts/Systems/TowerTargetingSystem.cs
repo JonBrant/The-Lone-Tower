@@ -6,34 +6,33 @@ public class TowerTargetingSystem : IEcsPreInitSystem, IEcsRunSystem
 {
     private SharedData sharedData;
     private EcsWorld world;
+    private EcsFilter enemyFilter;
+    private EcsFilter towerTargetSelectorFilter;
 
     public void PreInit(EcsSystems systems)
     {
         sharedData = systems.GetShared<SharedData>();
         world = systems.GetWorld();
+        enemyFilter = world.Filter<Enemy>()
+            .Inc<Position>()
+            .End();
+        towerTargetSelectorFilter = world.Filter<Tower>()
+            .Inc<TowerTargetSelector>()
+            .End();
     }
 
 
     public void Run(EcsSystems systems)
     {
-        EcsFilter enemyFilter = world.Filter<Enemy>()
-            .Inc<Position>()
-            .End();
-
-        EcsFilter towerTargetSelectorFilter = world.Filter<Tower>()
-            .Inc<TowerTargetSelector>()
-            .End();
-
         EcsPool<Position> enemyPositionPool = world.GetPool<Position>();
         EcsPool<TowerTargetSelector> towerTargetSelectorPool = world.GetPool<TowerTargetSelector>();
-        
+
         foreach (int tower in towerTargetSelectorFilter)
         {
             ref TowerTargetSelector towerTargetSelector = ref towerTargetSelectorPool.Get(tower);
             towerTargetSelector.CurrentTarget = -1;
-            int closestEnemy = -1;
             float shortestDistance = Single.PositiveInfinity;
-            
+
             foreach (int enemy in enemyFilter)
             {
                 ref Position enemyPosition = ref enemyPositionPool.Get(enemy);
@@ -41,12 +40,9 @@ public class TowerTargetingSystem : IEcsPreInitSystem, IEcsRunSystem
                 if (enemyDistance <= towerTargetSelector.TargetingRange && enemyDistance < shortestDistance)
                 {
                     shortestDistance = enemyDistance;
-                    closestEnemy = enemy;
                     towerTargetSelector.CurrentTarget = enemy;
                 }
             }
         }
-        
-        
     }
 }

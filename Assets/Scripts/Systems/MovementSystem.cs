@@ -4,10 +4,14 @@ using UnityEngine;
 public class MovementSystem : IEcsPreInitSystem, IEcsRunSystem
 {
     private EcsWorld world;
+    private EcsFilter enemyFilter;
 
     public void PreInit(EcsSystems systems)
     {
         world = systems.GetWorld();
+        enemyFilter = world.Filter<Position>()
+            .Inc<Movement>()
+            .End();
     }
 
     public void Run(EcsSystems systems)
@@ -15,9 +19,6 @@ public class MovementSystem : IEcsPreInitSystem, IEcsRunSystem
         EcsPool<Position> positionPool = world.GetPool<Position>();
         EcsPool<Movement> movementPool = world.GetPool<Movement>();
 
-        EcsFilter enemyFilter = world.Filter<Position>()
-            .Inc<Movement>()
-            .End();
 
         foreach (int entity in enemyFilter)
         {
