@@ -38,7 +38,6 @@ public class ProjectileView : MonoBehaviour
         {
             if (enemyView.packedEntity.Unpack(world, out int unpackedEnemy) && packedEntity.Unpack(world, out int unpackedProjectile))
             {
-                // ToDo: Separate destruction to allow for GameObject.Destroy(lifeTime) - Use HealthSystem, added before Destroy system
                 EcsPool<Destroy> destroyPool = world.GetPool<Destroy>();
                 EcsPool<Health> healthPool = world.GetPool<Health>();
                 EcsPool<Projectile> projectilePool = world.GetPool<Projectile>();
