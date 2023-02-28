@@ -32,17 +32,17 @@ public class TowerTargetingSystem : IEcsPreInitSystem, IEcsRunSystem
             ref TowerTargetSelector towerTargetSelector = ref towerTargetSelectorPool.Get(towerEntity);
             ref TowerWeapon towerWeapon = ref towerWeaponPool.Get(towerEntity);
             List<int> sortedEntities = null;
-            
-            // Make sure tower is ready to fire before acquiring targets to avoid unnecessary calculation (unsure why this breaks everything)
-            /*
+
+            // Make sure tower is ready to fire before acquiring targets to avoid unnecessary calculation
             if (towerWeapon.AttackCooldownRemaining >= 0)
             {
+                towerTargetSelector.CurrentTargets = null;
                 return;
             }
-            */
             
+            // Get a list of enemy entities, sorted by distance and checked against firing range
             sortedEntities = GetSortedTargets(ref towerTargetSelector);
-            
+
             // Set CurrentTargets to sorted list entries, up to MaxTargets
             towerTargetSelector.CurrentTargets = new List<int>();
             for (int i = 0; i < towerTargetSelector.MaxTargets && i < sortedEntities.Count; i++)
@@ -73,14 +73,7 @@ public class TowerTargetingSystem : IEcsPreInitSystem, IEcsRunSystem
             delegate(int a, int b) {
                 ref Position aPosition = ref enemyPositionPool.Get(a);
                 ref Position bPosition = ref enemyPositionPool.Get(b);
-                if (((Vector2)aPosition).magnitude < ((Vector2)bPosition).magnitude)
-                {
-                    return -1;
-                }
-                else
-                {
-                    return 1;
-                }
+                return (((Vector2)aPosition).magnitude < ((Vector2)bPosition).magnitude) ? -1 : 1;
             }
         );
 
