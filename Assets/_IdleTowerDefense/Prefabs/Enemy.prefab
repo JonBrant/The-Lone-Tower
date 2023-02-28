@@ -133,7 +133,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementSpeed: 2
-  StartingHealth: 10
+  StartingHealth: 1000
+  Damage: 1
+  DamageCooldown: 1
   healthBar: {fileID: 1374273605779650090}
 --- !u!212 &4719419927584065111
 SpriteRenderer:

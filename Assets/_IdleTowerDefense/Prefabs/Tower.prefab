@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartingHealth: 50
-  AttackCooldown: 0.3
+  AttackCooldown: 0.1
   TargetingRange: 5
   HealthBar: {fileID: 463204742845015056}
   RadiusRenderer: {fileID: 8403903296476473551}

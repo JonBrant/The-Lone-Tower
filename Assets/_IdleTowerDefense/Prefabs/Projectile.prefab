@@ -48,7 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementSpeed: 5
-  Damage: 5
+  Damage: 7
+  MaxLifetime: 10
 --- !u!212 &4790044967970184899
 SpriteRenderer:
   m_ObjectHideFlags: 0

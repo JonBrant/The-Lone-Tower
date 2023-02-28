@@ -2,6 +2,7 @@ using System;
 using Leopotam.EcsLite;
 using UnityEngine;
 using System.Linq;
+using Guirao.UltimateTextDamage;
 
 public class ProjectileView : MonoBehaviour
 {
@@ -46,7 +47,8 @@ public class ProjectileView : MonoBehaviour
                 enemyHealth.CurrentHealth -= projectile.Damage;
                 enemyHealth.OnDamaged?.Invoke();
                 projectile.OnDamageDealt?.Invoke(projectile.Damage, other.ClosestPoint(transform.position));
-                
+                UltimateTextDamageManager.Instance.AddStack(projectile.Damage, other.transform, "normal");
+
                 // Check enemy health and mark for deletion if necessary
                 if (enemyHealth.CurrentHealth <= 0 && !destroyPool.Has(unpackedEnemy))
                 {
