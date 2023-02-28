@@ -16,4 +16,4 @@ MonoBehaviour:
   EnemyPrefab: {fileID: 2420183176402899973, guid: 57aebfda2cf49994f8c1f723ffb0d64a, type: 3}
   ProjectilePrefab: {fileID: -6287025677217260571, guid: 1ec97e3ef12c87446829b12708c5b747, type: 3}
   SpawnRadius: 10
-  EnemySpawnDelay: 0.5
+  EnemySpawnDelay: 0.1
