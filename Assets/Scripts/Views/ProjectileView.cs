@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Leopotam.EcsLite;
 using UnityEngine;
 
@@ -21,6 +18,9 @@ public class ProjectileView : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log($"{nameof(ProjectileView)}.{nameof(OnTriggerEnter2D)}() - Collision!");
+        if (other.TryGetComponent(out EnemyView enemyView))
+        {
+            Debug.Log($"{nameof(ProjectileView)}.{nameof(OnTriggerEnter2D)}() - Collision!");
+        }
     }
 }

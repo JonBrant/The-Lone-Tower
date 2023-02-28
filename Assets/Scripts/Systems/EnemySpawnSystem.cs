@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Leopotam.EcsLite;
 using UnityEngine;
 
@@ -45,7 +43,6 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
 
         // Init Components
         position = randomPosition;
-
         movement.Velocity = -randomPosition.normalized;
         movement.StopRadius = 1;
         
