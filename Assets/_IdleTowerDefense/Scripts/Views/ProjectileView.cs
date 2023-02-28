@@ -36,7 +36,7 @@ public class ProjectileView : MonoBehaviour
         {
             if (enemyView.packedEntity.Unpack(world, out int unpackedEnemy) && packedEntity.Unpack(world, out int unpackedProjectile))
             {
-                // ToDo: Projectiles currently have no lifetime, separate destruction to allow for GameObject.Destroy(lifeTime) - Use HealthSystem, added before Destroy system
+                // ToDo: Separate destruction to allow for GameObject.Destroy(lifeTime) - Use HealthSystem, added before Destroy system
                 EcsPool<Destroy> destroyPool = world.GetPool<Destroy>();
                 EcsPool<Health> healthPool = world.GetPool<Health>();
                 EcsPool<Projectile> projectilePool = world.GetPool<Projectile>();
@@ -44,33 +44,18 @@ public class ProjectileView : MonoBehaviour
                 ref Projectile projectile = ref projectilePool.Get(unpackedProjectile);
 
                 enemyHealth.CurrentHealth -= projectile.Damage;
-
-                // Check if entities are already marked for deletion
-                // ToDo: There has to be better way to go about this
-                bool enemyMarkedForDeletion = false;
-                bool projectileMarkedForDeletion = false;
-                foreach (int i in destroyFilter)
-                {
-                    if (unpackedEnemy == i)
-                    {
-                        enemyMarkedForDeletion = true;
-                    }
-
-                    if (unpackedProjectile == i)
-                    {
-                        projectileMarkedForDeletion = true;
-                    }
-                }
-
+                enemyHealth.OnDamaged?.Invoke();
+                projectile.OnDamageDealt?.Invoke(projectile.Damage, other.ClosestPoint(transform.position));
+                
                 // Check enemy health and mark for deletion if necessary
-                if (enemyHealth.CurrentHealth <= 0 && !enemyMarkedForDeletion)
+                if (enemyHealth.CurrentHealth <= 0 && !destroyPool.Has(unpackedEnemy))
                 {
                     destroyPool.Add(unpackedEnemy);
                     Destroy(other.gameObject);
                 }
 
-                // Mark projectile for deletion
-                if (!projectileMarkedForDeletion)
+                // Mark projectile for deletion if not already
+                if (!destroyPool.Has(unpackedProjectile))
                 {
                     destroyPool.Add(unpackedProjectile);
                     Destroy(gameObject);
@@ -78,24 +63,16 @@ public class ProjectileView : MonoBehaviour
             }
         }
     }
-    
+
     private void OnDestroy()
     {
         if (!packedEntity.Unpack(world, out int unpackedProjectile))
             return;
 
         EcsPool<Destroy> destroyPool = world.GetPool<Destroy>();
-        bool projectileMarkedForDeletion = false;
-        
-        foreach (int i in destroyFilter)
-        {
-            if (unpackedProjectile == i)
-            {
-                projectileMarkedForDeletion = true;
-            }
-        }
 
-        if (!projectileMarkedForDeletion)
+
+        if (!destroyPool.Has(unpackedProjectile))
         {
             destroyPool.Add(unpackedProjectile);
         }
