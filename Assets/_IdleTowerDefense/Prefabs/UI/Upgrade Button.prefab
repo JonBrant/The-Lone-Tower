@@ -1527,11 +1527,11 @@ MonoBehaviour:
     IsSpacer: 1
   - LineStyle: 0
     CustomLineStyle: 
-    Content: Description content test
+    Content: Default content test
     IsSpacer: 0
   - LineStyle: 0
     CustomLineStyle: 
-    Content: Description content test
+    Content: Default content test
     IsSpacer: 0
   - LineStyle: 2
     CustomLineStyle: 

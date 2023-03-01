@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartingHealth: 500
-  AttackCooldown: 0.5
+  AttackCooldown: 0.2
   TargetingRange: 3
   MaxTargets: 1
   HealthBar: {fileID: 463204742845015056}
