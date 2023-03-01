@@ -14,12 +14,12 @@
       "dependencies": {},
       "hash": "959f58348d7daf10534c435fb059b25b12433713"
     },
-    "com.peturdarri.generic-event-bus": {
-      "version": "https://github.com/PeturDarri/GenericEventBus.git",
+    "com.unity-atoms.unity-atoms": {
+      "version": "https://github.com/unity-atoms/unity-atoms.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "9a5edf71a29bae0f59c68f04c97061e4a7076201"
+      "hash": "5df498b41ee77de0c5faa73b76f7fd0ed890216a"
     },
     "com.unity-atoms.unity-atoms-base-atoms": {
       "version": "4.4.5",
