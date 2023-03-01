@@ -1,3 +1,5 @@
+using DuloGames.UI;
+using Michsky.UI.Shift;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -9,6 +11,15 @@ public class UpgradeButton : MonoBehaviour
 {
     [Header("Resources")]
     public Sprite backgroundImage;
+    public Button Button;
+    public UITooltipShow Tooltip;
+    public UIElementSound ElementSound;
+    public Image backgroundImageObj;
+    public TextMeshProUGUI titleObj;
+    public TextMeshProUGUI descriptionObj;
+    public Transform statusNone;
+    public Transform statusLocked;
+    public Transform statusCompleted;
 
     public string buttonTitle = "My Title";
     [TextArea] public string buttonDescription = "My Description";
@@ -21,12 +32,7 @@ public class UpgradeButton : MonoBehaviour
 
     public StatusItem statusItem;
 
-    Image backgroundImageObj;
-    TextMeshProUGUI titleObj;
-    TextMeshProUGUI descriptionObj;
-    Transform statusNone;
-    Transform statusLocked;
-    Transform statusCompleted;
+    
 
     public enum StatusItem
     {
@@ -35,7 +41,7 @@ public class UpgradeButton : MonoBehaviour
         Completed
     }
 
-    void Start()
+    void Awake()
     {
         if (useCustomResources == false)
         {

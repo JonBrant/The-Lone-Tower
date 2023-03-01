@@ -8,7 +8,6 @@ public class UpgradePanel : MonoBehaviour
 {
     [SerializeField] private UpgradeButton upgradeButtonPrefab;
     [SerializeField] private Transform buttonContainer;
-
     [SerializeField] private AudioSource buttonAudioSource;
 
     private void Start()
@@ -16,7 +15,7 @@ public class UpgradePanel : MonoBehaviour
         for (int i = 0; i < 25; i++)
         {
             UpgradeButton button = Instantiate(upgradeButtonPrefab, buttonContainer);
-            button.GetComponent<UIElementSound>().audioObject = buttonAudioSource;
+            button.ElementSound.audioObject = buttonAudioSource;
         }
     }
 }
