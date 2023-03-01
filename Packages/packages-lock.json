@@ -14,105 +14,6 @@
       "dependencies": {},
       "hash": "959f58348d7daf10534c435fb059b25b12433713"
     },
-    "com.unity-atoms.unity-atoms": {
-      "version": "https://github.com/unity-atoms/unity-atoms.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "5df498b41ee77de0c5faa73b76f7fd0ed890216a"
-    },
-    "com.unity-atoms.unity-atoms-base-atoms": {
-      "version": "4.4.5",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.modules.physics": "1.0.0",
-        "com.unity.modules.physics2d": "1.0.0",
-        "com.unity-atoms.unity-atoms-core": "4.4.5"
-      },
-      "url": "https://registry.npmjs.org"
-    },
-    "com.unity-atoms.unity-atoms-core": {
-      "version": "4.4.5",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.modules.uielements": "1.0.0"
-      },
-      "url": "https://registry.npmjs.org"
-    },
-    "com.unity-atoms.unity-atoms-fsm": {
-      "version": "4.4.5",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity-atoms.unity-atoms-core": "4.4.5",
-        "com.unity-atoms.unity-atoms-base-atoms": "4.4.5"
-      },
-      "url": "https://registry.npmjs.org"
-    },
-    "com.unity-atoms.unity-atoms-input-system": {
-      "version": "4.4.5",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity-atoms.unity-atoms-core": "4.4.5",
-        "com.unity-atoms.unity-atoms-base-atoms": "4.4.5",
-        "com.unity.inputsystem": "1.0.1"
-      },
-      "url": "https://registry.npmjs.org"
-    },
-    "com.unity-atoms.unity-atoms-mobile": {
-      "version": "4.4.5",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity-atoms.unity-atoms-core": "4.4.5",
-        "com.unity-atoms.unity-atoms-base-atoms": "4.4.5"
-      },
-      "url": "https://registry.npmjs.org"
-    },
-    "com.unity-atoms.unity-atoms-mono-hooks": {
-      "version": "4.4.5",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.ugui": "1.0.0",
-        "com.unity-atoms.unity-atoms-core": "4.4.5",
-        "com.unity-atoms.unity-atoms-base-atoms": "4.4.5"
-      },
-      "url": "https://registry.npmjs.org"
-    },
-    "com.unity-atoms.unity-atoms-scene-mgmt": {
-      "version": "4.4.5",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity-atoms.unity-atoms-core": "4.4.5",
-        "com.unity-atoms.unity-atoms-base-atoms": "4.4.5"
-      },
-      "url": "https://registry.npmjs.org"
-    },
-    "com.unity-atoms.unity-atoms-tags": {
-      "version": "4.4.5",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity-atoms.unity-atoms-core": "4.4.5",
-        "com.unity-atoms.unity-atoms-base-atoms": "4.4.5"
-      },
-      "url": "https://registry.npmjs.org"
-    },
-    "com.unity-atoms.unity-atoms-ui": {
-      "version": "4.4.5",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity-atoms.unity-atoms-core": "4.4.5",
-        "com.unity-atoms.unity-atoms-base-atoms": "4.4.5"
-      },
-      "url": "https://registry.npmjs.org"
-    },
     "com.unity.2d.animation": {
       "version": "7.0.6",
       "depth": 1,
@@ -278,15 +179,6 @@
       "depth": 0,
       "source": "registry",
       "dependencies": {},
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.inputsystem": {
-      "version": "1.4.1",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.modules.uielements": "1.0.0"
-      },
       "url": "https://packages.unity.com"
     },
     "com.unity.mathematics": {
