@@ -50,8 +50,6 @@ public class ProjectileView : MonoBehaviour
                 // Bug: If enemy is killed in one shot, the damage text doesn't spawn in the correct spot
                 projectile.OnDamageDealt?.Invoke(projectile.Damage, other.transform);
                 
-                
-                
                 // Check enemy health and mark for deletion if necessary
                 if (enemyHealth.CurrentHealth <= 0 && !destroyPool.Has(unpackedEnemy))
                 {

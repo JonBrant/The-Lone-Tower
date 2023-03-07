@@ -14,11 +14,15 @@ public class UpgradeBase : ScriptableObject
     {
         
     }
-    
+
+    public virtual Dictionary<CurrencyTypes, float> GetCost()
+    {
+        return new Dictionary<CurrencyTypes, float>();
+    }
+
     public virtual bool CanUpgrade() => true;
 
     public virtual void Upgrade()
     {
-        // int upgradeLevel = UpgradeManager.Instance.UpgradeCounts[Title];
     }
 }
