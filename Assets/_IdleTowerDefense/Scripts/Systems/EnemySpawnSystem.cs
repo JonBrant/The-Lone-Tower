@@ -8,13 +8,14 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
     private SharedData sharedData;
     private double spawnTimeRemaining = 0;
     private EcsWorld world;
-    private double EnemySpawnDelay;
+    private double enemySpawnDelay;
+    private int spawnCount = 1;
 
     public void PreInit(EcsSystems systems)
     {
         sharedData = systems.GetShared<SharedData>();
         world = systems.GetWorld();
-        EnemySpawnDelay = sharedData.Settings.InitialEnemySpawnDelay;
+        enemySpawnDelay = sharedData.Settings.InitialEnemySpawnDelay;
     }
 
     public void Run(EcsSystems systems)
@@ -22,12 +23,20 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
         spawnTimeRemaining -= Time.deltaTime;
         if (spawnTimeRemaining <= 0)
         {
-            SpawnEnemy();
+            for (int i = 0; i < spawnCount; i++)
+            {
+                SpawnEnemy();
+            }
             
-            
-            // ToDo: Update this; floating point errors are screwing it up anyway
-            EnemySpawnDelay *= sharedData.Settings.EnemySpawnMultiplier;
-            spawnTimeRemaining = EnemySpawnDelay;
+            // Reduce delay to increase spawn speed
+            enemySpawnDelay *= sharedData.Settings.EnemySpawnMultiplier;
+            // Spawn multiple enemies if delay gets too low, because floating point errors occur quickly
+            if (enemySpawnDelay <= sharedData.Settings.InitialEnemySpawnDelay/2.0f)
+            {
+                spawnCount++;
+                enemySpawnDelay = sharedData.Settings.InitialEnemySpawnDelay;
+            }
+            spawnTimeRemaining = enemySpawnDelay;
         }
     }
 
