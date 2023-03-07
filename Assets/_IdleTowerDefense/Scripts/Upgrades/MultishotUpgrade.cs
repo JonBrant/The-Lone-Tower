@@ -22,7 +22,9 @@ public class MultishotUpgrade : UpgradeBase
     {
         return new Dictionary<CurrencyTypes, float> {
             {
-                CurrencyTypes.Gold, UpgradeManager.Instance.UpgradeCounts[Title]+1
+                CurrencyTypes.Gold, (UpgradeManager.Instance.UpgradeCounts[Title] + 1) * 5
+            }, {
+                CurrencyTypes.Scrap, (UpgradeManager.Instance.UpgradeCounts[Title] + 1) * 5
             }
         };
     }

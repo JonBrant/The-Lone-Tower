@@ -8,6 +8,7 @@ using UnityEngine;
 public class TowerView : MonoBehaviour
 {
     public float StartingHealth = 50;
+    public float HealthRegeneration = 10;
     public float AttackCooldown = 1;
     public float TargetingRange = 5;
     public int MaxTargets = 1;

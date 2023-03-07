@@ -20,6 +20,7 @@ class ECSWorld : MonoBehaviour
             .Add(new TowerFiringSystem())
             .Add(new EnemySpawnSystem())
             .Add(new EnemyDamageSystem())
+            .Add(new HealthRegenerationSystem())
             .Add(new DestroySystem())
             .Add(new WorldDebugSystem("Main World"))
             .Add(new MovementSystem());

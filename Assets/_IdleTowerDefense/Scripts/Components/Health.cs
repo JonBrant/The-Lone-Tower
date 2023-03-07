@@ -7,5 +7,6 @@ public struct Health
 {
     public float CurrentHealth;
     public float MaxHealth;
+    public float HealthRegeneration;
     public Action OnDamaged;
 }
