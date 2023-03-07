@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using Leopotam.EcsLite;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Attack Damage Upgrade", menuName = "Idle Tower Defense/Upgrades/Attack Damage")]
-public class AttackDamageUpgrade : UpgradeBase
+[CreateAssetMenu(fileName = "New Attack Speed Upgrade", menuName = "Idle Tower Defense/Upgrades/Attack Speed")]
+public class AttackSpeedUpgrade : UpgradeBase
 {
-    [Header("Upgrade Specific Values")]
-    
     private EcsFilter weaponFilter;
 
     public override void Init()
@@ -19,7 +17,9 @@ public class AttackDamageUpgrade : UpgradeBase
     {
         return new Dictionary<CurrencyTypes, float> {
             {
-                CurrencyTypes.Gold, UpgradeManager.Instance.UpgradeCounts[Title]+1
+                CurrencyTypes.Gold, (UpgradeManager.Instance.UpgradeCounts[Title] + 1) * 5
+            }, {
+                CurrencyTypes.Scrap, (UpgradeManager.Instance.UpgradeCounts[Title] + 1) * 5
             }
         };
     }
@@ -35,7 +35,7 @@ public class AttackDamageUpgrade : UpgradeBase
         foreach (int entity in weaponFilter)
         {
             ref TowerWeapon towerWeapon = ref weaponPool.Get(entity);
-            towerWeapon.AttackDamage += 1;
+            towerWeapon.AttackCooldown *= 0.9f;
         }
     }
 }

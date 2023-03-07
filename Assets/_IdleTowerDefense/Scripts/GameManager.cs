@@ -25,8 +25,5 @@ public class GameManager : Singleton<GameManager>
         {
             Currency.Add(currency, 0f);
         }
-        
-        // Temporary
-        Currency[CurrencyTypes.Gold] = 10;
     }
 }

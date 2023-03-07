@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using Leopotam.EcsLite;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Attack Damage Upgrade", menuName = "Idle Tower Defense/Upgrades/Attack Damage")]
-public class AttackDamageUpgrade : UpgradeBase
+[CreateAssetMenu(fileName = "New Multishot Upgrade", menuName = "Idle Tower Defense/Upgrades/Multishot")]
+public class MultishotUpgrade : UpgradeBase
 {
     [Header("Upgrade Specific Values")]
     
-    private EcsFilter weaponFilter;
+    private EcsFilter towerTargetSelectorFilter;
 
     public override void Init()
     {
-        weaponFilter = GameManager.Instance.World.Filter<TowerWeapon>().End();
+        towerTargetSelectorFilter = GameManager.Instance.World.Filter<Tower>()
+            .Inc<TowerTargetSelector>()
+            .Inc<TowerWeapon>()
+            .End();
     }
-
+    
     public override Dictionary<CurrencyTypes, float> GetCost()
     {
         return new Dictionary<CurrencyTypes, float> {
@@ -31,11 +34,11 @@ public class AttackDamageUpgrade : UpgradeBase
         UpgradeManager.Instance.UpgradeCounts[Title] += 1;
 
         // Handle upgrade
-        EcsPool<TowerWeapon> weaponPool = GameManager.Instance.World.GetPool<TowerWeapon>();
-        foreach (int entity in weaponFilter)
+        EcsPool<TowerTargetSelector> targetSelectorPool = GameManager.Instance.World.GetPool<TowerTargetSelector>();
+        foreach (int entity in towerTargetSelectorFilter)
         {
-            ref TowerWeapon towerWeapon = ref weaponPool.Get(entity);
-            towerWeapon.AttackDamage += 1;
+            ref TowerTargetSelector towerWeapon = ref targetSelectorPool.Get(entity);
+            towerWeapon.MaxTargets += 1;
         }
     }
 }
