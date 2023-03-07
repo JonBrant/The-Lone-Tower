@@ -9,13 +9,13 @@ public class TowerView : MonoBehaviour
 {
     public float StartingHealth = 50;
     public float HealthRegeneration = 10;
-    public float AttackCooldown = 1;
-    public float TargetingRange = 5;
+    
     public int MaxTargets = 1;
 
 
     [SerializeField] private SpriteRenderer HealthBar;
     [SerializeField] private LineRenderer RadiusRenderer;
+    private float targetingRange = -1;
 
     public EcsPackedEntity packedEntity;
     public EcsWorld world;
@@ -26,16 +26,21 @@ public class TowerView : MonoBehaviour
         if (packedEntity.Unpack(world, out int unpackedTower))
         {
             EcsPool<Health> healthPool = world.GetPool<Health>();
+            EcsPool<TowerTargetSelector> targetSelectorPool = world.GetPool<TowerTargetSelector>();
             ref Health towerHealth = ref healthPool.Get(unpackedTower);
+            ref TowerTargetSelector towerTargetSelector = ref targetSelectorPool.Get(unpackedTower);
 
+            // Update Health display
             HealthBar.sharedMaterial.SetFloat("_Arc2", Mathf.Lerp(360, 0, towerHealth.CurrentHealth / towerHealth.MaxHealth));
             HealthBar.color = Color.Lerp(Color.red, Color.green, towerHealth.CurrentHealth / towerHealth.MaxHealth);
+            
+            // Update targeting range if necessary
+            if (!targetingRange.Equals(towerTargetSelector.TargetingRange))
+            {
+                targetingRange = towerTargetSelector.TargetingRange;
+                UpdateTargetingRange(targetingRange);
+            }
         }
-    }
-
-    private void OnValidate()
-    {
-        UpdateTargetingRange(TargetingRange);
     }
 
     private void UpdateTargetingRange(float range)

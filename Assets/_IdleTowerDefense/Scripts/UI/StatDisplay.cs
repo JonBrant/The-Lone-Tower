@@ -16,6 +16,7 @@ public class StatDisplay : MonoBehaviour
     private StatDisplayElement HealthRegenDisplay;
     private StatDisplayElement AttackDamageDisplay;
     private StatDisplayElement AttackCooldownDisplay;
+    private StatDisplayElement TowerRangeDisplay;
     private StatDisplayElement MultishotDisplay;
 
     private EcsWorld world;
@@ -27,12 +28,14 @@ public class StatDisplay : MonoBehaviour
         HealthRegenDisplay = Instantiate(StatDisplayElementPrefab, container);
         AttackDamageDisplay = Instantiate(StatDisplayElementPrefab, container);
         AttackCooldownDisplay = Instantiate(StatDisplayElementPrefab, container);
+        TowerRangeDisplay = Instantiate(StatDisplayElementPrefab, container);
         MultishotDisplay = Instantiate(StatDisplayElementPrefab, container);
 
         HealthDisplay.LabelText.text = "Health";
         HealthRegenDisplay.LabelText.text = "Health Regeneration";
         AttackDamageDisplay.LabelText.text = "Attack Damage";
         AttackCooldownDisplay.LabelText.text = "Attack Cooldown";
+        TowerRangeDisplay.LabelText.text = "Tower Range";
         MultishotDisplay.LabelText.text = "Multishot Count";
 
         world = GameManager.Instance.World;
@@ -57,10 +60,9 @@ public class StatDisplay : MonoBehaviour
             
             HealthDisplay.ValueText.text = $"{towerHealth.CurrentHealth:N0} / {towerHealth.MaxHealth:N0}";
             HealthRegenDisplay.ValueText.text = $"{towerHealth.HealthRegeneration}/s";
-            
-            // Attack Damage
             AttackDamageDisplay.ValueText.text = towerWeapon.AttackDamage.ToString();
             AttackCooldownDisplay.ValueText.text = $"{1/towerWeapon.AttackCooldown:N2}/s";
+            TowerRangeDisplay.ValueText.text = $"{targetSelector.TargetingRange}m";
             MultishotDisplay.ValueText.text = targetSelector.MaxTargets.ToString();
         }
     }

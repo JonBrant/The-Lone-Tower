@@ -8,11 +8,13 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
     private SharedData sharedData;
     private float spawnTimeRemaining = 0;
     private EcsWorld world;
+    private float EnemySpawnDelay;
 
     public void PreInit(EcsSystems systems)
     {
         sharedData = systems.GetShared<SharedData>();
         world = systems.GetWorld();
+        EnemySpawnDelay = sharedData.Settings.InitialEnemySpawnDelay;
     }
 
     public void Run(EcsSystems systems)
@@ -21,7 +23,11 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
         if (spawnTimeRemaining <= 0)
         {
             SpawnEnemy();
-            spawnTimeRemaining = sharedData.Settings.EnemySpawnDelay;
+            
+            
+            // ToDo: Update this 
+            EnemySpawnDelay *= sharedData.Settings.EnemySpawnMultiplier;
+            spawnTimeRemaining = EnemySpawnDelay;
         }
     }
 

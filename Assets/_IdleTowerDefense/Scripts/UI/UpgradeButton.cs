@@ -12,8 +12,10 @@ using TMPro;
 public class UpgradeButton : MonoBehaviour
 {
     [Header("Resources")]
+    public Animator Animator;
     public Sprite backgroundImage;
     public Button Button;
+    public Image FrameGlow;
     public UITooltipShow Tooltip;
     public UIElementSound ElementSound;
     public Image backgroundImageObj;
@@ -72,8 +74,9 @@ public class UpgradeButton : MonoBehaviour
             statusCompleted = gameObject.transform.Find("Content/Texts/Status/Completed")
                 .GetComponent<Transform>();
 
-            UpdateStatus();
+            
         }
+        UpdateStatus();
     }
 
     private void Update()

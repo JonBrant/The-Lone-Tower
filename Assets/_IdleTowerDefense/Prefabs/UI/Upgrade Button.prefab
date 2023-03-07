@@ -1401,8 +1401,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2168485c139bb274dbf1d2134a183324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Animator: {fileID: 6201819933307611563}
   backgroundImage: {fileID: 21300000, guid: 953160aad749d4445804d6221300168e, type: 3}
   Button: {fileID: 6259348894670430681}
+  FrameGlow: {fileID: 6256182938376219191}
   Tooltip: {fileID: 6078086752340686520}
   ElementSound: {fileID: 6255601171247267501}
   backgroundImageObj: {fileID: 6259168751981457861}
@@ -1411,11 +1413,13 @@ MonoBehaviour:
   statusNone: {fileID: 6078480760180537897}
   statusLocked: {fileID: 6078078072977131891}
   statusCompleted: {fileID: 6078172389137724627}
+  TargetUpgrade: {fileID: 0}
   buttonTitle: TITLE
   buttonDescription: DESCRIPTION
   useCustomResources: 1
   enableStatus: 1
   statusItem: 1
+  UpdateInterval: 0.5
 --- !u!114 &6259348894670430681
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -33,6 +33,7 @@ public class TowerSpawnSystem : IEcsPreInitSystem, IEcsInitSystem
         TowerView towerView = GameObject.Instantiate(sharedData.Settings.TowerPrefab, Vector3.zero, Quaternion.identity);
 
         // Init components
+        // ToDo: Move stats to SharedData
         towerHealth.MaxHealth = towerView.StartingHealth;
         towerHealth.CurrentHealth = towerView.StartingHealth;
         towerHealth.HealthRegeneration = towerView.HealthRegeneration;
@@ -40,8 +41,8 @@ public class TowerSpawnSystem : IEcsPreInitSystem, IEcsInitSystem
             .OnComplete(() => towerView.transform.position = Vector3.zero);
         towerWeapon.AttackCooldown = sharedData.Settings.TowerStartingAttackCooldown;
         towerWeapon.AttackDamage = sharedData.Settings.TowerStartingAttackDamage;
-        towerTargetSelector.TargetingRange = towerView.TargetingRange;
-        towerTargetSelector.MaxTargets = towerView.MaxTargets;
+        towerTargetSelector.TargetingRange = sharedData.Settings.TowerStartingTargetingRange;
+        towerTargetSelector.MaxTargets = sharedData.Settings.TowerStartingAttackTargets;
 
 
         // Init View
