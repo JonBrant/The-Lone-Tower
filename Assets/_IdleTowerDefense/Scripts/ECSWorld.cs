@@ -2,11 +2,11 @@ using Leopotam.EcsLite;
 using Nomnom.EcsLiteDebugger;
 using UnityEngine;
 
-class ECSWorld : Singleton<ECSWorld>
+class ECSWorld : MonoBehaviour
 {
     [SerializeField] private GameSettings gameSettings;
 
-    public EcsWorld World;
+    public EcsWorld _world;
     EcsSystems _systems;
 
     void Awake()
@@ -14,8 +14,8 @@ class ECSWorld : Singleton<ECSWorld>
         SharedData sharedData = new SharedData();
         sharedData.InitDefaultValues(gameSettings);
 
-        World = new EcsWorld();
-        _systems = new EcsSystems(World, sharedData).Add(new TowerSpawnSystem())
+        _world = new EcsWorld();
+        _systems = new EcsSystems(_world, sharedData).Add(new TowerSpawnSystem())
             .Add(new TowerTargetingSystem())
             .Add(new TowerFiringSystem())
             .Add(new EnemySpawnSystem())
@@ -25,6 +25,8 @@ class ECSWorld : Singleton<ECSWorld>
             .Add(new MovementSystem());
 
         _systems.Init();
+
+        GameManager.Instance.World = _world;
     }
 
     void Update()
@@ -34,7 +36,7 @@ class ECSWorld : Singleton<ECSWorld>
 
     void OnDestroy()
     {
-        World?.Destroy();
+        _world?.Destroy();
         _systems?.Destroy();
     }
 }

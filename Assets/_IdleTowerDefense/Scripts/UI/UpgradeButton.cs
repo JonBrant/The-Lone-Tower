@@ -1,3 +1,4 @@
+using System;
 using DuloGames.UI;
 using Michsky.UI.Shift;
 using UnityEngine;
@@ -21,6 +22,9 @@ public class UpgradeButton : MonoBehaviour
     public Transform statusLocked;
     public Transform statusCompleted;
 
+    [HideInInspector]
+    public UpgradeBase TargetUpgrade;
+    
     public string buttonTitle = "My Title";
     [TextArea] public string buttonDescription = "My Description";
 
@@ -31,7 +35,8 @@ public class UpgradeButton : MonoBehaviour
     public bool enableStatus;
 
     public StatusItem statusItem;
-
+    public float UpdateInterval = 0.5f;
+    private float timeSinceLastUpdate = 0;
     
 
     public enum StatusItem
@@ -66,26 +71,43 @@ public class UpgradeButton : MonoBehaviour
             statusCompleted = gameObject.transform.Find("Content/Texts/Status/Completed")
                 .GetComponent<Transform>();
 
-            if (statusItem == StatusItem.None)
-            {
-                statusNone.gameObject.SetActive(true);
-                statusLocked.gameObject.SetActive(false);
-                statusCompleted.gameObject.SetActive(false);
-            }
+            UpdateStatus();
+        }
+    }
 
-            else if (statusItem == StatusItem.Locked)
-            {
-                statusNone.gameObject.SetActive(false);
-                statusLocked.gameObject.SetActive(true);
-                statusCompleted.gameObject.SetActive(false);
-            }
+    private void Update()
+    {
+        timeSinceLastUpdate += Time.deltaTime;
+        if (timeSinceLastUpdate < UpdateInterval) return;
+        if (!UpgradeManager.Instance.MenuOpen) return;
 
-            else if (statusItem == StatusItem.Completed)
-            {
-                statusNone.gameObject.SetActive(false);
-                statusLocked.gameObject.SetActive(false);
-                statusCompleted.gameObject.SetActive(true);
-            }
+        statusItem = TargetUpgrade.CanUpgrade() ? StatusItem.None : StatusItem.Locked;
+        UpdateStatus();
+    }
+
+    private void UpdateStatus()
+    {
+        if (statusItem == StatusItem.None)
+        {
+            statusNone.gameObject.SetActive(true);
+            statusLocked.gameObject.SetActive(false);
+            statusCompleted.gameObject.SetActive(false);
+            Button.interactable = true;
+        }
+
+        else if (statusItem == StatusItem.Locked)
+        {
+            statusNone.gameObject.SetActive(false);
+            statusLocked.gameObject.SetActive(true);
+            statusCompleted.gameObject.SetActive(false);
+            Button.interactable = false;
+        }
+
+        else if (statusItem == StatusItem.Completed)
+        {
+            statusNone.gameObject.SetActive(false);
+            statusLocked.gameObject.SetActive(false);
+            statusCompleted.gameObject.SetActive(true);
         }
     }
 }

@@ -45,7 +45,7 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
         EnemyView enemyView = GameObject.Instantiate(sharedData.Settings.EnemyPrefab);
 
         // Calculate a random starting position
-        Vector2 randomPosition = Random.insideUnitCircle.normalized * sharedData.Settings.SpawnRadius;
+        Vector2 randomPosition = Random.insideUnitCircle.normalized * sharedData.Settings.EnemySpawnRadius;
 
         // Init Components
         position = randomPosition;

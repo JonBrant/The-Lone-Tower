@@ -57,16 +57,11 @@ public class TowerFiringSystem : IEcsPreInitSystem, IEcsRunSystem
                 ProjectileView projectileView = GameObject.Instantiate(sharedData.Settings.ProjectilePrefab, Vector3.zero, Quaternion.identity);
 
                 // Init components
-
-
-
-                projectile.Damage = projectileView.Damage;
+                projectile.Damage = towerWeapon.AttackDamage;
                 projectile.OnDamageDealt += (damage, transform) => UltimateTextDamageManager.Instance.AddStack(damage, transform, "normal");
                 projectilePosition = ((Vector2)positionPool.Get(towerTargetSelector.CurrentTargets[i])).normalized * 0.05f;
                 projectileMovement.Velocity = ((Vector2)positionPool.Get(towerTargetSelector.CurrentTargets[i])).normalized * projectileView.MovementSpeed;
                 projectileMovement.StopRadius = 0;
-
-
 
                 // Init View
                 projectileView.packedEntity = packedProjectileEntity;

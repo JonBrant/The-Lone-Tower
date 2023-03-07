@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Leopotam.EcsLite;
 using UnityEngine;
 
 public enum CurrencyTypes
@@ -13,6 +14,7 @@ public enum CurrencyTypes
 
 public class GameManager : Singleton<GameManager>
 {
+    public EcsWorld World;
     public Dictionary<CurrencyTypes, float> Currency = new Dictionary<CurrencyTypes, float>();
 
     private void Awake()
@@ -23,5 +25,8 @@ public class GameManager : Singleton<GameManager>
         {
             Currency.Add(currency, 0f);
         }
+        
+        // Temporary
+        Currency[CurrencyTypes.Gold] = 10;
     }
 }

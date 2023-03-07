@@ -37,7 +37,8 @@ public class TowerSpawnSystem : IEcsPreInitSystem, IEcsInitSystem
         towerHealth.CurrentHealth = towerView.StartingHealth;
         towerHealth.OnDamaged += () => towerView.transform.DOPunchPosition(Random.insideUnitCircle / 10f, 0.1f, 3, 1, false)
             .OnComplete(() => towerView.transform.position = Vector3.zero);
-        towerWeapon.AttackCooldown = towerView.AttackCooldown;
+        towerWeapon.AttackCooldown = sharedData.Settings.TowerStartingAttackCooldown;
+        towerWeapon.AttackDamage = sharedData.Settings.TowerStartingAttackDamage;
         towerTargetSelector.TargetingRange = towerView.TargetingRange;
         towerTargetSelector.MaxTargets = towerView.MaxTargets;
 
