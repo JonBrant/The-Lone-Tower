@@ -49,12 +49,16 @@ public class ProjectileView : MonoBehaviour
                 
                 // Bug: If enemy is killed in one shot, the damage text doesn't spawn in the correct spot
                 projectile.OnDamageDealt?.Invoke(projectile.Damage, other.transform);
+                Debug.Log($"{nameof(ProjectileView)}.{nameof(OnTriggerEnter2D)}() - Other: {other.gameObject.name}");
                 
                 // Check enemy health and mark for deletion if necessary
                 if (enemyHealth.CurrentHealth <= 0 && !destroyPool.Has(unpackedEnemy))
                 {
                     destroyPool.Add(unpackedEnemy);
-                    Destroy(other.gameObject);
+                    
+                    // Delayed destroy to work around damage numbers not working when destroyed immediately
+                    other.gameObject.SetActive(false);
+                    Destroy(other.gameObject,0.1f);
                 }
 
                 // Mark projectile for deletion if not already
