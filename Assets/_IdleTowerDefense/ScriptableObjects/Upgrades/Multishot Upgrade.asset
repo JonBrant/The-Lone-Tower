@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a526a5fa9a74f0449323f3ef2358a4b, type: 3}
   m_Name: Multishot Upgrade
   m_EditorClassIdentifier: 
-  Title: Default Title
-  ShortDescription: Short Description
-  DescriptionLines: []
+  Title: Multishot
+  ShortDescription: Increases projectile count
+  DescriptionLines:
+  - Increases projectile count by 1 per level
   BackgroundImage: {fileID: 0}

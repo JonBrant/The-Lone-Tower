@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Attack Damage Upgrade
   m_EditorClassIdentifier: 
   Title: Attack Damage
-  ShortDescription: Flat upgrade damage
+  ShortDescription: Flat damage upgrade
   DescriptionLines:
-  - Attack Damage
-  - Upgraydd
+  - Flat attack damage upgrade
   BackgroundImage: {fileID: 0}

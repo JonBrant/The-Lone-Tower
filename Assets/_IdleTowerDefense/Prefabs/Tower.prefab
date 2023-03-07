@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartingHealth: 500
+  HealthRegeneration: 10
   AttackCooldown: 0.2
   TargetingRange: 3
   MaxTargets: 1

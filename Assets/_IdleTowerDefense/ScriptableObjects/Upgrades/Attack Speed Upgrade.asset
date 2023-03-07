@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9f9b8dc9aa99e54b80754f00a66a376, type: 3}
   m_Name: Attack Speed Upgrade
   m_EditorClassIdentifier: 
-  Title: Default Title
-  ShortDescription: Short Description
-  DescriptionLines: []
+  Title: Attack Speed
+  ShortDescription: Multiplicative attack speed
+  DescriptionLines:
+  - Multiplicative attack speed upgrade
   BackgroundImage: {fileID: 0}
