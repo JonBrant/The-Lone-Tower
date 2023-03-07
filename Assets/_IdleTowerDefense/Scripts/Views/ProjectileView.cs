@@ -48,7 +48,6 @@ public class ProjectileView : MonoBehaviour
                 enemyHealth.OnDamaged?.Invoke();
                 
                 projectile.OnDamageDealt?.Invoke(projectile.Damage, other.transform);
-                Debug.Log($"{nameof(ProjectileView)}.{nameof(OnTriggerEnter2D)}() - Other: {other.gameObject.name}");
                 
                 // Check enemy health and mark for deletion if necessary
                 if (enemyHealth.CurrentHealth <= 0 && !destroyPool.Has(unpackedEnemy))
