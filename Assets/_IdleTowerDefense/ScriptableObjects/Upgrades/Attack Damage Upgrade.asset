@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09f971468c306c3458f840a54eab19ff, type: 3}
   m_Name: Attack Damage Upgrade
   m_EditorClassIdentifier: 
-  Title: Default Title
-  DescriptionLines: []
+  Title: Attack Damage
+  ShortDescription: Flat upgrade damage
+  DescriptionLines:
+  - Attack Damage
+  - Upgraydd
+  BackgroundImage: {fileID: 0}
