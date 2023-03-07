@@ -46,6 +46,8 @@ public class ProjectileView : MonoBehaviour
 
                 enemyHealth.CurrentHealth -= projectile.Damage;
                 enemyHealth.OnDamaged?.Invoke();
+                
+                // Bug: If enemy is killed in one shot, the damage text doesn't spawn in the correct spot
                 projectile.OnDamageDealt?.Invoke(projectile.Damage, other.transform);
                 
                 

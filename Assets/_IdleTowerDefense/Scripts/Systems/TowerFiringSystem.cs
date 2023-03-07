@@ -58,7 +58,7 @@ public class TowerFiringSystem : IEcsPreInitSystem, IEcsRunSystem
 
                 // Init components
                 projectile.Damage = towerWeapon.AttackDamage;
-                projectile.OnDamageDealt += (damage, transform) => UltimateTextDamageManager.Instance.AddStack(damage, transform, "normal");
+                projectile.OnDamageDealt += (damage, enemyTransform) => UltimateTextDamageManager.Instance.AddStack(damage, enemyTransform, "normal");
                 projectilePosition = ((Vector2)positionPool.Get(towerTargetSelector.CurrentTargets[i])).normalized * 0.05f;
                 projectileMovement.Velocity = ((Vector2)positionPool.Get(towerTargetSelector.CurrentTargets[i])).normalized * projectileView.MovementSpeed;
                 projectileMovement.StopRadius = 0;

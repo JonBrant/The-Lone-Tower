@@ -347,9 +347,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 519420031}
     - target: {fileID: 114600978523305578, guid: 73ade234de8d92445a7756cd400e2fd3, type: 3}
+      propertyPath: textTypes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114600978523305578, guid: 73ade234de8d92445a7756cd400e2fd3, type: 3}
       propertyPath: textTypes.Array.data[0].prefab
       value: 
       objectReference: {fileID: 114685088414384168, guid: 9babc09af12f9ee4db8f140e32a9531b, type: 3}
+    - target: {fileID: 114600978523305578, guid: 73ade234de8d92445a7756cd400e2fd3, type: 3}
+      propertyPath: textTypes.Array.data[1].prefab
+      value: 
+      objectReference: {fileID: 114865973802963578, guid: f142b35f35a6b494689b8060d0822e79, type: 3}
+    - target: {fileID: 114600978523305578, guid: 73ade234de8d92445a7756cd400e2fd3, type: 3}
+      propertyPath: textTypes.Array.data[1].keyType
+      value: loot
+      objectReference: {fileID: 0}
+    - target: {fileID: 114600978523305578, guid: 73ade234de8d92445a7756cd400e2fd3, type: 3}
+      propertyPath: textTypes.Array.data[1].poolCount
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 224741906549615740, guid: 73ade234de8d92445a7756cd400e2fd3, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2285,7 +2301,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1025.1156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &3980316766642674857
