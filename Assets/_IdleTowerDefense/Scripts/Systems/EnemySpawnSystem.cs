@@ -6,9 +6,9 @@ using UnityEngine;
 public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
 {
     private SharedData sharedData;
-    private float spawnTimeRemaining = 0;
+    private double spawnTimeRemaining = 0;
     private EcsWorld world;
-    private float EnemySpawnDelay;
+    private double EnemySpawnDelay;
 
     public void PreInit(EcsSystems systems)
     {
@@ -25,7 +25,7 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
             SpawnEnemy();
             
             
-            // ToDo: Update this 
+            // ToDo: Update this; floating point errors are screwing it up anyway
             EnemySpawnDelay *= sharedData.Settings.EnemySpawnMultiplier;
             spawnTimeRemaining = EnemySpawnDelay;
         }

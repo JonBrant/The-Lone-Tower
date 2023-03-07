@@ -9,7 +9,7 @@ public class GameSettings : ScriptableObject
     public ProjectileView ProjectilePrefab;
     [FormerlySerializedAs("SpawnRadius")] public float EnemySpawnRadius = 10;
     public float InitialEnemySpawnDelay = 0.5f;
-    public float EnemySpawnMultiplier = 0.95f;
+    public double EnemySpawnMultiplier = 0.95f;
 
     [Header("Tower Starting Values")]
     public float TowerStartingAttackDamage = 1;

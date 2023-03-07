@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Multishot Upgrade
   m_EditorClassIdentifier: 
   Title: Multishot
-  ShortDescription: Increases projectile count
+  ShortDescription: Projectile count
   DescriptionLines:
   - Increases projectile count by 1 per level
   BackgroundImage: {fileID: 0}
