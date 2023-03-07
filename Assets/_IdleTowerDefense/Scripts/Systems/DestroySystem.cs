@@ -28,23 +28,13 @@ public class DestroySystem : IEcsPreInitSystem, IEcsRunSystem
                 ref CurrencyDrop currencyDrop = ref currencyDropPool.Get(destroyedEntity);
                 ref Position enemyPosition = ref positionPool.Get(destroyedEntity);
                 
+                // Add currency
+                GameManager.Instance.Currency.AddValues(currencyDrop.Drops);
+                
+                // Handle combat text
                 string dropText = currencyDrop.Drops.ToCommaString();
-                /*
-                List<CurrencyTypes> keys = currencyDrop.Drops.Keys.ToList();
-                for (int i = 0; i < keys.Count; i++)
-                {
-                    GameManager.Instance.Currency[keys[i]] += currencyDrop.Drops[keys[i]];
-                    dropText += $"{currencyDrop.Drops[keys[i]]} {keys[i]}";
-                    if (i+1 < keys.Count)
-                    {
-                        dropText += ", ";
-                    }
-                }
-                */
-
                 if (dropText!= "")
                 {
-                    // UltimateTextDamageManager.Instance.Add(dropText, (Vector2)enemyPosition, "loot");
                     UltimateTextDamageManager.Instance.Add(dropText, (Vector2)enemyPosition, "loot");
                 }
             }

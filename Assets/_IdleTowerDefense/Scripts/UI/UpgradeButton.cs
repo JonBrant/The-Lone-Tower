@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DuloGames.UI;
 using Michsky.UI.Shift;
 using UnityEngine;
@@ -81,8 +82,23 @@ public class UpgradeButton : MonoBehaviour
         if (timeSinceLastUpdate < UpdateInterval) return;
         if (!UpgradeManager.Instance.MenuOpen) return;
 
+        UpdateTooltip();
         statusItem = TargetUpgrade.CanUpgrade() ? StatusItem.None : StatusItem.Locked;
         UpdateStatus();
+    }
+
+    public void UpdateTooltip()
+    {
+        // Setup tooltip
+        List<UITooltipLineContent> LineList = new List<UITooltipLineContent>();
+        LineList.Add(new UITooltipLineContent(UITooltipLines.LineStyle.Title, null, TargetUpgrade.Title));
+        LineList.Add(new UITooltipLineContent(UITooltipLines.LineStyle.Description, null, TargetUpgrade.GetCost().ToCommaString()));
+        foreach (string t in TargetUpgrade.DescriptionLines)
+        {
+            LineList.Add(new UITooltipLineContent(UITooltipLines.LineStyle.Default, null, t));
+        }
+
+        Tooltip.contentLines = LineList.ToArray();
     }
 
     private void UpdateStatus()

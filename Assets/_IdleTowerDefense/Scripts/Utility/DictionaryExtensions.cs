@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public static class DictionaryHasAtLeast
+public static class DictionaryExtensions
 {
     public static bool HasAtLeast(this Dictionary<CurrencyTypes, float> lhs, Dictionary<CurrencyTypes, float> rhs)
     {
@@ -23,11 +23,18 @@ public static class DictionaryHasAtLeast
         return true;
     }
 
-    public static void Subtract(this Dictionary<CurrencyTypes, float> lhs, Dictionary<CurrencyTypes, float> rhs)
+    public static void SubtractValues(this Dictionary<CurrencyTypes, float> lhs, Dictionary<CurrencyTypes, float> rhs)
     {
         foreach (KeyValuePair<CurrencyTypes, float> kvp in rhs)
         {
             lhs[kvp.Key] -= rhs[kvp.Key];
+        }
+    }
+    public static void AddValues(this Dictionary<CurrencyTypes, float> lhs, Dictionary<CurrencyTypes, float> rhs)
+    {
+        foreach (KeyValuePair<CurrencyTypes, float> kvp in rhs)
+        {
+            lhs[kvp.Key] += rhs[kvp.Key];
         }
     }
 

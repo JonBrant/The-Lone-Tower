@@ -31,7 +31,7 @@ public class AttackDamageUpgrade : UpgradeBase
     {
         Debug.Log($"{nameof(AttackDamageUpgrade)}.{nameof(Upgrade)}() - Upgrading!");
         // Handle cost
-        GameManager.Instance.Currency.Subtract(GetCost());
+        GameManager.Instance.Currency.SubtractValues(GetCost());
         UpgradeManager.Instance.UpgradeCounts[Title] += 1;
 
         // Handle upgrade
