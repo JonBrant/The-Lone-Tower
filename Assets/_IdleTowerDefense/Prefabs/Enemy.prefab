@@ -134,7 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovementSpeed: 2
   StartingHealth: 2
-  Damage: 1
+  Damage: 3
   DamageCooldown: 1
   healthBar: {fileID: 1374273605779650090}
 --- !u!212 &4719419927584065111
