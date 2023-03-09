@@ -48,6 +48,10 @@ public class EnemyDamageSystem : IEcsPreInitSystem, IEcsRunSystem
                     enemyMeleeDamage.DamageCooldownRemaining = enemyMeleeDamage.DamageCooldown;
                     
                     towerHealth.CurrentHealth -= enemyMeleeDamage.Damage;
+                    if (towerHealth.CurrentHealth < 0)
+                    {
+                        towerHealth.CurrentHealth = 0;
+                    }
                     enemyMeleeDamage.OnDamageDealt?.Invoke(enemyMeleeDamage.Damage, sharedData.TowerView.transform);
                     towerHealth.OnDamaged?.Invoke();
                 }

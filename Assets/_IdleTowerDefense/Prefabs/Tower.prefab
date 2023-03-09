@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2203159105387169473}
   - component: {fileID: 2561317839851661327}
+  - component: {fileID: -6262024277379905340}
   - component: {fileID: 2203159105387169486}
+  - component: {fileID: 3587481748366666788}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -48,10 +50,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartingHealth: 100
-  HealthRegeneration: 0
-  MaxTargets: 1
+  StartingHealthRegeneration: 0
+  StartingAttackDamage: 1
+  StartingAttackCooldown: 1
+  StartingMaxTargets: 1
+  StartingTargetingRange: 2
   HealthBar: {fileID: 463204742845015056}
   RadiusRenderer: {fileID: 8403903296476473551}
+--- !u!114 &-6262024277379905340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2203159105387169487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a6b8b943eeee7b4fb251bdc85eb6b36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TowerView: {fileID: 2561317839851661327}
 --- !u!212 &2203159105387169486
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -104,6 +122,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &3587481748366666788
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2203159105387169487}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &2496045736859193876
 GameObject:
   m_ObjectHideFlags: 0

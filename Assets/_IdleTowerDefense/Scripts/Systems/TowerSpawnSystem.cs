@@ -12,7 +12,7 @@ public class TowerSpawnSystem : IEcsPreInitSystem, IEcsInitSystem
         sharedData = systems.GetShared<SharedData>();
         world = systems.GetWorld();
     }
-
+    
     public void Init(EcsSystems systems)
     {
         world = systems.GetWorld();
@@ -33,21 +33,20 @@ public class TowerSpawnSystem : IEcsPreInitSystem, IEcsInitSystem
         TowerView towerView = GameObject.Instantiate(sharedData.Settings.TowerPrefab, Vector3.zero, Quaternion.identity);
 
         // Init components
-        // ToDo: Move stats to SharedData
         towerHealth.MaxHealth = towerView.StartingHealth;
         towerHealth.CurrentHealth = towerView.StartingHealth;
-        towerHealth.HealthRegeneration = towerView.HealthRegeneration;
+        towerHealth.HealthRegeneration = towerView.StartingHealthRegeneration;
         towerHealth.OnDamaged += () => towerView.transform.DOPunchPosition(Random.insideUnitCircle / 10f, 0.1f, 3, 1, false)
             .OnComplete(() => towerView.transform.position = Vector3.zero);
-        towerWeapon.AttackCooldown = sharedData.Settings.TowerStartingAttackCooldown;
-        towerWeapon.AttackDamage = sharedData.Settings.TowerStartingAttackDamage;
-        towerTargetSelector.TargetingRange = sharedData.Settings.TowerStartingTargetingRange;
-        towerTargetSelector.MaxTargets = sharedData.Settings.TowerStartingAttackTargets;
+        towerWeapon.AttackCooldown = towerView.StartingAttackCooldown;
+        towerWeapon.AttackDamage = towerView.StartingAttackDamage;
+        towerTargetSelector.TargetingRange = towerView.StartingTargetingRange;
+        towerTargetSelector.MaxTargets = towerView.StartingMaxTargets;
 
 
         // Init View
-        towerView.packedEntity = packedEntity;
-        towerView.world = world;
+        towerView.PackedEntity = packedEntity;
+        towerView.World = world;
         sharedData.TowerView = towerView;
     }
 }

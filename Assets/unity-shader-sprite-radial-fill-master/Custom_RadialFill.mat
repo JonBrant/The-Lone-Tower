@@ -29,7 +29,7 @@ Material:
     - PixelSnap: 0
     - _Angle: 90
     - _Arc1: 0
-    - _Arc2: 360
+    - _Arc2: 115.2
     m_Colors:
     - _Color: {r: 0.2916443, g: 0.8867924, b: 0.11294055, a: 1}
   m_BuildTextureStacks: []
