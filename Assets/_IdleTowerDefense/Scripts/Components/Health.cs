@@ -9,4 +9,5 @@ public struct Health
     public float MaxHealth;
     public float HealthRegeneration;
     public Action OnDamaged;
+    public Action OnKilled;
 }

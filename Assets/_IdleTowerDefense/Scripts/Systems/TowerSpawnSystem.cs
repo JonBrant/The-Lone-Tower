@@ -12,7 +12,7 @@ public class TowerSpawnSystem : IEcsPreInitSystem, IEcsInitSystem
         sharedData = systems.GetShared<SharedData>();
         world = systems.GetWorld();
     }
-    
+
     public void Init(EcsSystems systems)
     {
         world = systems.GetWorld();
@@ -38,7 +38,8 @@ public class TowerSpawnSystem : IEcsPreInitSystem, IEcsInitSystem
         towerHealth.HealthRegeneration = towerView.StartingHealthRegeneration;
         towerHealth.OnDamaged += () => towerView.transform.DOPunchPosition(Random.insideUnitCircle / 10f, 0.1f, 3, 1, false)
             .OnComplete(() => towerView.transform.position = Vector3.zero);
-        towerWeapon.AttackCooldown = towerView.StartingAttackCooldown;
+        towerHealth.OnKilled += () => GameManager.Instance.OnTowerKilled();
+            towerWeapon.AttackCooldown = towerView.StartingAttackCooldown;
         towerWeapon.AttackDamage = towerView.StartingAttackDamage;
         towerTargetSelector.TargetingRange = towerView.StartingTargetingRange;
         towerTargetSelector.MaxTargets = towerView.StartingMaxTargets;

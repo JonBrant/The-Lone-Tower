@@ -8,7 +8,7 @@ public class HealthUpgrade : UpgradeBase
 {
     [Header("Upgrade Specific Values")]
     public float HealthPerUpgrade = 10;
-    
+
     private EcsFilter healthFilter;
 
     public override void Init()
@@ -36,7 +36,9 @@ public class HealthUpgrade : UpgradeBase
         foreach (int entity in healthFilter)
         {
             ref Health towerHealth = ref healthPool.Get(entity);
+            float healthPercent = towerHealth.CurrentHealth / towerHealth.MaxHealth;
             towerHealth.MaxHealth += HealthPerUpgrade;
+            towerHealth.CurrentHealth = healthPercent * towerHealth.MaxHealth;
         }
     }
 }

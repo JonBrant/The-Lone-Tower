@@ -76,6 +76,7 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
         movement.StopRadius = enemyView.AttackRange;
         health.MaxHealth = enemyView.StartingHealth * enemyHealthMultiplier;
         health.CurrentHealth = enemyView.StartingHealth * enemyHealthMultiplier;
+        health.OnKilled += () => GameManager.Instance.EnemiesKilled++;
         meleeDamage.Damage = enemyView.Damage;
         meleeDamage.DamageCooldown = enemyView.DamageCooldown;
         meleeDamage.OnDamageDealt += (damage, enemyTransform) => UltimateTextDamageManager.Instance.AddStack(damage, enemyTransform, "normal");

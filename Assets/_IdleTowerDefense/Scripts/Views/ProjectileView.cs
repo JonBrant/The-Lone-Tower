@@ -52,6 +52,7 @@ public class ProjectileView : MonoBehaviour
                 // Check enemy health and mark for deletion if necessary
                 if (enemyHealth.CurrentHealth <= 0 && !destroyPool.Has(unpackedEnemy))
                 {
+                    enemyHealth.OnKilled?.Invoke();
                     destroyPool.Add(unpackedEnemy);
                     
                     // Delayed destroy to work around damage numbers not working when destroyed immediately
