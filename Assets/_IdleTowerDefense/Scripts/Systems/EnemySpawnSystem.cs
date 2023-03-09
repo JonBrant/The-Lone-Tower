@@ -84,7 +84,7 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
 
         // Init View
         enemyView.transform.position = randomPosition;
-        enemyView.packedEntity = packedEntity;
-        enemyView.world = world;
+        enemyView.PackedEntity = packedEntity;
+        enemyView.World = world;
     }
 }

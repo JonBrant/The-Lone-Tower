@@ -36,7 +36,7 @@ public class ProjectileView : MonoBehaviour
     {
         if (other.TryGetComponent(out EnemyView enemyView))
         {
-            if (enemyView.packedEntity.Unpack(world, out int unpackedEnemy) && packedEntity.Unpack(world, out int unpackedProjectile))
+            if (enemyView.PackedEntity.Unpack(world, out int unpackedEnemy) && packedEntity.Unpack(world, out int unpackedProjectile))
             {
                 EcsPool<Destroy> destroyPool = world.GetPool<Destroy>();
                 EcsPool<Health> healthPool = world.GetPool<Health>();

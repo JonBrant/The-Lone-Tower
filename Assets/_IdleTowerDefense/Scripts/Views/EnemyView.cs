@@ -13,8 +13,8 @@ public class EnemyView : MonoBehaviour
     [SerializeField] private GameObject model;
     [SerializeField] private SpriteRenderer healthBar;
     
-    public EcsPackedEntity packedEntity;
-    public EcsWorld world;
+    public EcsPackedEntity PackedEntity;
+    public EcsWorld World;
 
     private Vector3 originalHealthBarScale;
 
@@ -33,10 +33,10 @@ public class EnemyView : MonoBehaviour
     private void Update()
     {
         
-        if (packedEntity.Unpack(world, out int unpackedEntity))
+        if (PackedEntity.Unpack(World, out int unpackedEntity))
         {
-            EcsPool<Position> positionPool = world.GetPool<Position>();
-            EcsPool<Health> healthPool = world.GetPool<Health>();
+            EcsPool<Position> positionPool = World.GetPool<Position>();
+            EcsPool<Health> healthPool = World.GetPool<Health>();
             ref Position position = ref positionPool.Get(unpackedEntity);
             ref Health health = ref healthPool.Get(unpackedEntity);
             
