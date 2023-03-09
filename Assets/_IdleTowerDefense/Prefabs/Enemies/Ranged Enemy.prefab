@@ -218,8 +218,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementSpeed: 2
-  StartingHealth: 3
-  Damage: 2
+  StartingHealth: 1
+  Damage: 1
   DamageCooldown: 1
   AttackRange: 1.9
   model: {fileID: 3938781522497842036}

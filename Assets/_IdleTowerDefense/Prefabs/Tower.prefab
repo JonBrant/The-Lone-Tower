@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a6b8b943eeee7b4fb251bdc85eb6b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerView: {fileID: 2561317839851661327}
+  updateInterval: 0.5
 --- !u!212 &2203159105387169486
 SpriteRenderer:
   m_ObjectHideFlags: 0
