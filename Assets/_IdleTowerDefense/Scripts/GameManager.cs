@@ -26,4 +26,9 @@ public class GameManager : Singleton<GameManager>
             Currency.Add(currency, 0f);
         }
     }
+
+    public void SetGameSpeed(float newSpeed)
+    {
+        Time.timeScale = newSpeed;
+    }
 }

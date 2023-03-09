@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d08e71e700ce1643bc8200c53357f8a, type: 3}
   m_Name: Game Settings
   m_EditorClassIdentifier: 
+  EnemySpawnSettings: {fileID: 11400000, guid: f059d6634ea476947833fdf57120567c, type: 2}
   TowerPrefab: {fileID: 2561317839851661327, guid: 04d700718b1fdb34fb6021c5be5332e7, type: 3}
   EnemyPrefab: {fileID: 2420183176402899973, guid: 57aebfda2cf49994f8c1f723ffb0d64a, type: 3}
   ProjectilePrefab: {fileID: -6287025677217260571, guid: 1ec97e3ef12c87446829b12708c5b747, type: 3}

@@ -12,3 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468c369c98607094cbdcf1daebcd90af, type: 3}
   m_Name: Enemy Spawn Settings
   m_EditorClassIdentifier: 
+  EnemySpawns:
+  - EnemyView: {fileID: 2420183176402899973, guid: 57aebfda2cf49994f8c1f723ffb0d64a, type: 3}
+    SpawnChance: 0.6
+  - EnemyView: {fileID: 2420183176402899973, guid: e1f836796fa256446a37bfa72efd25f1, type: 3}
+    SpawnChance: 0.2
+  - EnemyView: {fileID: 2420183176402899973, guid: d5852692113af6e4fba76cc0a3ae10c5, type: 3}
+    SpawnChance: 0.2

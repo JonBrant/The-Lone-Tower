@@ -8,7 +8,9 @@ public class EnemyView : MonoBehaviour
     public float StartingHealth = 10;
     public float Damage = 1;
     public float DamageCooldown = 1;
+    public float AttackRange = 3;
 
+    [SerializeField] private GameObject model;
     [SerializeField] private SpriteRenderer healthBar;
     
     public EcsPackedEntity packedEntity;
@@ -19,10 +21,18 @@ public class EnemyView : MonoBehaviour
     private void Awake()
     {
         originalHealthBarScale = healthBar.transform.localScale;
+        
+    }
+
+    private void Start()
+    {
+        // Rotate model to face the origin
+        model.transform.rotation = Quaternion.LookRotation(Vector3.forward, transform.position);
     }
 
     private void Update()
     {
+        
         if (packedEntity.Unpack(world, out int unpackedEntity))
         {
             EcsPool<Position> positionPool = world.GetPool<Position>();

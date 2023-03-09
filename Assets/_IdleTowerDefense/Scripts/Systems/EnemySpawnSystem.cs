@@ -60,7 +60,7 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
         ref CurrencyDrop currencyDrop = ref currencyDropPool.Add(entity);
 
         // Setup View
-        EnemyView enemyView = GameObject.Instantiate(sharedData.Settings.EnemyPrefab);
+        EnemyView enemyView = GameObject.Instantiate(sharedData.Settings.EnemySpawnSettings.GetRandomEnemy());
 
         // Calculate a random starting position
         Vector2 randomPosition = Random.insideUnitCircle.normalized * sharedData.Settings.EnemySpawnRadius;
@@ -68,7 +68,7 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
         // Init Components
         position = randomPosition;
         movement.Velocity = -randomPosition.normalized * enemyView.MovementSpeed;
-        movement.StopRadius = 1;
+        movement.StopRadius = enemyView.AttackRange;
         health.MaxHealth = enemyView.StartingHealth;
         health.CurrentHealth = enemyView.StartingHealth;
         meleeDamage.Damage = enemyView.Damage;
