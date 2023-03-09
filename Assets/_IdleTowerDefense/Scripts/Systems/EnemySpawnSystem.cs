@@ -8,7 +8,9 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
     private SharedData sharedData;
     private double spawnTimeRemaining = 0;
     private EcsWorld world;
-    private double enemySpawnDelay;
+
+    private float enemySpawnDelay;
+    private float enemyHealthMultiplier = 1;
     private int spawnCount = 1;
 
     public void PreInit(EcsSystems systems)
@@ -21,23 +23,26 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
     public void Run(EcsSystems systems)
     {
         spawnTimeRemaining -= Time.deltaTime;
-        if (spawnTimeRemaining <= 0)
+        if (!(spawnTimeRemaining <= 0))
+            return;
+
+        for (int i = 0; i < spawnCount; i++)
         {
-            for (int i = 0; i < spawnCount; i++)
-            {
-                SpawnEnemy();
-            }
-            
-            // Reduce delay to increase spawn speed
-            enemySpawnDelay *= sharedData.Settings.EnemySpawnMultiplier;
-            // Spawn multiple enemies if delay gets too low, because floating point errors occur quickly
-            if (enemySpawnDelay <= sharedData.Settings.InitialEnemySpawnDelay/2.0f)
-            {
-                spawnCount++;
-                enemySpawnDelay = sharedData.Settings.InitialEnemySpawnDelay;
-            }
-            spawnTimeRemaining = enemySpawnDelay;
+            SpawnEnemy();
         }
+
+        // Reduce delay to increase spawn speed, increase health multiplier
+        enemySpawnDelay *= sharedData.Settings.EnemySpawnSettings.EnemySpawnDelayMultiplier;
+        enemyHealthMultiplier *= sharedData.Settings.EnemySpawnSettings.EnemyHealthMultiplier;
+
+        // Spawn multiple enemies if delay gets too low, because floating point errors occur quickly
+        if (enemySpawnDelay <= sharedData.Settings.InitialEnemySpawnDelay / 2.0f)
+        {
+            spawnCount++;
+            enemySpawnDelay = sharedData.Settings.InitialEnemySpawnDelay;
+        }
+
+        spawnTimeRemaining = enemySpawnDelay;
     }
 
     private void SpawnEnemy()
@@ -69,8 +74,8 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
         position = randomPosition;
         movement.Velocity = -randomPosition.normalized * enemyView.MovementSpeed;
         movement.StopRadius = enemyView.AttackRange;
-        health.MaxHealth = enemyView.StartingHealth;
-        health.CurrentHealth = enemyView.StartingHealth;
+        health.MaxHealth = enemyView.StartingHealth * enemyHealthMultiplier;
+        health.CurrentHealth = enemyView.StartingHealth * enemyHealthMultiplier;
         meleeDamage.Damage = enemyView.Damage;
         meleeDamage.DamageCooldown = enemyView.DamageCooldown;
         meleeDamage.OnDamageDealt += (damage, enemyTransform) => UltimateTextDamageManager.Instance.AddStack(damage, enemyTransform, "normal");

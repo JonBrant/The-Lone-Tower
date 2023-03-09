@@ -7,6 +7,9 @@ using Random = UnityEngine.Random;
 [CreateAssetMenu(fileName = "New Enemy Spawn Settings", menuName = "Idle Tower Defense/Enemy Spawn Settings")]
 public class EnemySpawnSettings : ScriptableObject
 {
+    public float EnemySpawnDelayMultiplier = 0.95f;
+    public float EnemyHealthMultiplier = 1.01f;
+    
     [Serializable]
     public struct EnemySpawnEntry
     {

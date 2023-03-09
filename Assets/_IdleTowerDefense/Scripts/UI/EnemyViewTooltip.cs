@@ -41,11 +41,11 @@ public class EnemyViewTooltip : MonoBehaviour
         UITooltip.Instance.CleanupLines();
         UITooltip.AddTitle($"{enemyView.gameObject.name.Replace("(Clone)","")}");
         
-        UITooltip.AddLineColumn($"<b>Health</b>: {healthPool.Get(unpackedEnemy).CurrentHealth}/{healthPool.Get(unpackedEnemy).MaxHealth}");
-        UITooltip.AddLineColumn($"<b>Speed</b>: {movementPool.Get(unpackedEnemy).Velocity.magnitude}");
-        UITooltip.AddLineColumn($"<b>Damage</b>: {damagePool.Get(unpackedEnemy).Damage}");
-        UITooltip.AddLineColumn($"<b>Attack Speed</b>: {damagePool.Get(unpackedEnemy).DamageCooldown}");
-        UITooltip.AddLineColumn($"<b>Range</b>: {movementPool.Get(unpackedEnemy).StopRadius}");
+        UITooltip.AddLineColumn($"<b>Health</b>: {healthPool.Get(unpackedEnemy).CurrentHealth:N1}/{healthPool.Get(unpackedEnemy).MaxHealth:N1}");
+        UITooltip.AddLineColumn($"<b>Speed</b>: {movementPool.Get(unpackedEnemy).Velocity.magnitude:N1}");
+        UITooltip.AddLineColumn($"<b>Damage</b>: {damagePool.Get(unpackedEnemy).Damage:N1}");
+        UITooltip.AddLineColumn($"<b>Attack Speed</b>: {damagePool.Get(unpackedEnemy).DamageCooldown:N1}");
+        UITooltip.AddLineColumn($"<b>Range</b>: {movementPool.Get(unpackedEnemy).StopRadius:N1}");
         UITooltip.AddLineColumn($"<b>Drops</b>: {currencyDropPool.Get(unpackedEnemy).Drops.ToCommaString()}");
         
         
