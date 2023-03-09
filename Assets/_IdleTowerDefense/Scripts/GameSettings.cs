@@ -4,6 +4,7 @@ using UnityEngine.Serialization;
 [CreateAssetMenu(fileName = "New Game Settings", menuName = "Idle Tower Defense/Game Settings")]
 public class GameSettings : ScriptableObject
 {
+    public EnemySpawnSettings EnemySpawnSettings;
     public TowerView TowerPrefab;
     public EnemyView EnemyPrefab;
     public ProjectileView ProjectilePrefab;
