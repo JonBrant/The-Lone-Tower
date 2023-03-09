@@ -46,13 +46,22 @@ public class GameManager : Singleton<GameManager>
 
         Time.timeScale = 0;
 
+        // Destroy tower, enemies and projetiles
         var enemies = FindObjectsOfType<EnemyView>();
+        var projectiles = FindObjectsOfType<ProjectileView>();
         var tower = FindObjectOfType<TowerView>();
-        Destroy(tower.gameObject);
         foreach (EnemyView enemyView in enemies)
         {
             Destroy(enemyView.gameObject);
         }
+
+        foreach (ProjectileView projectileView in projectiles)
+        {
+            Destroy(projectileView.gameObject);
+        }
+
+        Destroy(tower.gameObject);
+
 
         bool newHighScore = false;
         if (EnemiesKilled > PlayerPrefs.GetInt(PlayerPrefValues.HighestEnemiesKilled.ToString()))
@@ -63,7 +72,7 @@ public class GameManager : Singleton<GameManager>
 
         RestartWindow.windowDescription.text = $"Enemies Killed: {EnemiesKilled} " +
                                                $"\n Highest: {PlayerPrefs.GetInt(PlayerPrefValues.HighestEnemiesKilled.ToString())} " +
-                                               $"{(newHighScore?"New High score!":"")}"+
+                                               $"{(newHighScore ? "New High score!" : "")}" +
                                                $"\n Try again?";
         RestartWindow.ModalWindowIn();
 
