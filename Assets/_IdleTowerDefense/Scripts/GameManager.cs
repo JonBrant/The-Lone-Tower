@@ -63,7 +63,7 @@ public class GameManager : Singleton<GameManager>
 
 
         bool isNewHighScore = false;
-        int highScore = ES3.KeyExists("EnemyKillRecord") ? (int)ES3.Load("EnemyKillRecord") : 0;
+        int highScore = ES3.KeyExists(SaveKeys.EnemiesKilled) ? (int)ES3.Load(SaveKeys.EnemiesKilled) : 0;
         if (highScore < EnemiesKilled)
         {
             isNewHighScore = true;
@@ -87,7 +87,7 @@ public class GameManager : Singleton<GameManager>
     {
         SaveGame();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        
+
         Currency[CurrencyTypes.Exp] = 0;
         EnemiesKilled = 0;
         Time.timeScale = 1;
@@ -101,15 +101,15 @@ public class GameManager : Singleton<GameManager>
 
     public void SaveGame()
     {
-        if (ES3.KeyExists("EnemyKillRecord") && (int)ES3.Load("EnemyKillRecord") < EnemiesKilled)
+        if (ES3.KeyExists(SaveKeys.EnemiesKilled) && (int)ES3.Load(SaveKeys.EnemiesKilled) < EnemiesKilled)
         {
             // Save new high score
-            ES3.Save("EnemyKillRecord", EnemiesKilled);
+            ES3.Save(SaveKeys.EnemiesKilled, EnemiesKilled);
         }
-        else if (!ES3.KeyExists("EnemyKillRecord"))
+        else if (!ES3.KeyExists(SaveKeys.EnemiesKilled))
         {
             // No record exists, save current value
-            ES3.Save("EnemyKillRecord", EnemiesKilled);
+            ES3.Save(SaveKeys.EnemiesKilled, EnemiesKilled);
         }
     }
 }
