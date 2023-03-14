@@ -3414,6 +3414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemiesKilled: 0
+  Paused: 0
   LoadingScreenManager: {fileID: 1530785149}
 --- !u!4 &972745696
 Transform:
@@ -4725,8 +4726,10 @@ MonoBehaviour:
   onTriggerExit: 0
   onlyLoadWithTag: 0
   startLoadingAtStart: 0
+  fadeOutMultiplier: 4
   objectTag: 
   sceneName: 
+  audioSources: []
   loadingScreens:
   - {fileID: 6498329938164979471, guid: a6d6d28fbef5e6f4aa3e250d402fdc36, type: 3}
   - {fileID: 395881036633011262, guid: 95a7792292d18714aa328b4f7a725165, type: 3}
@@ -5713,7 +5716,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dca2d7c9e97e0c74ea6b89d2dd5b663e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Volume: 1
+  m_Volume: 0.5
 --- !u!82 &1800503219
 AudioSource:
   m_ObjectHideFlags: 0
