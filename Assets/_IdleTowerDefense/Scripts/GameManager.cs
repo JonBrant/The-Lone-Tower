@@ -28,7 +28,6 @@ public class GameManager : Singleton<GameManager>
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
         // Init Currency dictionary
         List<CurrencyTypes> currencies = ((CurrencyTypes[])Enum.GetValues(typeof(CurrencyTypes))).ToList();
         foreach (CurrencyTypes currency in currencies)
@@ -44,10 +43,7 @@ public class GameManager : Singleton<GameManager>
 
     public void OnTowerKilled()
     {
-        Debug.Log($"{nameof(GameManager)}.{nameof(OnTowerKilled)}() - Message");
-
         Time.timeScale = 0;
-
 
         // Destroy tower, enemies and projectiles
         var enemies = FindObjectsOfType<EnemyView>();
@@ -66,11 +62,11 @@ public class GameManager : Singleton<GameManager>
         Destroy(tower.gameObject);
 
 
-        bool newHighScore = false;
-        if (EnemiesKilled > PlayerPrefs.GetInt(PlayerPrefValues.HighestEnemiesKilled.ToString()))
+        bool isNewHighScore = false;
+        int highScore = ES3.KeyExists("EnemyKillRecord") ? (int)ES3.Load("EnemyKillRecord") : 0;
+        if (highScore < EnemiesKilled)
         {
-            PlayerPrefs.SetInt(PlayerPrefValues.HighestEnemiesKilled.ToString(), EnemiesKilled);
-            newHighScore = true;
+            isNewHighScore = true;
         }
 
         // Reference gets lost because of GameManager's DDOL
@@ -79,23 +75,41 @@ public class GameManager : Singleton<GameManager>
             RestartWindow = FindObjectOfType<ModalWindowManager>(true);
         }
 
-        RestartWindow.windowDescription.text = $"Enemies Killed: {EnemiesKilled} " +
-                                               $"\n Highest: {PlayerPrefs.GetInt(PlayerPrefValues.HighestEnemiesKilled.ToString())} " +
-                                               $"{(newHighScore ? "New High score!" : "")}" +
-                                               $"\n Try again?";
+        RestartWindow.windowDescription.text = $"Enemies Killed: {EnemiesKilled} \n" +
+                                               $"Highest: {highScore.ToString()} " +
+                                               $"{(isNewHighScore ? "New High score!" : "")} \n" +
+                                               $"Try again?";
         RestartWindow.ModalWindowIn();
 
     }
 
     public void ReloadGame()
     {
-        Currency[CurrencyTypes.Exp] = 0;
+        SaveGame();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        
+        Currency[CurrencyTypes.Exp] = 0;
+        EnemiesKilled = 0;
         Time.timeScale = 1;
     }
 
     public void ExitGame()
     {
+        SaveGame();
         Application.Quit();
+    }
+
+    public void SaveGame()
+    {
+        if (ES3.KeyExists("EnemyKillRecord") && (int)ES3.Load("EnemyKillRecord") < EnemiesKilled)
+        {
+            // Save new high score
+            ES3.Save("EnemyKillRecord", EnemiesKilled);
+        }
+        else if (!ES3.KeyExists("EnemyKillRecord"))
+        {
+            // No record exists, save current value
+            ES3.Save("EnemyKillRecord", EnemiesKilled);
+        }
     }
 }
