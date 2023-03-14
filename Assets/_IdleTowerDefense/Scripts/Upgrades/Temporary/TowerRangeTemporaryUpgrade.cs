@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Leopotam.EcsLite;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Tower Range Upgrade", menuName = "Idle Tower Defense/Upgrades/Tower Range")]
-public class TowerRangeUpgrade : UpgradeBase
+[CreateAssetMenu(fileName = "New Tower Range Upgrade", menuName = "Idle Tower Defense/Temporary Upgrades/Tower Range")]
+public class TowerRangeTemporaryUpgrade : UpgradeBase
 {
     [Header("Upgrade Specific Values")]
     public float RangePerUpgrade = 0.5f;

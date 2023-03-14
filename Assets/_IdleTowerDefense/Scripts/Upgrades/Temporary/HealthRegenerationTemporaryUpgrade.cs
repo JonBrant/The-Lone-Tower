@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Leopotam.EcsLite;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Health Regeneration Upgrade", menuName = "Idle Tower Defense/Upgrades/Health Regeneration")]
-public class HealthRegenerationUpgrade : UpgradeBase
+[CreateAssetMenu(fileName = "New Health Regeneration Upgrade", menuName = "Idle Tower Defense/Temporary Upgrades/Health Regeneration")]
+public class HealthRegenerationTemporaryUpgrade : UpgradeBase
 {
     [Header("Upgrade Specific Values")]
     public float HealthRegenerationPerUpgrade = 0.5f;

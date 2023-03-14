@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Leopotam.EcsLite;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Multishot Upgrade", menuName = "Idle Tower Defense/Upgrades/Multishot")]
-public class MultishotUpgrade : UpgradeBase
+[CreateAssetMenu(fileName = "New Multishot Upgrade", menuName = "Idle Tower Defense/Temporary Upgrades/Multishot")]
+public class MultishotTemporaryUpgrade : UpgradeBase
 {
     [Header("Upgrade Specific Values")]
     
