@@ -99,6 +99,11 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 1;
     }
 
+    public void ExitToMainMenu()
+    {
+        LoadingScreenManager.LoadScene("Menu");
+    }
+    
     public void ExitGame()
     {
         SaveGame();
