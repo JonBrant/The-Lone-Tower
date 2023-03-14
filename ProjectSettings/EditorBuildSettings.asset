@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/_IdleTowerDefense/Scenes/Menu.unity
+    guid: 44e3e95142fd6394c8a1000c7e512bac
+  - enabled: 1
+    path: Assets/_IdleTowerDefense/Scenes/Game.unity
+    guid: a7d5c6e652e27454ba92bf61f0dfb713
   m_configObjects: {}
