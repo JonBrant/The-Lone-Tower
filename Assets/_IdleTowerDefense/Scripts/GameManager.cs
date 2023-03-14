@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using Leopotam.EcsLite;
+using Michsky.LSS;
 using Michsky.UI.Shift;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -20,9 +21,12 @@ public enum CurrencyTypes
 
 public class GameManager : Singleton<GameManager>
 {
+    
     public EcsWorld World;
     public Dictionary<CurrencyTypes, float> Currency = new Dictionary<CurrencyTypes, float>();
     public int EnemiesKilled = 0;
+    
+    [SerializeField] private LoadingScreenManager LoadingScreenManager;
 
     private ModalWindowManager RestartWindow;
 
@@ -88,7 +92,7 @@ public class GameManager : Singleton<GameManager>
     public void ReloadGame()
     {
         SaveGame();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        LoadingScreenManager.LoadScene(SceneManager.GetActiveScene().name);
 
         Currency[CurrencyTypes.Exp] = 0;
         EnemiesKilled = 0;

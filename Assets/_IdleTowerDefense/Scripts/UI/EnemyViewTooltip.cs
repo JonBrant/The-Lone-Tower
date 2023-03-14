@@ -29,26 +29,29 @@ public class EnemyViewTooltip : MonoBehaviour
         if (!enemyView.PackedEntity.Unpack(world, out int unpackedEnemy))
             return;
 
+        if (MenuScreen.Instance.IsOn)
+            return;
+
         timeSinceLastUpdate = updateInterval;
-        
+
         EcsPool<Health> healthPool = world.GetPool<Health>();
         EcsPool<Movement> movementPool = world.GetPool<Movement>();
         EcsPool<MeleeDamage> damagePool = world.GetPool<MeleeDamage>();
         EcsPool<CurrencyDrop> currencyDropPool = world.GetPool<CurrencyDrop>();
-        
-        
+
+
         UITooltip.InstantiateIfNecessary(GameObject.Find("UI"));
         UITooltip.Instance.CleanupLines();
-        UITooltip.AddTitle($"{enemyView.gameObject.name.Replace("(Clone)","")}");
-        
+        UITooltip.AddTitle($"{enemyView.gameObject.name.Replace("(Clone)", "")}");
+
         UITooltip.AddLineColumn($"<b>Health</b>: {healthPool.Get(unpackedEnemy).CurrentHealth:N1}/{healthPool.Get(unpackedEnemy).MaxHealth:N1}");
         UITooltip.AddLineColumn($"<b>Speed</b>: {movementPool.Get(unpackedEnemy).Velocity.magnitude:N1}");
         UITooltip.AddLineColumn($"<b>Damage</b>: {damagePool.Get(unpackedEnemy).Damage:N1}");
         UITooltip.AddLineColumn($"<b>Attack Speed</b>: {damagePool.Get(unpackedEnemy).DamageCooldown:N1}");
         UITooltip.AddLineColumn($"<b>Range</b>: {movementPool.Get(unpackedEnemy).StopRadius:N1}");
         UITooltip.AddLineColumn($"<b>Drops</b>: {currencyDropPool.Get(unpackedEnemy).Drops.ToCommaString()}");
-        
-        
+
+
         UITooltip.Show();
     }
 

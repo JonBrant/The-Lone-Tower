@@ -25,6 +25,8 @@ public class TowerViewTooltip : MonoBehaviour
             return;
         if (!TowerView.PackedEntity.Unpack(world, out int unpackedTower))
             return;
+        if (MenuScreen.Instance.IsOn)
+            return;
 
         timeSinceLastUpdate = updateInterval;
         
