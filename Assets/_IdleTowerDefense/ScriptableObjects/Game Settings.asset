@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Game Settings
   m_EditorClassIdentifier: 
   EnemySpawnSettings: {fileID: 11400000, guid: f059d6634ea476947833fdf57120567c, type: 2}
-  TowerPrefab: {fileID: 2561317839851661327, guid: 04d700718b1fdb34fb6021c5be5332e7, type: 3}
-  EnemyPrefab: {fileID: 2420183176402899973, guid: 57aebfda2cf49994f8c1f723ffb0d64a, type: 3}
-  ProjectilePrefab: {fileID: -6287025677217260571, guid: 1ec97e3ef12c87446829b12708c5b747, type: 3}
-  EnemySpawnRadius: 10
-  InitialEnemySpawnDelay: 4
-  EnemySpawnMultiplier: 0.9700000286102295
+  UpgradeSettings: {fileID: 11400000, guid: 2beb3d7ce10244647a0c893696928a4b, type: 2}
+  TowerView: {fileID: 2561317839851661327, guid: 04d700718b1fdb34fb6021c5be5332e7, type: 3}
+  EnemyView: {fileID: 2420183176402899973, guid: 57aebfda2cf49994f8c1f723ffb0d64a, type: 3}
+  ProjectileView: {fileID: -6287025677217260571, guid: 1ec97e3ef12c87446829b12708c5b747, type: 3}
   TowerStartingAttackDamage: 1
   TowerStartingAttackCooldown: 1
   TowerStartingAttackTargets: 1
   TowerStartingTargetingRange: 2
+  EnemySpawnRadius: 10
+  InitialEnemySpawnDelay: 4

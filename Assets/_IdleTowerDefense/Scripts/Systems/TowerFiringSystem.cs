@@ -54,7 +54,7 @@ public class TowerFiringSystem : IEcsPreInitSystem, IEcsRunSystem
 
 
                 // Setup View
-                ProjectileView projectileView = GameObject.Instantiate(sharedData.Settings.ProjectilePrefab, Vector3.zero, Quaternion.identity);
+                ProjectileView projectileView = GameObject.Instantiate(sharedData.Settings.ProjectileView, Vector3.zero, Quaternion.identity);
 
                 // Init components
                 projectile.Damage = towerWeapon.AttackDamage;

@@ -15,8 +15,6 @@ public class TowerSpawnSystem : IEcsPreInitSystem, IEcsInitSystem
 
     public void Init(EcsSystems systems)
     {
-        world = systems.GetWorld();
-
         // Create Entity, add components
         int entity = world.NewEntity();
         EcsPackedEntity packedEntity = world.PackEntity(entity);
@@ -30,7 +28,7 @@ public class TowerSpawnSystem : IEcsPreInitSystem, IEcsInitSystem
         ref Health towerHealth = ref healthPool.Add(entity);
 
         // Setup View
-        TowerView towerView = GameObject.Instantiate(sharedData.Settings.TowerPrefab, Vector3.zero, Quaternion.identity);
+        TowerView towerView = GameObject.Instantiate(sharedData.Settings.TowerView, Vector3.zero, Quaternion.identity);
 
         // Init components
         towerHealth.MaxHealth = towerView.StartingHealth;

@@ -41,7 +41,7 @@ public class GameManager : Singleton<GameManager>
 
         LoadGame();
     }
-
+    
     public void SetGameSpeed(float newSpeed)
     {
         Time.timeScale = newSpeed;

@@ -16,6 +16,7 @@ class ECSWorld : MonoBehaviour
 
         _world = new EcsWorld();
         _systems = new EcsSystems(_world, sharedData).Add(new TowerSpawnSystem())
+            .Add(new TowerUpgradeLoadingSystem())
             .Add(new TowerTargetingSystem())
             .Add(new TowerFiringSystem())
             .Add(new EnemySpawnSystem())

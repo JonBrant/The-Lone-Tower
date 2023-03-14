@@ -15556,7 +15556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d12e89706953e1c4c9f58f7e3c687bab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeSettings: {fileID: 11400000, guid: 2beb3d7ce10244647a0c893696928a4b, type: 2}
+  gameSettings: {fileID: 11400000, guid: 64f6e8953a0b1b44ab883d507c18a38d, type: 2}
   upgradeButtonPrefab: {fileID: 6255698023014223661, guid: 515267e90452bd943af2bf922e596cbc, type: 3}
   buttonContainer: {fileID: 3980347088015290899}
   buttonAudioSource: {fileID: 1919086991}
