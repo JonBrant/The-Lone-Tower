@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using Leopotam.EcsLite;
-using TMPro;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Attack Damage Persistent Upgrade", menuName = "Idle Tower Defense/Persistent Upgrades/Attack Damage")]
-public class AttackDamagePersistentUpgrade : PersistentUpgradeBase
+[CreateAssetMenu(fileName = "New Additive Attack Damage Persistent Upgrade", menuName = "Idle Tower Defense/Persistent Upgrades/Additive Attack Damage")]
+public class AdditiveAttackDamagePersistentUpgrade : PersistentUpgradeBase
 {
     [Header("Upgrade Specific Values")]
-    [SerializeField] private float damageExponent = 1.01f;
+    [SerializeField] private float damageIncrease = 1.01f;
     [SerializeField] private float upgradeExponent = 1.1f;
 
     private EcsFilter weaponFilter;
@@ -21,9 +18,9 @@ public class AttackDamagePersistentUpgrade : PersistentUpgradeBase
 
     public override string GetDescription()
     {
-        return string.Format(ShortDescription, damageExponent, null);
+        return string.Format(ShortDescription, damageIncrease, null);
     }
-    
+
 
     public override float GetCost()
     {
@@ -38,7 +35,7 @@ public class AttackDamagePersistentUpgrade : PersistentUpgradeBase
         foreach (int entity in weaponFilter)
         {
             ref TowerWeapon towerWeapon = ref weaponPool.Get(entity);
-            towerWeapon.AttackDamage = towerWeapon.AttackDamage * Mathf.Pow(damageExponent, upgradeCount);
+            towerWeapon.AttackDamage += damageIncrease * upgradeCount;
         }
     }
 }

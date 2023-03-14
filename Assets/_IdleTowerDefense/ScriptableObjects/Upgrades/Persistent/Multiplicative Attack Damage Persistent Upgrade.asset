@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bb1140eac82ec247887f1d37c5639f8, type: 3}
-  m_Name: Attack Damage Persistent Upgrade
+  m_Name: Multiplicative Attack Damage Persistent Upgrade
   m_EditorClassIdentifier: 
   Title: Attack Damage Multiplier
   ShortDescription: Permanently multiplies attack damage by {0}{1}

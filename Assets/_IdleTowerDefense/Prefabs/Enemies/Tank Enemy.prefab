@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementSpeed: 1
-  StartingHealth: 10
+  StartingHealth: 50
   Damage: 2
   DamageCooldown: 1
   AttackRange: 0.75
