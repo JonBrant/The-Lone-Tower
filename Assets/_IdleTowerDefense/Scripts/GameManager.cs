@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using Leopotam.EcsLite;
 using Michsky.UI.Shift;
 using UnityEngine;
@@ -9,7 +10,7 @@ using UnityEngine.SceneManagement;
 
 public enum CurrencyTypes
 {
-    Gold,
+    Exp,
     Scrap
 }
 
@@ -23,7 +24,7 @@ public class GameManager : Singleton<GameManager>
     public Dictionary<CurrencyTypes, float> Currency = new Dictionary<CurrencyTypes, float>();
     public int EnemiesKilled = 0;
 
-    [SerializeField] private ModalWindowManager RestartWindow;
+    private ModalWindowManager RestartWindow;
 
     private void Awake()
     {
@@ -47,7 +48,8 @@ public class GameManager : Singleton<GameManager>
 
         Time.timeScale = 0;
 
-        // Destroy tower, enemies and projetiles
+
+        // Destroy tower, enemies and projectiles
         var enemies = FindObjectsOfType<EnemyView>();
         var projectiles = FindObjectsOfType<ProjectileView>();
         var tower = FindObjectOfType<TowerView>();
@@ -71,6 +73,12 @@ public class GameManager : Singleton<GameManager>
             newHighScore = true;
         }
 
+        // Reference gets lost because of GameManager's DDOL
+        if (RestartWindow == null)
+        {
+            RestartWindow = FindObjectOfType<ModalWindowManager>(true);
+        }
+
         RestartWindow.windowDescription.text = $"Enemies Killed: {EnemiesKilled} " +
                                                $"\n Highest: {PlayerPrefs.GetInt(PlayerPrefValues.HighestEnemiesKilled.ToString())} " +
                                                $"{(newHighScore ? "New High score!" : "")}" +
@@ -81,6 +89,7 @@ public class GameManager : Singleton<GameManager>
 
     public void ReloadGame()
     {
+        Currency[CurrencyTypes.Exp] = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1;
     }

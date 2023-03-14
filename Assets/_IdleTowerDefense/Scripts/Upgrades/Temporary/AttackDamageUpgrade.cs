@@ -19,7 +19,7 @@ public class AttackDamageUpgrade : UpgradeBase
     {
         return new Dictionary<CurrencyTypes, float> {
             {
-                CurrencyTypes.Gold, UpgradeManager.Instance.UpgradeCounts[Title]+1
+                CurrencyTypes.Exp, UpgradeManager.Instance.UpgradeCounts[Title]+1
             }
         };
     }

@@ -82,7 +82,7 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
         meleeDamage.OnDamageDealt += (damage, enemyTransform) => UltimateTextDamageManager.Instance.AddStack(damage, enemyTransform, "normal");
         currencyDrop.Drops = new Dictionary<CurrencyTypes, float> {
             {
-                CurrencyTypes.Gold, 1.0f
+                CurrencyTypes.Exp, 1.0f
             }, {
                 CurrencyTypes.Scrap, 1.0f
             }
