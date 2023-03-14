@@ -20,7 +20,7 @@ public class HealthRegenerationUpgrade : UpgradeBase
     {
         return new Dictionary<CurrencyTypes, float> {
             {
-                CurrencyTypes.Exp, UpgradeManager.Instance.UpgradeCounts[Title] + 1
+                CurrencyTypes.Exp, TemporaryUpgradeMenu.Instance.UpgradeCounts[Title] + 1
             }
         };
     }
@@ -29,7 +29,7 @@ public class HealthRegenerationUpgrade : UpgradeBase
     {
         // Handle cost
         GameManager.Instance.Currency.SubtractValues(GetCost());
-        UpgradeManager.Instance.UpgradeCounts[Title] += 1;
+        TemporaryUpgradeMenu.Instance.UpgradeCounts[Title] += 1;
 
         // Handle Upgrade
         EcsPool<Health> healthPool = GameManager.Instance.World.GetPool<Health>();

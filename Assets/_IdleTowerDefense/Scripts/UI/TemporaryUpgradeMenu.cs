@@ -3,7 +3,7 @@ using DuloGames.UI;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class UpgradeManager : Singleton<UpgradeManager>
+public class TemporaryUpgradeMenu : Singleton<TemporaryUpgradeMenu>
 {
     [SerializeField] private UpgradeSettings upgradeSettings;
     [SerializeField] private UpgradeButton upgradeButtonPrefab;
@@ -19,30 +19,30 @@ public class UpgradeManager : Singleton<UpgradeManager>
     private void Start()
     {
         upgradeSettings.Init();
-        for (int i = 0; i < upgradeSettings.Upgrades.Count; i++)
+        for (int i = 0; i < upgradeSettings.TemporaryUpgrades.Count; i++)
         {
             // Capture i to avoid closure issues
             int index = i;
 
             // Init dictionary element for the upgrade
-            UpgradeCounts.Add(upgradeSettings.Upgrades[i].Title, 0);
+            UpgradeCounts.Add(upgradeSettings.TemporaryUpgrades[i].Title, 0);
 
             // Setup UpgradeButton values
             UpgradeButton upgradeButton = Instantiate(upgradeButtonPrefab, buttonContainer);
             upgradeButtons.Add(upgradeButton);
-            upgradeButton.TargetUpgrade = upgradeSettings.Upgrades[i];
+            upgradeButton.TargetUpgrade = upgradeSettings.TemporaryUpgrades[i];
             upgradeButton.ElementSound.audioObject = buttonAudioSource;
-            upgradeButton.titleObj.text = upgradeSettings.Upgrades[i].Title.ToUpper();
-            upgradeButton.descriptionObj.text = upgradeSettings.Upgrades[i].ShortDescription;
-            if (upgradeSettings.Upgrades[i].BackgroundImage != null)
+            upgradeButton.titleObj.text = upgradeSettings.TemporaryUpgrades[i].Title.ToUpper();
+            upgradeButton.descriptionObj.text = upgradeSettings.TemporaryUpgrades[i].ShortDescription;
+            if (upgradeSettings.TemporaryUpgrades[i].BackgroundImage != null)
             {
-                upgradeButton.backgroundImageObj.sprite = upgradeSettings.Upgrades[i].BackgroundImage;
+                upgradeButton.backgroundImageObj.sprite = upgradeSettings.TemporaryUpgrades[i].BackgroundImage;
             }
 
             // Setup tooltip
             List<UITooltipLineContent> LineList = new List<UITooltipLineContent>();
-            LineList.Add(new UITooltipLineContent(UITooltipLines.LineStyle.Title, null, upgradeSettings.Upgrades[i].Title));
-            foreach (string t in upgradeSettings.Upgrades[i].DescriptionLines)
+            LineList.Add(new UITooltipLineContent(UITooltipLines.LineStyle.Title, null, upgradeSettings.TemporaryUpgrades[i].Title));
+            foreach (string t in upgradeSettings.TemporaryUpgrades[i].DescriptionLines)
             {
                 LineList.Add(new UITooltipLineContent(UITooltipLines.LineStyle.Default, null, t));
             }
@@ -53,9 +53,9 @@ public class UpgradeManager : Singleton<UpgradeManager>
 
             upgradeButton.Button.onClick.AddListener(
                 () => {
-                    if (upgradeSettings.Upgrades[index].CanUpgrade())
+                    if (upgradeSettings.TemporaryUpgrades[index].CanUpgrade())
                     {
-                        upgradeSettings.Upgrades[index].Upgrade();
+                        upgradeSettings.TemporaryUpgrades[index].Upgrade();
                     }
                 }
             );

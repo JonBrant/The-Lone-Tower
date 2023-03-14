@@ -17,7 +17,7 @@ public class AttackSpeedUpgrade : UpgradeBase
     {
         return new Dictionary<CurrencyTypes, float> {
             {
-                CurrencyTypes.Exp, UpgradeManager.Instance.UpgradeCounts[Title]+1
+                CurrencyTypes.Exp, TemporaryUpgradeMenu.Instance.UpgradeCounts[Title]+1
             }
         };
     }
@@ -26,7 +26,7 @@ public class AttackSpeedUpgrade : UpgradeBase
     {
         // Handle cost
         GameManager.Instance.Currency.SubtractValues(GetCost());
-        UpgradeManager.Instance.UpgradeCounts[Title] += 1;
+        TemporaryUpgradeMenu.Instance.UpgradeCounts[Title] += 1;
 
         // Handle upgrade
         EcsPool<TowerWeapon> weaponPool = GameManager.Instance.World.GetPool<TowerWeapon>();

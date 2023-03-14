@@ -34,7 +34,7 @@ public class GameManager : Singleton<GameManager>
         {
             Currency.Add(currency, 0f);
         }
-        
+
         LoadGame();
     }
 
@@ -63,12 +63,13 @@ public class GameManager : Singleton<GameManager>
 
         Destroy(tower.gameObject);
 
-
+        // Check for new high score and save if necessary
         bool isNewHighScore = false;
         int highScore = ES3.KeyExists(SaveKeys.EnemiesKilled) ? (int)ES3.Load(SaveKeys.EnemiesKilled) : 0;
         if (highScore < EnemiesKilled)
         {
             isNewHighScore = true;
+            ES3.Save(SaveKeys.EnemiesKilled, EnemiesKilled);
         }
 
         // Reference gets lost because of GameManager's DDOL
@@ -82,7 +83,6 @@ public class GameManager : Singleton<GameManager>
                                                $"{(isNewHighScore ? "New High score!" : "")} \n" +
                                                $"Try again?";
         RestartWindow.ModalWindowIn();
-
     }
 
     public void ReloadGame()
@@ -103,20 +103,11 @@ public class GameManager : Singleton<GameManager>
 
     public void SaveGame()
     {
-        if (ES3.KeyExists(SaveKeys.EnemiesKilled) && (int)ES3.Load(SaveKeys.EnemiesKilled) < EnemiesKilled)
-        {
-            // Save new high score
-            ES3.Save(SaveKeys.EnemiesKilled, EnemiesKilled);
-        }
-        else if (!ES3.KeyExists(SaveKeys.EnemiesKilled))
-        {
-            // No record exists, save current value
-            ES3.Save(SaveKeys.EnemiesKilled, EnemiesKilled);
-        }
+        ES3.Save(SaveKeys.Scrap, Currency[CurrencyTypes.Scrap]);
     }
 
     public void LoadGame()
     {
-        Currency[CurrencyTypes.Scrap] = ES3.Load(SaveKeys.Scrap, 0);
+        Currency[CurrencyTypes.Scrap] = ES3.Load(SaveKeys.Scrap, 0f);
     }
 }

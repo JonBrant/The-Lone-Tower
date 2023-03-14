@@ -21,9 +21,9 @@ public class MultishotUpgrade : UpgradeBase
     {
         return new Dictionary<CurrencyTypes, float> {
             {
-                CurrencyTypes.Exp, (UpgradeManager.Instance.UpgradeCounts[Title] + 1) * 5
+                CurrencyTypes.Exp, (TemporaryUpgradeMenu.Instance.UpgradeCounts[Title] + 1) * 5
             }, {
-                CurrencyTypes.Scrap, (UpgradeManager.Instance.UpgradeCounts[Title] + 1) * 5
+                CurrencyTypes.Scrap, (TemporaryUpgradeMenu.Instance.UpgradeCounts[Title] + 1) * 5
             }
         };
     }
@@ -32,7 +32,7 @@ public class MultishotUpgrade : UpgradeBase
     {
         // Handle cost
         GameManager.Instance.Currency.SubtractValues(GetCost());
-        UpgradeManager.Instance.UpgradeCounts[Title] += 1;
+        TemporaryUpgradeMenu.Instance.UpgradeCounts[Title] += 1;
 
         // Handle upgrade
         EcsPool<TowerTargetSelector> targetSelectorPool = GameManager.Instance.World.GetPool<TowerTargetSelector>();
