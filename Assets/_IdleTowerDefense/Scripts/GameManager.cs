@@ -27,8 +27,7 @@ public class GameManager : Singleton<GameManager>
     public bool Paused = false;
 
     [SerializeField] private LoadingScreenManager LoadingScreenManager;
-
-    private ModalWindowManager RestartWindow;
+    [SerializeField] private ModalWindowManager RestartWindow;
 
     private void Awake()
     {
@@ -51,6 +50,17 @@ public class GameManager : Singleton<GameManager>
     {
         Paused = true;
 
+        // Cleanup all views
+        var views = new List<Component>();
+        views.AddRange(FindObjectsOfType<ProjectileView>());
+        views.AddRange(FindObjectsOfType<EnemyView>());
+        views.Add(FindObjectOfType<TowerView>());
+
+        foreach (Component view in views)
+        {
+            Destroy(view.gameObject);
+        }
+
         // Check for new high score and save if necessary
         bool isNewHighScore = false;
         int highScore = ES3.KeyExists(SaveKeys.EnemiesKilled) ? (int)ES3.Load(SaveKeys.EnemiesKilled) : 0;
@@ -58,12 +68,6 @@ public class GameManager : Singleton<GameManager>
         {
             isNewHighScore = true;
             ES3.Save(SaveKeys.EnemiesKilled, EnemiesKilled);
-        }
-
-        // Reference gets lost because of GameManager's DDOL
-        if (RestartWindow == null)
-        {
-            RestartWindow = FindObjectOfType<ModalWindowManager>(true);
         }
 
         RestartWindow.windowDescription.text = $"Enemies Killed: {EnemiesKilled} \n" +
@@ -79,8 +83,8 @@ public class GameManager : Singleton<GameManager>
         SaveGame();
         LoadingScreenManager.LoadScene(SceneManager.GetActiveScene().name);
 
-        Currency[CurrencyTypes.Exp] = 0;
-        EnemiesKilled = 0;
+        // Currency[CurrencyTypes.Exp] = 0;
+        // EnemiesKilled = 0;
 
     }
 

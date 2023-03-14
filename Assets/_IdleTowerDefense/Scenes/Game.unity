@@ -3416,6 +3416,7 @@ MonoBehaviour:
   EnemiesKilled: 0
   Paused: 0
   LoadingScreenManager: {fileID: 1530785149}
+  RestartWindow: {fileID: 1743491631}
 --- !u!4 &972745696
 Transform:
   m_ObjectHideFlags: 0
@@ -5497,6 +5498,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99dd25f7aec14f24194a7f0eb3c4507c, type: 3}
+--- !u!114 &1743491631 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114811678967924108, guid: 99dd25f7aec14f24194a7f0eb3c4507c, type: 3}
+  m_PrefabInstance: {fileID: 1743491630}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b18e36b055152f41afbb464d8500cf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1771017899
 GameObject:
   m_ObjectHideFlags: 0
