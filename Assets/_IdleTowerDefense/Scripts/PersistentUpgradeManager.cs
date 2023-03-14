@@ -19,21 +19,18 @@ public class PersistentUpgradeManager : Singleton<PersistentUpgradeManager>
 
     private void Awake()
     {
+        // Init default empty dictionary
         Dictionary<string, int> defaultValues = new Dictionary<string, int>();
-        
         foreach (var upgrade in gameSettings.UpgradeSettings.PersistentUpgrades)
         {
             defaultValues.Add(upgrade.Title, 0);
         }
-        
 
+        // Load saved upgrade counts and Scrap count
         RemainingScrap = ES3.Load(SaveKeys.Scrap, 0f);
-        remainingScrapText.text = $"SCRAP {RemainingScrap:N0}";
         PersistentUpgradeCounts = ES3.Load(SaveKeys.PersistentUpgradeCounts, defaultValues);
-        foreach (KeyValuePair<string, int> kvp in PersistentUpgradeCounts)
-        {
-            Debug.Log($"{nameof(PersistentUpgradeManager)}.{nameof(Awake)}() - {kvp.Key} - {kvp.Value}");
-        }
+        remainingScrapText.text = $"SCRAP {RemainingScrap:N0}";
+        
         InitButtons();
     }
 
@@ -44,7 +41,9 @@ public class PersistentUpgradeManager : Singleton<PersistentUpgradeManager>
             PersistentUpgradeButton currentButton = Instantiate(persistentUpgradeButtonPrefab, buttonContainer);
             currentButton.TargetUpgrade = upgrade;
             currentButton.TitleText.text = upgrade.Title;
-            currentButton.DescriptionText.text = upgrade.ShortDescription;
+            //currentButton.DescriptionText.text = upgrade.ShortDescription;
+            //upgrade.SetText(currentButton.DescriptionText);
+            currentButton.DescriptionText.text = upgrade.GetDescription();
             currentButton.CostText.text = $"COST: {upgrade.GetCost():N1}";
             currentButton.UpgradeAmountText.text = $"LEVEL: {PersistentUpgradeCounts[upgrade.Title].ToString()}";
             currentButton.ElementSound.audioObject = audioSource;

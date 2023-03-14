@@ -23,10 +23,6 @@ public class TowerUpgradeLoadingSystem : IEcsPreInitSystem, IEcsInitSystem
         
         // Load saved upgrade counts
         persistentUpgradeCounts = ES3.Load(SaveKeys.PersistentUpgradeCounts, defaultValues);
-        foreach (KeyValuePair<string, int> kvp in persistentUpgradeCounts)
-        {
-            Debug.Log($"{nameof(PersistentUpgradeManager)}.{nameof(PreInit)}() - {kvp.Key} - {kvp.Value}");
-        }
     }
 
     public void Init(EcsSystems systems)

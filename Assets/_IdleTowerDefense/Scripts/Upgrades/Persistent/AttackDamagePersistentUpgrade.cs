@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Leopotam.EcsLite;
+using TMPro;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Attack Damage Persistent Upgrade", menuName = "Idle Tower Defense/Persistent Upgrades/Attack Damage")]
@@ -12,10 +13,17 @@ public class AttackDamagePersistentUpgrade : PersistentUpgradeBase
 
     private EcsFilter weaponFilter;
 
+
     public override void Init()
     {
         weaponFilter = GameManager.Instance.World.Filter<TowerWeapon>().End();
     }
+
+    public override string GetDescription()
+    {
+        return string.Format(ShortDescription, damageExponent, null);
+    }
+    
 
     public override float GetCost()
     {
