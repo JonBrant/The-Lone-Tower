@@ -10,9 +10,9 @@ using UnityEngine.SceneManagement;
 public enum CurrencyTypes
 {
     Gold,
-    Scrap,
-    Etc
+    Scrap
 }
+
 // ToDo: Save and display high score when losing. Score being EnemiesKilled. Display EnemiesKilled in Restart dialog box
 // ToDo: More decimal places on attack speed
 // ToDo: Max levels on upgrades, maybe unlock new ones
