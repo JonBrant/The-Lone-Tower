@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using Leopotam.EcsLite;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Attack Speed Upgrade", menuName = "Idle Tower Defense/Temporary Upgrades/Attack Speed")]
-public class AttackSpeedTemporaryUpgrade : UpgradeBase
+[CreateAssetMenu(fileName = "New Attack Damage Upgrade", menuName = "Idle Tower Defense/Temporary Upgrades/Attack Damage")]
+public class AttackDamageTemporaryTemporaryUpgrade : TemporaryUpgradeBase
 {
+    [Header("Upgrade Specific Values")]
+    
     private EcsFilter weaponFilter;
 
     public override void Init()
@@ -17,7 +19,7 @@ public class AttackSpeedTemporaryUpgrade : UpgradeBase
     {
         return new Dictionary<CurrencyTypes, float> {
             {
-                CurrencyTypes.Exp, TemporaryUpgradeMenu.Instance.UpgradeCounts[Title]+1
+                CurrencyTypes.Exp, TemporaryUpgradeMenu.Instance.TemporaryUpgradeCounts[Title]+1
             }
         };
     }
@@ -26,14 +28,14 @@ public class AttackSpeedTemporaryUpgrade : UpgradeBase
     {
         // Handle cost
         GameManager.Instance.Currency.SubtractValues(GetCost());
-        TemporaryUpgradeMenu.Instance.UpgradeCounts[Title] += 1;
+        TemporaryUpgradeMenu.Instance.TemporaryUpgradeCounts[Title] += 1;
 
         // Handle upgrade
         EcsPool<TowerWeapon> weaponPool = GameManager.Instance.World.GetPool<TowerWeapon>();
         foreach (int entity in weaponFilter)
         {
             ref TowerWeapon towerWeapon = ref weaponPool.Get(entity);
-            towerWeapon.AttackCooldown *= 0.9f;
+            towerWeapon.AttackDamage += 1;
         }
     }
 }

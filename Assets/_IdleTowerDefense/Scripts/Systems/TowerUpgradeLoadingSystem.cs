@@ -7,20 +7,25 @@ public class TowerUpgradeLoadingSystem : IEcsPreInitSystem, IEcsInitSystem
 {
     private EcsWorld world;
     private SharedData sharedData;
-    private Dictionary<int, int> TestUpgrades = new Dictionary<int, int>();
-
+    private Dictionary<string, int> persistentUpgradeCounts = new Dictionary<string, int>();
+    
     public void PreInit(EcsSystems systems)
     {
         sharedData = systems.GetShared<SharedData>();
         world = systems.GetWorld();
+        persistentUpgradeCounts = ES3.Load(SaveKeys.PersistentUpgradeCounts, persistentUpgradeCounts);
     }
 
     public void Init(EcsSystems systems)
     {
-        TestUpgrades = ES3.Load("Test", TestUpgrades);
-        foreach (KeyValuePair<int, int> kvp in TestUpgrades)
+        foreach (PersistentUpgradeBase upgrade in sharedData.Settings.UpgradeSettings.PersistentUpgrades)
         {
-            Debug.Log($"Key: {kvp.Key} => {kvp.Value}");
+            upgrade.Init();
+            if (persistentUpgradeCounts[upgrade.Title] == 0)
+                continue;
+
+            Debug.Log($"{nameof(TowerUpgradeLoadingSystem)}.{nameof(Init)}() - Upgrading {upgrade.Title} {persistentUpgradeCounts[upgrade.Title]} times!");
+            upgrade.Upgrade(persistentUpgradeCounts[upgrade.Title]);
         }
     }
 }

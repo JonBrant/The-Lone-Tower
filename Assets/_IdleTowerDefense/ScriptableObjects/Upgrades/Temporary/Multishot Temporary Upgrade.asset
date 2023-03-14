@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff068dad0af547d4c801ea00061873f7, type: 3}
-  m_Name: Health Regeneration Upgrade
+  m_Script: {fileID: 11500000, guid: 4a526a5fa9a74f0449323f3ef2358a4b, type: 3}
+  m_Name: Multishot Temporary Upgrade
   m_EditorClassIdentifier: 
-  Title: Regeneration
-  ShortDescription: Health Regeneration
+  Title: Multishot
+  ShortDescription: Projectile count
   DescriptionLines:
-  - Increases the tower's health regeneration rate
+  - Increases projectile count by 1 per level
   BackgroundImage: {fileID: 0}
-  HealthRegenerationPerUpgrade: 0.5

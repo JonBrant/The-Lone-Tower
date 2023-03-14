@@ -1,39 +1,75 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PersistentUpgradeManager : MonoBehaviour
+// ToDo: Add tooltip
+public class PersistentUpgradeManager : Singleton<PersistentUpgradeManager>
 {
-   [SerializeField] private Transform buttonContainer;
-   Dictionary<int, int> TestUpgrades = new Dictionary<int, int>();
-   
-   private void Awake()
-   {
-      
-      for (int i = 0; i < buttonContainer.childCount; i++)
-      {
-         Button currentButton = buttonContainer.GetChild(i).GetComponent<Button>();
-         int currentIndex = i;
-         
-         TestUpgrades.Add(currentIndex,0);
-         currentButton.onClick.AddListener(
-            () => {
-               UpgradeButtonClickTest(currentIndex);
-            });
-      }
-   }
+    public Dictionary<string, int> PersistentUpgradeCounts = new Dictionary<string, int>();
+    public float RemainingScrap = 0;
 
-   private void UpgradeButtonClickTest(int index)
-   {
-      Debug.Log($"{nameof(PersistentUpgradeManager)}.{nameof(UpgradeButtonClickTest)}() - Index: {index}");
-      TestUpgrades[index] += 1;
-      ES3.Save("Test", TestUpgrades);
-   }
-   
-   public void ClearSaveData()
-   {
-      ES3.DeleteFile();
-   }
+    [SerializeField] private GameSettings gameSettings;
+    [SerializeField] private TextMeshProUGUI remainingScrapText;
+    [SerializeField] private PersistentUpgradeButton persistentUpgradeButtonPrefab;
+    [SerializeField] private Transform buttonContainer;
+    [SerializeField] private AudioSource audioSource;
+
+    private void Awake()
+    {
+        Dictionary<string, int> defaultValues = new Dictionary<string, int>();
+        foreach (var upgrade in gameSettings.UpgradeSettings.PersistentUpgrades)
+        {
+            defaultValues.Add(upgrade.Title, 0);
+        }
+
+        RemainingScrap = ES3.Load(SaveKeys.Scrap, 0f);
+        remainingScrapText.text = $"SCRAP {RemainingScrap:N0}";
+        PersistentUpgradeCounts = ES3.Load(SaveKeys.PersistentUpgradeCounts, defaultValues);
+
+        InitButtons();
+    }
+
+    private void InitButtons()
+    {
+        foreach (var upgrade in gameSettings.UpgradeSettings.PersistentUpgrades)
+        {
+            PersistentUpgradeButton currentButton = Instantiate(persistentUpgradeButtonPrefab, buttonContainer);
+            currentButton.TargetUpgrade = upgrade;
+            currentButton.TitleText.text = upgrade.Title;
+            currentButton.DescriptionText.text = upgrade.ShortDescription;
+            currentButton.CostText.text = $"COST: {upgrade.GetCost():N1}";
+            currentButton.UpgradeAmountText.text = $"LEVEL: {PersistentUpgradeCounts[upgrade.Title].ToString()}";
+            currentButton.ElementSound.audioObject = audioSource;
+            if (RemainingScrap < upgrade.GetCost())
+            {
+                currentButton.Button.interactable = false;
+            }
+
+            currentButton.Button.onClick.AddListener(
+                () => {
+                    if (RemainingScrap < upgrade.GetCost())
+                    {
+                        currentButton.Button.interactable = false;
+                        return;
+                    }
+
+                    PersistentUpgradeCounts[upgrade.Title]++;
+                    RemainingScrap -= upgrade.GetCost();
+                    ES3.Save(SaveKeys.Scrap, RemainingScrap);
+                    ES3.Save(SaveKeys.PersistentUpgradeCounts, PersistentUpgradeCounts);
+                    currentButton.CostText.text = $"COST: {upgrade.GetCost():N1}";
+                    currentButton.UpgradeAmountText.text = $"LEVEL: {PersistentUpgradeCounts[upgrade.Title].ToString()}";
+                    remainingScrapText.text = $"SCRAP {RemainingScrap:N0}";
+                }
+            );
+        }
+    }
+
+    public void ClearSaveData()
+    {
+        ES3.DeleteFile();
+    }
 }

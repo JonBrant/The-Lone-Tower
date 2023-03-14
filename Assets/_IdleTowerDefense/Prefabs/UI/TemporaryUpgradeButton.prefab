@@ -1360,7 +1360,7 @@ GameObject:
   - component: {fileID: 6201819933307611563}
   - component: {fileID: 6078086752340686520}
   m_Layer: 5
-  m_Name: Upgrade Button
+  m_Name: TemporaryUpgradeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

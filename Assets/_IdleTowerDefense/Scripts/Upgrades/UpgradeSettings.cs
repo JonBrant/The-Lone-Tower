@@ -7,12 +7,12 @@ using UnityEngine.Serialization;
 [CreateAssetMenu(fileName = "New Upgrade Settings", menuName = "Idle Tower Defense/Upgrade Settings")]
 public class UpgradeSettings : ScriptableObject
 {
-    public List<UpgradeBase> TemporaryUpgrades = new List<UpgradeBase>();
-    public List<UpgradeBase> PersistentUpgrades = new List<UpgradeBase>();
+    public List<TemporaryUpgradeBase> TemporaryUpgrades = new List<TemporaryUpgradeBase>();
+    public List<PersistentUpgradeBase> PersistentUpgrades = new List<PersistentUpgradeBase>();
 
-    public void Init()
+    public void InitTemporaryUpgrades()
     {
-        foreach (UpgradeBase upgrade in TemporaryUpgrades)
+        foreach (TemporaryUpgradeBase upgrade in TemporaryUpgrades)
         {
             upgrade.Init();
         }

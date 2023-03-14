@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a526a5fa9a74f0449323f3ef2358a4b, type: 3}
-  m_Name: Multishot Upgrade
+  m_Script: {fileID: 11500000, guid: d9f9b8dc9aa99e54b80754f00a66a376, type: 3}
+  m_Name: Attack Speed Temporary Upgrade
   m_EditorClassIdentifier: 
-  Title: Multishot
-  ShortDescription: Projectile count
+  Title: Attack Speed
+  ShortDescription: Multiplicative attack speed
   DescriptionLines:
-  - Increases projectile count by 1 per level
+  - Multiplicative attack speed upgrade
   BackgroundImage: {fileID: 0}

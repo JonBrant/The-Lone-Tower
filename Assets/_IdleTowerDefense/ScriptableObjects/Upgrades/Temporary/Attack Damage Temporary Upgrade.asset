@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6531729882e251340a5e6575cdb38537, type: 3}
-  m_Name: Tower Range Upgrade
+  m_Script: {fileID: 11500000, guid: 09f971468c306c3458f840a54eab19ff, type: 3}
+  m_Name: Attack Damage Temporary Upgrade
   m_EditorClassIdentifier: 
-  Title: Range
-  ShortDescription: Tower Range
+  Title: Attack Damage
+  ShortDescription: Flat damage upgrade
   DescriptionLines:
-  - Tower attack range increase
+  - Flat attack damage upgrade
   BackgroundImage: {fileID: 0}
-  RangePerUpgrade: 0.5

@@ -5,11 +5,12 @@ using Michsky.UI.Shift;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Serialization;
 
 /// <summary>
 /// Modified from Michsky's ChapterButton
 /// </summary>
-public class UpgradeButton : MonoBehaviour
+public class TemporaryUpgradeButton : MonoBehaviour
 {
     [Header("Resources")]
     public Animator Animator;
@@ -25,9 +26,10 @@ public class UpgradeButton : MonoBehaviour
     public Transform statusLocked;
     public Transform statusCompleted;
 
+    // ToDo: Remove all FormerlySerializedAs attributes
     [HideInInspector]
-    public UpgradeBase TargetUpgrade;
-    
+    public TemporaryUpgradeBase targetTemporaryUpgrade;
+
     public string buttonTitle = "My Title";
     [TextArea] public string buttonDescription = "My Description";
 
@@ -40,7 +42,7 @@ public class UpgradeButton : MonoBehaviour
     public StatusItem statusItem;
     public float UpdateInterval = 0.5f;
     private float timeSinceLastUpdate = 0;
-    
+
 
     public enum StatusItem
     {
@@ -53,12 +55,9 @@ public class UpgradeButton : MonoBehaviour
     {
         if (useCustomResources == false)
         {
-            backgroundImageObj = gameObject.transform.Find("Content/Background")
-                .GetComponent<Image>();
-            titleObj = gameObject.transform.Find("Content/Texts/Title")
-                .GetComponent<TextMeshProUGUI>();
-            descriptionObj = gameObject.transform.Find("Content/Texts/Description")
-                .GetComponent<TextMeshProUGUI>();
+            backgroundImageObj = gameObject.transform.Find("Content/Background").GetComponent<Image>();
+            titleObj = gameObject.transform.Find("Content/Texts/Title").GetComponent<TextMeshProUGUI>();
+            descriptionObj = gameObject.transform.Find("Content/Texts/Description").GetComponent<TextMeshProUGUI>();
 
             backgroundImageObj.sprite = backgroundImage;
             titleObj.text = buttonTitle;
@@ -67,15 +66,13 @@ public class UpgradeButton : MonoBehaviour
 
         if (enableStatus == true)
         {
-            statusNone = gameObject.transform.Find("Content/Texts/Status/None")
-                .GetComponent<Transform>();
-            statusLocked = gameObject.transform.Find("Content/Texts/Status/Locked")
-                .GetComponent<Transform>();
-            statusCompleted = gameObject.transform.Find("Content/Texts/Status/Completed")
-                .GetComponent<Transform>();
+            statusNone = gameObject.transform.Find("Content/Texts/Status/None").GetComponent<Transform>();
+            statusLocked = gameObject.transform.Find("Content/Texts/Status/Locked").GetComponent<Transform>();
+            statusCompleted = gameObject.transform.Find("Content/Texts/Status/Completed").GetComponent<Transform>();
 
-            
+
         }
+
         UpdateStatus();
     }
 
@@ -86,7 +83,7 @@ public class UpgradeButton : MonoBehaviour
         if (!TemporaryUpgradeMenu.Instance.MenuOpen) return;
 
         UpdateTooltip();
-        statusItem = TargetUpgrade.CanUpgrade() ? StatusItem.None : StatusItem.Locked;
+        statusItem = targetTemporaryUpgrade.CanUpgrade() ? StatusItem.None : StatusItem.Locked;
         UpdateStatus();
     }
 
@@ -94,9 +91,9 @@ public class UpgradeButton : MonoBehaviour
     {
         // Setup tooltip
         List<UITooltipLineContent> LineList = new List<UITooltipLineContent>();
-        LineList.Add(new UITooltipLineContent(UITooltipLines.LineStyle.Title, null, TargetUpgrade.Title));
-        LineList.Add(new UITooltipLineContent(UITooltipLines.LineStyle.Description, null, TargetUpgrade.GetCost().ToCommaString()));
-        foreach (string t in TargetUpgrade.DescriptionLines)
+        LineList.Add(new UITooltipLineContent(UITooltipLines.LineStyle.Title, null, targetTemporaryUpgrade.Title));
+        LineList.Add(new UITooltipLineContent(UITooltipLines.LineStyle.Description, null, targetTemporaryUpgrade.GetCost().ToCommaString()));
+        foreach (string t in targetTemporaryUpgrade.DescriptionLines)
         {
             LineList.Add(new UITooltipLineContent(UITooltipLines.LineStyle.Default, null, t));
         }

@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09f971468c306c3458f840a54eab19ff, type: 3}
-  m_Name: Attack Damage Upgrade
+  m_Script: {fileID: 11500000, guid: a7fef2317705d0f4f8ad45ceabbc7ebb, type: 3}
+  m_Name: Health Temporary Upgrade
   m_EditorClassIdentifier: 
-  Title: Attack Damage
-  ShortDescription: Flat damage upgrade
+  Title: Health
+  ShortDescription: Maximum health
   DescriptionLines:
-  - Flat attack damage upgrade
+  - Increases the tower's maximum health
   BackgroundImage: {fileID: 0}
+  HealthPerUpgrade: 10

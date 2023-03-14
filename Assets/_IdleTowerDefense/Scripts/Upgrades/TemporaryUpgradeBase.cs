@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Leopotam.EcsLite;
 using UnityEngine;
 
-public class UpgradeBase : ScriptableObject
+public class TemporaryUpgradeBase : ScriptableObject
 {
     [Header("Base Values")]
     public string Title = "Default Title";

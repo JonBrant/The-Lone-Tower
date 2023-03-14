@@ -101,6 +101,7 @@ public class GameManager : Singleton<GameManager>
 
     public void ExitToMainMenu()
     {
+        SaveGame();
         LoadingScreenManager.LoadScene("Menu");
     }
     

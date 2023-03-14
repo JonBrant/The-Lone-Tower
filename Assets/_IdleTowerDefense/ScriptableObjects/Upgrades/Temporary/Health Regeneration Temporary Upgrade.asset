@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9f9b8dc9aa99e54b80754f00a66a376, type: 3}
-  m_Name: Attack Speed Upgrade
+  m_Script: {fileID: 11500000, guid: ff068dad0af547d4c801ea00061873f7, type: 3}
+  m_Name: Health Regeneration Temporary Upgrade
   m_EditorClassIdentifier: 
-  Title: Attack Speed
-  ShortDescription: Multiplicative attack speed
+  Title: Regeneration
+  ShortDescription: Health Regeneration
   DescriptionLines:
-  - Multiplicative attack speed upgrade
+  - Increases the tower's health regeneration rate
   BackgroundImage: {fileID: 0}
+  HealthRegenerationPerUpgrade: 0.5

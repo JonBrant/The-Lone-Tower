@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7fef2317705d0f4f8ad45ceabbc7ebb, type: 3}
-  m_Name: Health Upgrade
+  m_Script: {fileID: 11500000, guid: 4bb1140eac82ec247887f1d37c5639f8, type: 3}
+  m_Name: Attack Damage Persistent Upgrade
   m_EditorClassIdentifier: 
-  Title: Health
-  ShortDescription: Maximum health
-  DescriptionLines:
-  - Increases the tower's maximum health
-  BackgroundImage: {fileID: 0}
-  HealthPerUpgrade: 10
+  Title: Attack Damage
+  ShortDescription: Permanently increasesa attack damage
+  DescriptionLines: []
+  damageExponent: 1.02
+  upgradeExponent: 1.1
