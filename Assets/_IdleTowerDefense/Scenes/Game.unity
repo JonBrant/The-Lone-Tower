@@ -15557,7 +15557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSettings: {fileID: 11400000, guid: 64f6e8953a0b1b44ab883d507c18a38d, type: 2}
-  upgradeButtonPrefab: {fileID: 6255698023014223661, guid: 515267e90452bd943af2bf922e596cbc, type: 3}
+  temporaryUpgradeButtonPrefab: {fileID: 6255698023014223661, guid: 515267e90452bd943af2bf922e596cbc, type: 3}
   buttonContainer: {fileID: 3980347088015290899}
   buttonAudioSource: {fileID: 1919086991}
 --- !u!224 &3981170439990665385

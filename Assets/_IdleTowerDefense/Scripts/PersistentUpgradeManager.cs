@@ -20,15 +20,20 @@ public class PersistentUpgradeManager : Singleton<PersistentUpgradeManager>
     private void Awake()
     {
         Dictionary<string, int> defaultValues = new Dictionary<string, int>();
+        
         foreach (var upgrade in gameSettings.UpgradeSettings.PersistentUpgrades)
         {
             defaultValues.Add(upgrade.Title, 0);
         }
+        
 
         RemainingScrap = ES3.Load(SaveKeys.Scrap, 0f);
         remainingScrapText.text = $"SCRAP {RemainingScrap:N0}";
         PersistentUpgradeCounts = ES3.Load(SaveKeys.PersistentUpgradeCounts, defaultValues);
-
+        foreach (KeyValuePair<string, int> kvp in PersistentUpgradeCounts)
+        {
+            Debug.Log($"{nameof(PersistentUpgradeManager)}.{nameof(Awake)}() - {kvp.Key} - {kvp.Value}");
+        }
         InitButtons();
     }
 
