@@ -27,6 +27,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         // Init Currency dictionary
         List<CurrencyTypes> currencies = ((CurrencyTypes[])Enum.GetValues(typeof(CurrencyTypes))).ToList();
         foreach (CurrencyTypes currency in currencies)
