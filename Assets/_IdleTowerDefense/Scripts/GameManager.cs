@@ -34,6 +34,8 @@ public class GameManager : Singleton<GameManager>
         {
             Currency.Add(currency, 0f);
         }
+        
+        LoadGame();
     }
 
     public void SetGameSpeed(float newSpeed)
@@ -111,5 +113,10 @@ public class GameManager : Singleton<GameManager>
             // No record exists, save current value
             ES3.Save(SaveKeys.EnemiesKilled, EnemiesKilled);
         }
+    }
+
+    public void LoadGame()
+    {
+        Currency[CurrencyTypes.Scrap] = ES3.Load(SaveKeys.Scrap, 0);
     }
 }
