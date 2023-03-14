@@ -30,7 +30,7 @@ public class CurrencyDisplay : MonoBehaviour
 
         foreach (KeyValuePair<CurrencyTypes, CurrencyDisplayElement> entry in CurrencyDisplayElements)
         {
-            entry.Value.TextObject.text = $"<b>{entry.Key.ToString()}</b>: {GameManager.Instance.Currency[entry.Key].ToString()}";
+            entry.Value.TextObject.text = $"<b>{entry.Key.ToString()}</b>: {GameManager.Instance.Currency[entry.Key]:N0}";
         }
     }
 }

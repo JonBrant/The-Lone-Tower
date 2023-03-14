@@ -34,7 +34,6 @@ public class TowerUpgradeLoadingSystem : IEcsPreInitSystem, IEcsInitSystem
             if (persistentUpgradeCounts[upgrade.Title] == 0)
                 continue;
 
-            Debug.Log($"{nameof(TowerUpgradeLoadingSystem)}.{nameof(Init)}() - Upgrading {upgrade.Title} {persistentUpgradeCounts[upgrade.Title]} times!");
             upgrade.Upgrade(persistentUpgradeCounts[upgrade.Title]);
         }
     }
