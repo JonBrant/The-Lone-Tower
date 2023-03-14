@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bb1140eac82ec247887f1d37c5639f8, type: 3}
   m_Name: Multiplicative Attack Damage Persistent Upgrade
   m_EditorClassIdentifier: 
-  Title: Attack Damage Multiplier
+  Title: Multiplicative Attack Damage
   ShortDescription: Permanently multiplies attack damage by {0}{1}
   DescriptionLines: []
   damageExponent: 1.05

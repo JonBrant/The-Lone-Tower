@@ -20,4 +20,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8f16a54d4e3f7ee498d76452b09d5d2e, type: 2}
   - {fileID: 11400000, guid: 1d32f6840d318a7488f4fd74424d24db, type: 2}
   PersistentUpgrades:
+  - {fileID: 11400000, guid: ca1353f59233cca47adf1244e2457aab, type: 2}
   - {fileID: 11400000, guid: 5259ab877164e8940ba12d8f1c6e8b6b, type: 2}

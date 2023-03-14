@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e41b0ca32e71eb246bb1339d18cffcaf, type: 3}
   m_Name: Additive Attack Damage Persistent Upgrade
   m_EditorClassIdentifier: 
-  Title: Default Title
-  ShortDescription: Short Description
+  Title: Additive Attack Damage
+  ShortDescription: Permanentely adds {0} attack damage{1}
   DescriptionLines: []
-  damageIncrease: 1.01
+  damageIncrease: 0.1
   upgradeExponent: 1.1
