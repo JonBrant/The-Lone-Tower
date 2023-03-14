@@ -21,11 +21,11 @@ public enum CurrencyTypes
 
 public class GameManager : Singleton<GameManager>
 {
-    
     public EcsWorld World;
     public Dictionary<CurrencyTypes, float> Currency = new Dictionary<CurrencyTypes, float>();
     public int EnemiesKilled = 0;
-    
+    public bool Paused = false;
+
     [SerializeField] private LoadingScreenManager LoadingScreenManager;
 
     private ModalWindowManager RestartWindow;
@@ -41,7 +41,7 @@ public class GameManager : Singleton<GameManager>
 
         LoadGame();
     }
-    
+
     public void SetGameSpeed(float newSpeed)
     {
         Time.timeScale = newSpeed;
@@ -49,23 +49,7 @@ public class GameManager : Singleton<GameManager>
 
     public void OnTowerKilled()
     {
-        Time.timeScale = 0;
-
-        // Destroy tower, enemies and projectiles
-        var enemies = FindObjectsOfType<EnemyView>();
-        var projectiles = FindObjectsOfType<ProjectileView>();
-        var tower = FindObjectOfType<TowerView>();
-        foreach (EnemyView enemyView in enemies)
-        {
-            Destroy(enemyView.gameObject);
-        }
-
-        foreach (ProjectileView projectileView in projectiles)
-        {
-            Destroy(projectileView.gameObject);
-        }
-
-        Destroy(tower.gameObject);
+        Paused = true;
 
         // Check for new high score and save if necessary
         bool isNewHighScore = false;
@@ -91,22 +75,25 @@ public class GameManager : Singleton<GameManager>
 
     public void ReloadGame()
     {
+        Time.timeScale = 1;
         SaveGame();
         LoadingScreenManager.LoadScene(SceneManager.GetActiveScene().name);
 
         Currency[CurrencyTypes.Exp] = 0;
         EnemiesKilled = 0;
-        Time.timeScale = 1;
+
     }
 
     public void ExitToMainMenu()
     {
+        Time.timeScale = 1;
         SaveGame();
         LoadingScreenManager.LoadScene("Menu");
     }
-    
+
     public void ExitGame()
     {
+        Time.timeScale = 1;
         SaveGame();
         Application.Quit();
     }

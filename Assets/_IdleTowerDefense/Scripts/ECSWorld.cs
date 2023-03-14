@@ -16,7 +16,7 @@ class ECSWorld : MonoBehaviour
 
         _world = new EcsWorld();
         GameManager.Instance.World = _world;
-        
+
         _systems = new EcsSystems(_world, sharedData).Add(new TowerSpawnSystem())
             .Add(new TowerUpgradeLoadingSystem())
             .Add(new TowerTargetingSystem())
@@ -33,7 +33,10 @@ class ECSWorld : MonoBehaviour
 
     void Update()
     {
-        _systems?.Run();
+        if (!GameManager.Instance.Paused)
+        {
+            _systems?.Run();
+        }
     }
 
     void OnDestroy()
