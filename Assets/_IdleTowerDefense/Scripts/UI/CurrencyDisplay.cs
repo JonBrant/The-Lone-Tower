@@ -19,6 +19,7 @@ public class CurrencyDisplay : MonoBehaviour
         {
             CurrencyDisplayElement currencyDisplayElement = Instantiate(currencyDisplayElementPrefab, currencyContainer);
             CurrencyDisplayElements.Add(currencyType, currencyDisplayElement);
+            currencyDisplayElement.TextObject.text = $"<b>{currencyType.ToString()}</b>: {GameManager.Instance.Currency[currencyType].ToString()}";
         }
     }
 
