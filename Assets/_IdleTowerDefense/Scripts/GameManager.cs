@@ -15,10 +15,7 @@ public enum CurrencyTypes
     Scrap
 }
 
-// ToDo: Save and display high score when losing. Score being EnemiesKilled. Display EnemiesKilled in Restart dialog box
-// ToDo: More decimal places on attack speed
 // ToDo: Max levels on upgrades, maybe unlock new ones
-
 public class GameManager : Singleton<GameManager>
 {
     public EcsWorld World;

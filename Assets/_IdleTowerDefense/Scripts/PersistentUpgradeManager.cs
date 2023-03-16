@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-// ToDo: Add tooltips
+// ToDo: Add tooltips?
 public class PersistentUpgradeManager : Singleton<PersistentUpgradeManager>
 {
     public Dictionary<string, int> PersistentUpgradeCounts = new Dictionary<string, int>();

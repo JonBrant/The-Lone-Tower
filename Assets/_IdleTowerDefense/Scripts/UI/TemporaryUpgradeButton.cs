@@ -26,7 +26,6 @@ public class TemporaryUpgradeButton : MonoBehaviour
     public Transform statusLocked;
     public Transform statusCompleted;
 
-    // ToDo: Remove all FormerlySerializedAs attributes
     [HideInInspector]
     public TemporaryUpgradeBase targetTemporaryUpgrade;
 

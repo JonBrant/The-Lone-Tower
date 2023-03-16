@@ -46,7 +46,7 @@ public class TowerViewTooltip : MonoBehaviour
         UITooltip.AddLineColumn($"<b>Health</b>: {towerHealth.CurrentHealth:N1}/{towerHealth.MaxHealth:N1}");
         UITooltip.AddLineColumn($"<b>Health Regeneration</b>: {towerHealth.HealthRegeneration:N1}");
         UITooltip.AddLineColumn($"<b>Damage</b>: {towerWeapon.AttackDamage:N1}");
-        UITooltip.AddLineColumn($"<b>Cooldown</b>: {towerWeapon.AttackCooldown:N1}");
+        UITooltip.AddLineColumn($"<b>Cooldown</b>: {towerWeapon.AttackCooldown:N2}");
         UITooltip.AddLineColumn($"<b>Range</b>: {targetSelector.TargetingRange:N1}");
         UITooltip.AddLineColumn($"<b>Targets</b>: {targetSelector.MaxTargets}");
         UITooltip.Show();

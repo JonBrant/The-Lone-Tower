@@ -15,5 +15,6 @@ MonoBehaviour:
   Title: Additive Attack Damage
   ShortDescription: Permanentely adds {0} attack damage{1}
   DescriptionLines: []
+  UpgradePriority: 1
   damageIncrease: 0.1
   upgradeExponent: 1.1
