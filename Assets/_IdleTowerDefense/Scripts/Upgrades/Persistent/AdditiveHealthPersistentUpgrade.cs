@@ -16,7 +16,7 @@ public class AdditiveHealthPersistentUpgrade : PersistentUpgradeBase
     {
         towerHealthFilter = GameManager.Instance.World.Filter<Tower>().Inc<Health>().End();
     }
-    
+
     public override string GetDescription()
     {
         return string.Format(ShortDescription, healthIncrease, null);
@@ -34,7 +34,7 @@ public class AdditiveHealthPersistentUpgrade : PersistentUpgradeBase
         foreach (int entity in towerHealthFilter)
         {
             ref Health towerHealth = ref healthPool.Get(entity);
-            towerHealth.MaxHealthAdditions += healthIncrease;
+            towerHealth.MaxHealthAdditions += healthIncrease * upgradeCount;
             towerHealth.RecalculateMaxHealth();
         }
     }
