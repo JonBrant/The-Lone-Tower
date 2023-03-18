@@ -9,13 +9,8 @@ public class PersistentUpgradeBase : ScriptableObject
     public string Title = "Default Title";
     public string ShortDescription = "Short Description"; // Used for button
     public List<string> DescriptionLines = new List<string>();
-    [Tooltip("Priority used by TowerUpgradeLoadingSystem, lower means it will be applied before.")]
-    public int UpgradePriority = 0;
 
-    public virtual void Init()
-    {
-
-    }
+    public virtual void Init() {}
 
     public virtual string GetDescription()
     {
@@ -32,8 +27,5 @@ public class PersistentUpgradeBase : ScriptableObject
         return PersistentUpgradeManager.Instance.RemainingScrap < GetCost();
     }
 
-    public virtual void Upgrade(int upgradeCount)
-    {
-
-    }
+    public virtual void Upgrade(int upgradeCount) {}
 }

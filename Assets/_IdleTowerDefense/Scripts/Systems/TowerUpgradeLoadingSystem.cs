@@ -28,8 +28,7 @@ public class TowerUpgradeLoadingSystem : IEcsPreInitSystem, IEcsInitSystem
 
     public void Init(EcsSystems systems)
     {
-        var prioritizedUpgrades = sharedData.Settings.UpgradeSettings.PersistentUpgrades.OrderBy(u => u.UpgradePriority);
-        foreach (PersistentUpgradeBase upgrade in prioritizedUpgrades)
+        foreach (PersistentUpgradeBase upgrade in sharedData.Settings.UpgradeSettings.PersistentUpgrades)
         {
             upgrade.Init();
             if (persistentUpgradeCounts[upgrade.Title] == 0)

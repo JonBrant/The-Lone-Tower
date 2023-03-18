@@ -6,7 +6,7 @@ public class AdditiveAttackDamagePersistentUpgrade : PersistentUpgradeBase
 {
     [Header("Upgrade Specific Values")]
     [SerializeField] private float damageIncrease = 1.01f;
-    [SerializeField] private float upgradeExponent = 1.1f;
+    [SerializeField] private float upgradeCostExponent = 1.1f;
 
     private EcsFilter weaponFilter;
 
@@ -25,7 +25,7 @@ public class AdditiveAttackDamagePersistentUpgrade : PersistentUpgradeBase
     public override float GetCost()
     {
         int upgradeCount = PersistentUpgradeManager.Instance.PersistentUpgradeCounts[Title];
-        return Mathf.Pow(upgradeExponent, upgradeCount);
+        return Mathf.Pow(upgradeCostExponent, upgradeCount);
     }
 
     public override void Upgrade(int upgradeCount)
