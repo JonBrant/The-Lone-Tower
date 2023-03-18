@@ -1776,7 +1776,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MinZoom: 2
   MaxZoom: 8
-  zoomSpeed: 1
+  zoomSpeed: 0.3
 --- !u!1 &541673605
 GameObject:
   m_ObjectHideFlags: 0

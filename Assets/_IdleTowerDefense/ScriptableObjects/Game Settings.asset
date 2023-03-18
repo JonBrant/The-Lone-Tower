@@ -21,5 +21,5 @@ MonoBehaviour:
   TowerStartingAttackCooldown: 1
   TowerStartingAttackTargets: 1
   TowerStartingTargetingRange: 2
-  EnemySpawnRadius: 10
+  EnemySpawnRadius: 15
   InitialEnemySpawnDelay: 4
