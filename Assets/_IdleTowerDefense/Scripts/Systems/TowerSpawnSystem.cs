@@ -22,7 +22,7 @@ public class TowerSpawnSystem : IEcsPreInitSystem, IEcsInitSystem
         EcsPool<TowerWeapon> towerWeaponPool = world.GetPool<TowerWeapon>();
         EcsPool<TowerTargetSelector> towerTargetingPool = world.GetPool<TowerTargetSelector>();
         EcsPool<Health> healthPool = world.GetPool<Health>();
-        ref Tower tower = ref towerPool.Add(entity);
+        towerPool.Add(entity);
         ref TowerWeapon towerWeapon = ref towerWeaponPool.Add(entity);
         ref TowerTargetSelector towerTargetSelector = ref towerTargetingPool.Add(entity);
         ref Health towerHealth = ref healthPool.Add(entity);
@@ -31,21 +31,39 @@ public class TowerSpawnSystem : IEcsPreInitSystem, IEcsInitSystem
         TowerView towerView = GameObject.Instantiate(sharedData.Settings.TowerView, Vector3.zero, Quaternion.identity);
 
         // Init components
-        towerHealth.MaxHealth = towerView.StartingHealth;
-        towerHealth.CurrentHealth = towerView.StartingHealth;
-        towerHealth.HealthRegeneration = towerView.StartingHealthRegeneration;
+        // Health
+        towerHealth.BaseMaxHealth = towerView.BaseMaxHealth;
+        towerHealth.MaxHealthMultiplier = 1;
+        towerHealth.MaxHealthAdditions = 0;
+        towerHealth.RecalculateMaxHealth();
+        towerHealth.CurrentHealth = towerHealth.MaxHealth;
+
+        // Health Regeneration
+        towerHealth.BaseHealthRegeneration = towerView.BaseHealthRegeneration;
+        towerHealth.HealthRegenerationMultiplier = 1;
+        towerHealth.HealthRegenerationAdditions = 0;
+        towerHealth.RecalculateHealthRegeneration();
         towerHealth.OnDamaged += () => towerView.transform.DOPunchPosition(Random.insideUnitCircle / 10f, 0.1f, 3, 1, false)
             .OnComplete(() => towerView.transform.position = Vector3.zero);
         towerHealth.OnKilled += () => GameManager.Instance.OnTowerKilled();
-            towerWeapon.AttackCooldown = towerView.StartingAttackCooldown;
-        towerWeapon.AttackDamage = towerView.StartingAttackDamage;
-        towerTargetSelector.TargetingRange = towerView.StartingTargetingRange;
-        towerTargetSelector.MaxTargets = towerView.StartingMaxTargets;
+
+        // Attack Cooldown
+        towerWeapon.BaseAttackCooldown = towerView.BaseAttackCooldown;
+        towerWeapon.AttackCooldownMultiplier = 1;
+        towerWeapon.RecalculateAttackCooldown();
+
+        // Attack Damage
+        towerWeapon.BaseAttackDamage = towerView.BaseAttackDamage;
+        towerWeapon.AttackDamageMultiplier = 1;
+        towerWeapon.AttackDamageAdditions = 0;
+        towerWeapon.RecalculateAttackDamage();
+
+        towerTargetSelector.TargetingRange = towerView.BaseTargetingRange;
+        towerTargetSelector.MaxTargets = towerView.BaseMaxTargets;
 
 
         // Init View
         towerView.PackedEntity = packedEntity;
-        towerView.World = world;
         sharedData.TowerView = towerView;
     }
 }

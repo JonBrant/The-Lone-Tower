@@ -59,7 +59,7 @@ public class StatDisplay : MonoBehaviour
             ref TowerTargetSelector targetSelector = ref towerTargetingPool.Get(entity);
             
             HealthDisplay.ValueText.text = $"{towerHealth.CurrentHealth:N0} / {towerHealth.MaxHealth:N0}";
-            HealthRegenDisplay.ValueText.text = $"{towerHealth.HealthRegeneration}/s";
+            HealthRegenDisplay.ValueText.text = $"{towerHealth.CurrentHealthRegeneration}/s";
             AttackDamageDisplay.ValueText.text = towerWeapon.AttackDamage.ToString();
             AttackCooldownDisplay.ValueText.text = $"{1/towerWeapon.AttackCooldown:N2}/s";
             TowerRangeDisplay.ValueText.text = $"{targetSelector.TargetingRange}m";

@@ -5,33 +5,33 @@ using DG.Tweening;
 using DuloGames.UI;
 using Leopotam.EcsLite;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class TowerView : MonoBehaviour
 {
-    public float StartingHealth = 50;
-    public float StartingHealthRegeneration = 10;
-    public float StartingAttackDamage = 1;
-    public float StartingAttackCooldown = 1;
-    public int StartingMaxTargets = 1;
-    public float StartingTargetingRange = 2;
-    
+    public float BaseMaxHealth = 50;
+    public float BaseHealthRegeneration = 10;
+    public float BaseAttackDamage = 1;
+    public float BaseAttackCooldown = 1;
+    public int BaseMaxTargets = 1;
+    public float BaseTargetingRange = 2;
+
     [SerializeField] private SpriteRenderer HealthBar;
     [SerializeField] private LineRenderer RadiusRenderer;
     private float targetingRange = -1;
 
     public EcsPackedEntity PackedEntity;
-    public EcsWorld World;
-
-    
 
     private void Update()
     {
-        // Update HealthBar
-        if (!PackedEntity.Unpack(World, out int unpackedTower))
+        if (!PackedEntity.Unpack(GameManager.Instance.World, out int unpackedTower))
+        {
+            Debug.Log($"{nameof(TowerView)}.{nameof(Update)}() - Attempted to get an invalid packed entity!");
             return;
+        }
 
-        EcsPool<Health> healthPool = World.GetPool<Health>();
-        EcsPool<TowerTargetSelector> targetSelectorPool = World.GetPool<TowerTargetSelector>();
+        EcsPool<Health> healthPool = GameManager.Instance.World.GetPool<Health>();
+        EcsPool<TowerTargetSelector> targetSelectorPool = GameManager.Instance.World.GetPool<TowerTargetSelector>();
         ref Health towerHealth = ref healthPool.Get(unpackedTower);
         ref TowerTargetSelector towerTargetSelector = ref targetSelectorPool.Get(unpackedTower);
 

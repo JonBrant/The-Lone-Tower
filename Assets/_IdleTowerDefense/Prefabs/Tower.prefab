@@ -49,12 +49,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5fec0e497a31f41a7a01c2929e7ae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartingHealth: 100
-  StartingHealthRegeneration: 0
-  StartingAttackDamage: 10
-  StartingAttackCooldown: 1
-  StartingMaxTargets: 1
-  StartingTargetingRange: 2
+  BaseMaxHealth: 50
+  BaseHealthRegeneration: 10
+  BaseAttackDamage: 10
+  BaseAttackCooldown: 1
+  BaseMaxTargets: 1
+  BaseTargetingRange: 2
   HealthBar: {fileID: 463204742845015056}
   RadiusRenderer: {fileID: 8403903296476473551}
 --- !u!114 &-6262024277379905340

@@ -38,7 +38,9 @@ public class MultiplicativeAttackDamagePersistentUpgrade : PersistentUpgradeBase
         foreach (int entity in weaponFilter)
         {
             ref TowerWeapon towerWeapon = ref weaponPool.Get(entity);
-            towerWeapon.AttackDamage = towerWeapon.AttackDamage * Mathf.Pow(damageExponent, upgradeCount);
+            //towerWeapon.AttackDamage = towerWeapon.AttackDamage * Mathf.Pow(damageExponent, upgradeCount);
+            towerWeapon.AttackDamageMultiplier += (damageExponent - 1) * upgradeCount;
+            towerWeapon.RecalculateAttackDamage();
         }
     }
 }

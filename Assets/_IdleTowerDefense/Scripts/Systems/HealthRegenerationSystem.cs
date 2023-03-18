@@ -22,7 +22,7 @@ public class HealthRegenerationSystem : IEcsPreInitSystem, IEcsRunSystem
         foreach (int entity in healthFilter)
         {
             ref Health entityHealth = ref healthPool.Get(entity);
-            entityHealth.CurrentHealth += entityHealth.HealthRegeneration * Time.deltaTime;
+            entityHealth.CurrentHealth += entityHealth.CurrentHealthRegeneration * Time.deltaTime;
             if (entityHealth.CurrentHealth > entityHealth.MaxHealth)
             {
                 entityHealth.CurrentHealth = entityHealth.MaxHealth;

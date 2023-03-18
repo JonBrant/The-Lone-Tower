@@ -35,7 +35,8 @@ public class AdditiveAttackDamagePersistentUpgrade : PersistentUpgradeBase
         foreach (int entity in weaponFilter)
         {
             ref TowerWeapon towerWeapon = ref weaponPool.Get(entity);
-            towerWeapon.AttackDamage += damageIncrease * upgradeCount;
+            towerWeapon.AttackDamageAdditions += damageIncrease * upgradeCount;
+            towerWeapon.RecalculateAttackDamage();
         }
     }
 }

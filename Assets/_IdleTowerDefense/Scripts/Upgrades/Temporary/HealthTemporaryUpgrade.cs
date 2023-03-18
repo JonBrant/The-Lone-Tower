@@ -37,7 +37,8 @@ public class HealthTemporaryUpgrade : TemporaryUpgradeBase
         {
             ref Health towerHealth = ref healthPool.Get(entity);
             float healthPercent = towerHealth.CurrentHealth / towerHealth.MaxHealth;
-            towerHealth.MaxHealth += HealthPerUpgrade;
+            towerHealth.MaxHealthAdditions += HealthPerUpgrade;
+            towerHealth.RecalculateMaxHealth();
             towerHealth.CurrentHealth = healthPercent * towerHealth.MaxHealth;
         }
     }

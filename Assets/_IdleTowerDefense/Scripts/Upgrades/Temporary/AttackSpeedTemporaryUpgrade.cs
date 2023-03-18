@@ -6,6 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Attack Speed Upgrade", menuName = "Idle Tower Defense/Temporary Upgrades/Attack Speed")]
 public class AttackSpeedTemporaryUpgrade : TemporaryUpgradeBase
 {
+    public float AttackSpeedMultiplier = 0.1f;
+    public float MinimumAttackCooldown = 0.25f;
     private EcsFilter weaponFilter;
 
     public override void Init()
@@ -17,9 +19,25 @@ public class AttackSpeedTemporaryUpgrade : TemporaryUpgradeBase
     {
         return new Dictionary<CurrencyTypes, float> {
             {
-                CurrencyTypes.Exp, TemporaryUpgradeMenu.Instance.TemporaryUpgradeCounts[Title]+1
+                CurrencyTypes.Exp, TemporaryUpgradeMenu.Instance.TemporaryUpgradeCounts[Title] + 1
             }
         };
+    }
+
+    public override bool CanUpgrade()
+    {
+        bool limitReached = false;
+        EcsPool<TowerWeapon> weaponPool = GameManager.Instance.World.GetPool<TowerWeapon>();
+        foreach (int entity in weaponFilter)
+        {
+            ref TowerWeapon towerWeapon = ref weaponPool.Get(entity);
+            if (towerWeapon.AttackCooldownMultiplier - AttackSpeedMultiplier <= MinimumAttackCooldown)
+            {
+                limitReached = true;
+            }
+        }
+
+        return base.CanUpgrade() && !limitReached;
     }
 
     public override void Upgrade()
@@ -33,7 +51,8 @@ public class AttackSpeedTemporaryUpgrade : TemporaryUpgradeBase
         foreach (int entity in weaponFilter)
         {
             ref TowerWeapon towerWeapon = ref weaponPool.Get(entity);
-            towerWeapon.AttackCooldown *= 0.9f;
+            towerWeapon.AttackCooldownMultiplier -= AttackSpeedMultiplier;
+            towerWeapon.RecalculateAttackCooldown();
         }
     }
 }

@@ -35,7 +35,8 @@ public class AttackDamageTemporaryUpgrade : TemporaryUpgradeBase
         foreach (int entity in weaponFilter)
         {
             ref TowerWeapon towerWeapon = ref weaponPool.Get(entity);
-            towerWeapon.AttackDamage += 1;
+            towerWeapon.AttackDamageAdditions += 1;
+            towerWeapon.RecalculateAttackDamage();
         }
     }
 }
