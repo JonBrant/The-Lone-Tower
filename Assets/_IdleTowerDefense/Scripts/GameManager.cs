@@ -102,7 +102,6 @@ public class GameManager : Singleton<GameManager>
     public override void OnApplicationQuit()
     {
         base.OnApplicationQuit();
-        Debug.Log($"{nameof(GameManager)}.{nameof(OnApplicationQuit)}() - Saving");
         SaveGame();
     }
 

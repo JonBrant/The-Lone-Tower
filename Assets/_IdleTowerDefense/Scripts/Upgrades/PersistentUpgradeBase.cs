@@ -24,7 +24,7 @@ public class PersistentUpgradeBase : ScriptableObject
 
     public virtual bool CanUpgrade()
     {
-        return PersistentUpgradeManager.Instance.RemainingScrap < GetCost();
+        return PersistentUpgradeManager.Instance.RemainingScrap >= GetCost();
     }
 
     public virtual void Upgrade(int upgradeCount) {}

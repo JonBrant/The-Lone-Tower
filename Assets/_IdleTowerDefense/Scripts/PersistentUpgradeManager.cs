@@ -17,6 +17,8 @@ public class PersistentUpgradeManager : Singleton<PersistentUpgradeManager>
     [SerializeField] private Transform buttonContainer;
     [SerializeField] private AudioSource audioSource;
 
+    private List<PersistentUpgradeButton> buttons = new List<PersistentUpgradeButton>();
+
     private void Start()
     {
         // Init default empty dictionary
@@ -29,8 +31,8 @@ public class PersistentUpgradeManager : Singleton<PersistentUpgradeManager>
         // Load saved upgrade counts and Scrap count
         RemainingScrap = ES3.Load(SaveKeys.Scrap, 0f);
         PersistentUpgradeCounts = ES3.Load(SaveKeys.PersistentUpgradeCounts, defaultValues);
-        remainingScrapText.text = $"SCRAP {RemainingScrap:N0}";
-        
+        remainingScrapText.text = $"SCRAP {RemainingScrap:N2}";
+
         // Check for new upgrades to avoid exception
         foreach (var upgrade in gameSettings.UpgradeSettings.PersistentUpgrades)
         {
@@ -40,7 +42,7 @@ public class PersistentUpgradeManager : Singleton<PersistentUpgradeManager>
                 Debug.Log($"{nameof(PersistentUpgradeManager)}.{nameof(Start)}() - Adding new upgrade: {upgrade.Title}");
             }
         }
-        
+
         InitButtons();
     }
 
@@ -49,36 +51,36 @@ public class PersistentUpgradeManager : Singleton<PersistentUpgradeManager>
         foreach (var upgrade in gameSettings.UpgradeSettings.PersistentUpgrades)
         {
             PersistentUpgradeButton currentButton = Instantiate(persistentUpgradeButtonPrefab, buttonContainer);
+            buttons.Add(currentButton);
             currentButton.TargetUpgrade = upgrade;
             currentButton.TitleText.text = upgrade.Title;
-            //currentButton.DescriptionText.text = upgrade.ShortDescription;
-            //upgrade.SetText(currentButton.DescriptionText);
             currentButton.DescriptionText.text = upgrade.GetDescription();
             currentButton.CostText.text = $"COST: {upgrade.GetCost():N1}";
             currentButton.UpgradeAmountText.text = $"LEVEL: {PersistentUpgradeCounts[upgrade.Title].ToString()}";
             currentButton.ElementSound.audioObject = audioSource;
-            if (RemainingScrap < upgrade.GetCost())
-            {
-                currentButton.Button.interactable = false;
-            }
-
             currentButton.Button.onClick.AddListener(
                 () => {
-                    if (RemainingScrap < upgrade.GetCost())
-                    {
-                        currentButton.Button.interactable = false;
-                        return;
-                    }
-
-                    PersistentUpgradeCounts[upgrade.Title]++;
                     RemainingScrap -= upgrade.GetCost();
+                    PersistentUpgradeCounts[upgrade.Title]++;
                     ES3.Save(SaveKeys.Scrap, RemainingScrap);
                     ES3.Save(SaveKeys.PersistentUpgradeCounts, PersistentUpgradeCounts);
                     currentButton.CostText.text = $"COST: {upgrade.GetCost():N1}";
                     currentButton.UpgradeAmountText.text = $"LEVEL: {PersistentUpgradeCounts[upgrade.Title].ToString()}";
-                    remainingScrapText.text = $"SCRAP {RemainingScrap:N0}";
+                    remainingScrapText.text = $"SCRAP {RemainingScrap:N1}";
+                    UpdateButtonInteractability();
                 }
             );
+        }
+
+        UpdateButtonInteractability();
+    }
+
+    private void UpdateButtonInteractability()
+    {
+
+        foreach (PersistentUpgradeButton button in buttons)
+        {
+            button.Button.interactable = button.TargetUpgrade.CanUpgrade();
         }
     }
 

@@ -5,8 +5,7 @@ public struct TowerWeapon
     public float AttackDamage;
     public float AttackDamageMultiplier;
     public float AttackDamageAdditions;
-
-    // ToDo: Use multiplier/additions here as well
+    
     // AttackCooldown
     public float BaseAttackCooldown;
     public float AttackCooldown;
