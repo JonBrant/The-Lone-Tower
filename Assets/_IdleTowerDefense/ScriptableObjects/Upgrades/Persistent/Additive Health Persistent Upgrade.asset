@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e21aa639a52525146b312f125f29ca45, type: 3}
   m_Name: Additive Health Persistent Upgrade
   m_EditorClassIdentifier: 
-  Title: Default Title
-  ShortDescription: Short Description
+  Title: Additive Max Health
+  ShortDescription: Permanently adds {0} tower max health {1}
   DescriptionLines: []
-  UpgradePriority: 0
   healthIncrease: 1
   upgradeCostExponent: 1.1

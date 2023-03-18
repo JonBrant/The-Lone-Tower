@@ -50,7 +50,7 @@ Material:
     - _LineThickness: 0.98
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _TileAmount: 20
+    - _TileAmount: 50
     m_Colors:
     - _Color: {r: 0.007843138, g: 0.007843138, b: 0.007843138, a: 0}
   m_BuildTextureStacks: []
