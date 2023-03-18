@@ -99,6 +99,13 @@ public class GameManager : Singleton<GameManager>
         Application.Quit();
     }
 
+    public override void OnApplicationQuit()
+    {
+        base.OnApplicationQuit();
+        Debug.Log($"{nameof(GameManager)}.{nameof(OnApplicationQuit)}() - Saving");
+        SaveGame();
+    }
+
     public void SaveGame()
     {
         ES3.Save(SaveKeys.Scrap, Currency[CurrencyTypes.Scrap]);
