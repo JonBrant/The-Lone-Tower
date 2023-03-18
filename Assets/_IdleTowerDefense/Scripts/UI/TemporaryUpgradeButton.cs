@@ -79,7 +79,7 @@ public class TemporaryUpgradeButton : MonoBehaviour
     {
         timeSinceLastUpdate += Time.deltaTime;
         if (timeSinceLastUpdate < UpdateInterval) return;
-        if (!TemporaryUpgradeMenu.Instance.MenuOpen) return;
+        if (!TemporaryUpgradeManager.Instance.MenuOpen) return;
 
         UpdateTooltip();
         statusItem = targetTemporaryUpgrade.CanUpgrade() ? StatusItem.None : StatusItem.Locked;

@@ -20,7 +20,7 @@ public class HealthRegenerationTemporaryUpgrade : TemporaryUpgradeBase
     {
         return new Dictionary<CurrencyTypes, float> {
             {
-                CurrencyTypes.Exp, TemporaryUpgradeMenu.Instance.TemporaryUpgradeCounts[Title] + 1
+                CurrencyTypes.Exp, TemporaryUpgradeManager.Instance.TemporaryUpgradeCounts[Title] + 1
             }
         };
     }
@@ -29,7 +29,7 @@ public class HealthRegenerationTemporaryUpgrade : TemporaryUpgradeBase
     {
         // Handle cost
         GameManager.Instance.Currency.SubtractValues(GetCost());
-        TemporaryUpgradeMenu.Instance.TemporaryUpgradeCounts[Title] += 1;
+        TemporaryUpgradeManager.Instance.TemporaryUpgradeCounts[Title] += 1;
 
         // Handle Upgrade
         EcsPool<Health> healthPool = GameManager.Instance.World.GetPool<Health>();

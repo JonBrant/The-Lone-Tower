@@ -19,7 +19,7 @@ public class AttackDamageTemporaryUpgrade : TemporaryUpgradeBase
     {
         return new Dictionary<CurrencyTypes, float> {
             {
-                CurrencyTypes.Exp, TemporaryUpgradeMenu.Instance.TemporaryUpgradeCounts[Title]+1
+                CurrencyTypes.Exp, TemporaryUpgradeManager.Instance.TemporaryUpgradeCounts[Title]+1
             }
         };
     }
@@ -28,7 +28,7 @@ public class AttackDamageTemporaryUpgrade : TemporaryUpgradeBase
     {
         // Handle cost
         GameManager.Instance.Currency.SubtractValues(GetCost());
-        TemporaryUpgradeMenu.Instance.TemporaryUpgradeCounts[Title] += 1;
+        TemporaryUpgradeManager.Instance.TemporaryUpgradeCounts[Title] += 1;
 
         // Handle upgrade
         EcsPool<TowerWeapon> weaponPool = GameManager.Instance.World.GetPool<TowerWeapon>();

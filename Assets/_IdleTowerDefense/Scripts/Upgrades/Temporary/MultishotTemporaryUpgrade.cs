@@ -21,9 +21,9 @@ public class MultishotTemporaryUpgrade : TemporaryUpgradeBase
     {
         return new Dictionary<CurrencyTypes, float> {
             {
-                CurrencyTypes.Exp, (TemporaryUpgradeMenu.Instance.TemporaryUpgradeCounts[Title] + 1) * 5
+                CurrencyTypes.Exp, (TemporaryUpgradeManager.Instance.TemporaryUpgradeCounts[Title] + 1) * 5
             }, {
-                CurrencyTypes.Scrap, (TemporaryUpgradeMenu.Instance.TemporaryUpgradeCounts[Title] + 1) * 5
+                CurrencyTypes.Scrap, (TemporaryUpgradeManager.Instance.TemporaryUpgradeCounts[Title] + 1) * 5
             }
         };
     }
@@ -32,7 +32,7 @@ public class MultishotTemporaryUpgrade : TemporaryUpgradeBase
     {
         // Handle cost
         GameManager.Instance.Currency.SubtractValues(GetCost());
-        TemporaryUpgradeMenu.Instance.TemporaryUpgradeCounts[Title] += 1;
+        TemporaryUpgradeManager.Instance.TemporaryUpgradeCounts[Title] += 1;
 
         // Handle upgrade
         EcsPool<TowerTargetSelector> targetSelectorPool = GameManager.Instance.World.GetPool<TowerTargetSelector>();
