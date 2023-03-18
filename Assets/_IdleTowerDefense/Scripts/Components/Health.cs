@@ -23,7 +23,9 @@ public struct Health
 
     public void RecalculateMaxHealth()
     {
+        float healthPercent = CurrentHealth / MaxHealth;
         MaxHealth = BaseMaxHealth * MaxHealthMultiplier + MaxHealthAdditions;
+        CurrentHealth = healthPercent * MaxHealth;
     }
 
     public void RecalculateHealthRegeneration()
