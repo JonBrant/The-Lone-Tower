@@ -8,6 +8,7 @@ public class AdditiveHealthPersistentUpgrade : PersistentUpgradeBase
 {
     [Header("Upgrade Specific Values")]
     [SerializeField] private float healthIncrease = 1.0f;
+    [SerializeField] private float baseCost = 1;
     [SerializeField] private float upgradeCostExponent = 1.1f;
 
     private EcsFilter towerHealthFilter;
@@ -25,7 +26,7 @@ public class AdditiveHealthPersistentUpgrade : PersistentUpgradeBase
     public override float GetCost()
     {
         int upgradeCount = PersistentUpgradeManager.Instance.PersistentUpgradeCounts[Title];
-        return Mathf.Pow(upgradeCostExponent, upgradeCount);
+        return baseCost * Mathf.Pow(upgradeCostExponent, upgradeCount);
     }
 
     public override void Upgrade(int upgradeCount)

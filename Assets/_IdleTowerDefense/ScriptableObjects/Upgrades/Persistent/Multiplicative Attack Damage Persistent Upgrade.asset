@@ -16,4 +16,5 @@ MonoBehaviour:
   ShortDescription: Permanently multiplies attack damage by {0}{1}
   DescriptionLines: []
   damageExponent: 1.05
+  baseCost: 2
   upgradeExponent: 1.1
