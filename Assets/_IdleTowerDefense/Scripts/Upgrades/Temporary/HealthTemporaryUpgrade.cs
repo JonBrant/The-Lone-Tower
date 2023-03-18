@@ -4,7 +4,7 @@ using Leopotam.EcsLite;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Health Upgrade", menuName = "Idle Tower Defense/Temporary Upgrades/Health")]
-public class HealthTemporaryTemporaryUpgrade : TemporaryUpgradeBase
+public class HealthTemporaryUpgrade : TemporaryUpgradeBase
 {
     [Header("Upgrade Specific Values")]
     public float HealthPerUpgrade = 10;

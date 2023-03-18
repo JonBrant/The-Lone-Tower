@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using Leopotam.EcsLite;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Multishot Upgrade", menuName = "Idle Tower Defense/Temporary Upgrades/Multishot")]
-public class MultishotTemporaryTemporaryUpgrade : TemporaryUpgradeBase
+[CreateAssetMenu(fileName = "New Tower Range Upgrade", menuName = "Idle Tower Defense/Temporary Upgrades/Tower Range")]
+public class TowerRangeTemporaryUpgrade : TemporaryUpgradeBase
 {
     [Header("Upgrade Specific Values")]
+    public float RangePerUpgrade = 0.5f;
     
     private EcsFilter towerTargetSelectorFilter;
-
+    
     public override void Init()
     {
         towerTargetSelectorFilter = GameManager.Instance.World.Filter<Tower>()
@@ -21,13 +22,13 @@ public class MultishotTemporaryTemporaryUpgrade : TemporaryUpgradeBase
     {
         return new Dictionary<CurrencyTypes, float> {
             {
-                CurrencyTypes.Exp, (TemporaryUpgradeMenu.Instance.TemporaryUpgradeCounts[Title] + 1) * 5
+                CurrencyTypes.Exp, (TemporaryUpgradeMenu.Instance.TemporaryUpgradeCounts[Title] + 1) * 2
             }, {
-                CurrencyTypes.Scrap, (TemporaryUpgradeMenu.Instance.TemporaryUpgradeCounts[Title] + 1) * 5
+                CurrencyTypes.Scrap, (TemporaryUpgradeMenu.Instance.TemporaryUpgradeCounts[Title] + 1) * 2
             }
         };
     }
-
+    
     public override void Upgrade()
     {
         // Handle cost
@@ -39,7 +40,7 @@ public class MultishotTemporaryTemporaryUpgrade : TemporaryUpgradeBase
         foreach (int entity in towerTargetSelectorFilter)
         {
             ref TowerTargetSelector towerWeapon = ref targetSelectorPool.Get(entity);
-            towerWeapon.MaxTargets += 1;
+            towerWeapon.TargetingRange += RangePerUpgrade;
         }
     }
 }
