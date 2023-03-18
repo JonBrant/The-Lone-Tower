@@ -17,7 +17,7 @@ public class PersistentUpgradeManager : Singleton<PersistentUpgradeManager>
     [SerializeField] private Transform buttonContainer;
     [SerializeField] private AudioSource audioSource;
 
-    private void Awake()
+    private void Start()
     {
         // Init default empty dictionary
         Dictionary<string, int> defaultValues = new Dictionary<string, int>();
@@ -30,6 +30,16 @@ public class PersistentUpgradeManager : Singleton<PersistentUpgradeManager>
         RemainingScrap = ES3.Load(SaveKeys.Scrap, 0f);
         PersistentUpgradeCounts = ES3.Load(SaveKeys.PersistentUpgradeCounts, defaultValues);
         remainingScrapText.text = $"SCRAP {RemainingScrap:N0}";
+        
+        // Check for new upgrades to avoid exception
+        foreach (var upgrade in gameSettings.UpgradeSettings.PersistentUpgrades)
+        {
+            if (!PersistentUpgradeCounts.ContainsKey(upgrade.Title))
+            {
+                PersistentUpgradeCounts.Add(upgrade.Title, 0);
+                Debug.Log($"{nameof(PersistentUpgradeManager)}.{nameof(Start)}() - Adding new upgrade: {upgrade.Title}");
+            }
+        }
         
         InitButtons();
     }
