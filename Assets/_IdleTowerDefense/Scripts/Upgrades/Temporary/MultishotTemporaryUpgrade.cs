@@ -22,8 +22,6 @@ public class MultishotTemporaryUpgrade : TemporaryUpgradeBase
         return new Dictionary<CurrencyTypes, float> {
             {
                 CurrencyTypes.Exp, (TemporaryUpgradeManager.Instance.TemporaryUpgradeCounts[Title] + 1) * 5
-            }, {
-                CurrencyTypes.Scrap, (TemporaryUpgradeManager.Instance.TemporaryUpgradeCounts[Title] + 1) * 5
             }
         };
     }

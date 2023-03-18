@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 // ToDo: Add tooltips?
@@ -10,8 +11,8 @@ public class PersistentUpgradeManager : Singleton<PersistentUpgradeManager>
 {
     public Dictionary<string, int> PersistentUpgradeCounts = new Dictionary<string, int>();
     public float RemainingScrap = 0;
+    public GameSettings GameSettings;
 
-    [SerializeField] private GameSettings gameSettings;
     [SerializeField] private TextMeshProUGUI remainingScrapText;
     [SerializeField] private PersistentUpgradeButton persistentUpgradeButtonPrefab;
     [SerializeField] private Transform buttonContainer;
@@ -21,9 +22,15 @@ public class PersistentUpgradeManager : Singleton<PersistentUpgradeManager>
 
     private void Start()
     {
+        InitSaveData();
+        InitMenu();
+    }
+
+    private void InitSaveData()
+    {
         // Init default empty dictionary
         Dictionary<string, int> defaultValues = new Dictionary<string, int>();
-        foreach (var upgrade in gameSettings.UpgradeSettings.PersistentUpgrades)
+        foreach (var upgrade in GameSettings.UpgradeSettings.PersistentUpgrades)
         {
             defaultValues.Add(upgrade.Title, 0);
         }
@@ -31,24 +38,12 @@ public class PersistentUpgradeManager : Singleton<PersistentUpgradeManager>
         // Load saved upgrade counts and Scrap count
         RemainingScrap = ES3.Load(SaveKeys.Scrap, 0f);
         PersistentUpgradeCounts = ES3.Load(SaveKeys.PersistentUpgradeCounts, defaultValues);
-        remainingScrapText.text = $"SCRAP {RemainingScrap:N2}";
-
-        // Check for new upgrades to avoid exception
-        foreach (var upgrade in gameSettings.UpgradeSettings.PersistentUpgrades)
-        {
-            if (!PersistentUpgradeCounts.ContainsKey(upgrade.Title))
-            {
-                PersistentUpgradeCounts.Add(upgrade.Title, 0);
-                Debug.Log($"{nameof(PersistentUpgradeManager)}.{nameof(Start)}() - Adding new upgrade: {upgrade.Title}");
-            }
-        }
-
-        InitButtons();
     }
 
-    private void InitButtons()
+    private void InitMenu()
     {
-        foreach (var upgrade in gameSettings.UpgradeSettings.PersistentUpgrades)
+        remainingScrapText.text = $"SCRAP {RemainingScrap:N2}";
+        foreach (var upgrade in GameSettings.UpgradeSettings.PersistentUpgrades)
         {
             PersistentUpgradeButton currentButton = Instantiate(persistentUpgradeButtonPrefab, buttonContainer);
             buttons.Add(currentButton);
@@ -87,5 +82,13 @@ public class PersistentUpgradeManager : Singleton<PersistentUpgradeManager>
     public void ClearSaveData()
     {
         ES3.DeleteFile();
+        InitSaveData();
+        // Clear menu and re-initialize it
+        for (int i = buttons.Count - 1; i >= 0; i--)
+        {
+            Destroy(buttons[i].gameObject);
+        }
+
+        InitMenu();
     }
 }
