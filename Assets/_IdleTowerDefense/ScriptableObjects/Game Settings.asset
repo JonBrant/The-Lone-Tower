@@ -17,6 +17,10 @@ MonoBehaviour:
   TowerView: {fileID: 2561317839851661327, guid: 04d700718b1fdb34fb6021c5be5332e7, type: 3}
   EnemyView: {fileID: 2420183176402899973, guid: 57aebfda2cf49994f8c1f723ffb0d64a, type: 3}
   ProjectileView: {fileID: -6287025677217260571, guid: 1ec97e3ef12c87446829b12708c5b747, type: 3}
+  FriendlyViews:
+  - {fileID: -8837461166758771051, guid: ea1f6776e505b084d9358ae609f8a749, type: 3}
+  - {fileID: 7326325531775149630, guid: 5a3c4c4771f3bc14b8bcd420f97cc8dc, type: 3}
+  - {fileID: -7902417201871305706, guid: f6137161ff92c2b418fc769d58b7659e, type: 3}
   TowerStartingAttackDamage: 2
   TowerStartingAttackCooldown: 1
   TowerStartingAttackTargets: 1

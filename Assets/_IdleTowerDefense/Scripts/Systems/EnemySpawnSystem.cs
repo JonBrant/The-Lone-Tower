@@ -3,8 +3,7 @@ using Guirao.UltimateTextDamage;
 using Leopotam.EcsLite;
 using UnityEngine;
 
-public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
-{
+public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem {
     private SharedData sharedData;
     private double spawnTimeRemaining = 0;
     private EcsWorld world;
@@ -13,21 +12,23 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
     private float enemyHealthMultiplier = 1;
     private int spawnCount = 1;
 
-    public void PreInit(EcsSystems systems)
-    {
+    public void PreInit(EcsSystems systems) {
         sharedData = systems.GetShared<SharedData>();
         world = systems.GetWorld();
         enemySpawnDelay = sharedData.Settings.InitialEnemySpawnDelay;
     }
 
-    public void Run(EcsSystems systems)
-    {
+    public void Run(EcsSystems systems) {
+        // Return early if settings say not to spawn - for debugging
+        if (!sharedData.Settings.EnemySpawnSettings.EnemySpawning) {
+            return;
+        }
+
         spawnTimeRemaining -= Time.deltaTime;
         if (!(spawnTimeRemaining <= 0))
             return;
 
-        for (int i = 0; i < spawnCount; i++)
-        {
+        for (int i = 0; i < spawnCount; i++) {
             SpawnEnemy();
         }
 
@@ -36,8 +37,7 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
         enemyHealthMultiplier *= sharedData.Settings.EnemySpawnSettings.EnemyHealthMultiplier;
 
         // Spawn multiple enemies if delay gets too low, because floating point errors occur quickly
-        if (enemySpawnDelay <= sharedData.Settings.InitialEnemySpawnDelay / 2.0f)
-        {
+        if (enemySpawnDelay <= sharedData.Settings.InitialEnemySpawnDelay / 2.0f) {
             spawnCount++;
             enemySpawnDelay = sharedData.Settings.InitialEnemySpawnDelay;
         }
@@ -45,8 +45,7 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem
         spawnTimeRemaining = enemySpawnDelay;
     }
 
-    private void SpawnEnemy()
-    {
+    private void SpawnEnemy() {
         // Create Entity, add components
         int entity = world.NewEntity();
         EcsPackedEntity packedEntity = world.PackEntity(entity);

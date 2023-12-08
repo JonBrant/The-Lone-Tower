@@ -10,6 +10,8 @@ public class EnemySpawnSettings : ScriptableObject
     public float EnemySpawnDelayMultiplier = 0.95f;
     public float EnemyHealthMultiplier = 1.01f;
     
+    public bool EnemySpawning = true; // For debugging
+    
     [Serializable]
     public struct EnemySpawnEntry
     {

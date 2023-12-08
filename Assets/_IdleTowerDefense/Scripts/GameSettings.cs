@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -12,6 +13,8 @@ public class GameSettings : ScriptableObject
     public TowerView TowerView;
     public EnemyView EnemyView;
     public ProjectileView ProjectileView;
+    public List<FriendlyView> FriendlyViews;
+
 
     [Header("Tower Starting Values")]
     public float TowerStartingAttackDamage = 1;

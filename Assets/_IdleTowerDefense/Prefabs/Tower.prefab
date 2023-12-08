@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5fec0e497a31f41a7a01c2929e7ae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BaseMaxHealth: 50
+  BaseMaxHealth: 500000
   BaseHealthRegeneration: 10
   BaseAttackDamage: 10
   BaseAttackCooldown: 1

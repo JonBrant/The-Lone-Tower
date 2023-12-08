@@ -8,6 +8,7 @@ using UnityEngine.Serialization;
 public class UpgradeSettings : ScriptableObject
 {
     public List<TemporaryUpgradeBase> TemporaryUpgrades = new List<TemporaryUpgradeBase>();
+    public List<TemporaryFriendlySpawnBase> FriendlySpawnables = new List<TemporaryFriendlySpawnBase>();
     public List<PersistentUpgradeBase> PersistentUpgrades = new List<PersistentUpgradeBase>();
 
     public void InitTemporaryUpgrades()

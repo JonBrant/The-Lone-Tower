@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemySpawnDelayMultiplier: 0.95
   EnemyHealthMultiplier: 1.02
+  EnemySpawning: 1
   EnemySpawns:
   - EnemyView: {fileID: 2420183176402899973, guid: 57aebfda2cf49994f8c1f723ffb0d64a, type: 3}
     SpawnChance: 0.6

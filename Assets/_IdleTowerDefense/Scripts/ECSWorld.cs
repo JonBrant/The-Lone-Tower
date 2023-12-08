@@ -1,18 +1,19 @@
 using Leopotam.EcsLite;
 using Nomnom.EcsLiteDebugger;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-class ECSWorld : MonoBehaviour
-{
-    [SerializeField] private GameSettings gameSettings;
+public class ECSWorld : MonoBehaviour {
+    [FormerlySerializedAs("gameSettings")]
+    public GameSettings GameSettings;
 
     public EcsWorld _world;
     EcsSystems _systems;
 
-    void Awake()
-    {
+    void Awake() {
         SharedData sharedData = new SharedData();
-        sharedData.InitDefaultValues(gameSettings);
+        sharedData.InitDefaultValues(GameSettings);
+        GameManager.Instance.ECSWorldInitFriendlyViews(GameSettings);
 
         _world = new EcsWorld();
         GameManager.Instance.World = _world;
@@ -26,21 +27,20 @@ class ECSWorld : MonoBehaviour
             .Add(new HealthRegenerationSystem())
             .Add(new DestroySystem())
             .Add(new WorldDebugSystem("Main World"))
-            .Add(new MovementSystem());
+            .Add(new EnemyMovementSystem())
+            .Add(new FriendlyMovementSystem())
+            .Add(new FriendlyVisionSystem());
 
         _systems.Init();
     }
 
-    void Update()
-    {
-        if (!GameManager.Instance.Paused)
-        {
+    void Update() {
+        if (!GameManager.Instance.Paused) {
             _systems?.Run();
         }
     }
 
-    void OnDestroy()
-    {
+    void OnDestroy() {
         _world?.Destroy();
         _systems?.Destroy();
     }

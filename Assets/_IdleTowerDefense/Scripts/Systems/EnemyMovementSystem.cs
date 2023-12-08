@@ -1,7 +1,7 @@
 using Leopotam.EcsLite;
 using UnityEngine;
 
-public class MovementSystem : IEcsPreInitSystem, IEcsRunSystem
+public class EnemyMovementSystem : IEcsPreInitSystem, IEcsRunSystem
 {
     private EcsWorld world;
     private EcsFilter enemyFilter;
@@ -11,6 +11,7 @@ public class MovementSystem : IEcsPreInitSystem, IEcsRunSystem
         world = systems.GetWorld();
         enemyFilter = world.Filter<Position>()
             .Inc<Movement>()
+            .Exc<Friendly>() // FriendlyMovementSystem handles these
             .End();
     }
 

@@ -6,24 +6,27 @@ using Leopotam.EcsLite;
 using UnityEditor;
 using UnityEngine;
 
-public class EnemyViewTooltip : MonoBehaviour
-{
+public class EnemyViewTooltip : MonoBehaviour {
     [SerializeField] private float updateInterval = 0.5f;
     private EnemyView enemyView;
     private EcsWorld world;
     private float timeSinceLastUpdate = 0;
     private bool mouseOver = false;
 
-    private void Start()
-    {
+    private void Start() {
         enemyView = GetComponent<EnemyView>();
         world = enemyView.World;
     }
 
-    private void OnMouseOver()
-    {
+    private void OnMouseOver() {
         mouseOver = true;
         timeSinceLastUpdate -= Time.deltaTime;
+
+        if (enemyView == null) {
+            Debug.LogError($"{nameof(enemyView)} == null!");
+            return;
+        }
+
         if (timeSinceLastUpdate > 0)
             return;
         if (!enemyView.PackedEntity.Unpack(world, out int unpackedEnemy))
@@ -56,16 +59,13 @@ public class EnemyViewTooltip : MonoBehaviour
     }
 
 
-    private void OnMouseExit()
-    {
+    private void OnMouseExit() {
         mouseOver = false;
         UITooltip.Hide();
     }
 
-    private void OnDestroy()
-    {
-        if (mouseOver)
-        {
+    private void OnDestroy() {
+        if (mouseOver) {
             UITooltip.Hide();
         }
     }

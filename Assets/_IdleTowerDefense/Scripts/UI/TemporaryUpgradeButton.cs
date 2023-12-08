@@ -68,10 +68,12 @@ public class TemporaryUpgradeButton : MonoBehaviour
             statusNone = gameObject.transform.Find("Content/Texts/Status/None").GetComponent<Transform>();
             statusLocked = gameObject.transform.Find("Content/Texts/Status/Locked").GetComponent<Transform>();
             statusCompleted = gameObject.transform.Find("Content/Texts/Status/Completed").GetComponent<Transform>();
-
-
         }
 
+        UpdateStatus();
+    }
+
+    private void OnEnable() {
         UpdateStatus();
     }
 
