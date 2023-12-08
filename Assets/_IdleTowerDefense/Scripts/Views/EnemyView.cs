@@ -49,7 +49,7 @@ public class EnemyView : MonoBehaviour {
             }
         }
         else {
-            Debug.Log($"Entity failed to unpack, destroying!");
+            // Debug.Log($"Entity failed to unpack, destroying!");
             Destroy(gameObject);
         }
     }

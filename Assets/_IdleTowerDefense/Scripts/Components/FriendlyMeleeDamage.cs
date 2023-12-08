@@ -5,8 +5,9 @@ using UnityEngine;
 
 public struct FriendlyMeleeDamage
 {
+    //public delegate void 
     public float Damage;
     public float DamageCooldown;
     public float DamageCooldownRemaining;
-    public Action<float, Transform> OnDamageDealt;
+    public Action<float, Vector2> OnDamageDealt;
 }

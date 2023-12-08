@@ -4131,8 +4131,8 @@ MonoBehaviour:
   EnemiesKilled: 0
   Paused: 0
   FriendlyViews: []
-  StartingExp: 1000000
-  StartingScrap: 10000000
+  StartingExp: 10
+  StartingScrap: 10
   LoadingScreenManager: {fileID: 1530785149}
   RestartWindow: {fileID: 1743491631}
 --- !u!4 &972745696
@@ -7248,7 +7248,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1800503218
 MonoBehaviour:
   m_ObjectHideFlags: 0

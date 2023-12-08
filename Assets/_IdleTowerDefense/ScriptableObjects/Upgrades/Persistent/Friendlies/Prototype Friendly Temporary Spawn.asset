@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca33759fd3eaf964ab1b55acdca5a561, type: 3}
   m_Name: Prototype Friendly Temporary Spawn
   m_EditorClassIdentifier: 
-  Title: Prototype Friendly
-  ShortDescription: A prototype Unit
+  Title: Friendly Melee
+  ShortDescription: A prototype melee Unit
   DescriptionLines: []
   BackgroundImage: {fileID: 0}
   FriendlyViewPrefab: {fileID: -8837461166758771051, guid: ea1f6776e505b084d9358ae609f8a749, type: 3}

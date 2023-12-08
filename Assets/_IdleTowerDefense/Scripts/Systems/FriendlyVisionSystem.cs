@@ -42,6 +42,7 @@ public class FriendlyVisionSystem : IEcsPreInitSystem, IEcsRunSystem
                     if (Vector2.Distance(position, enemyPosition) < friendlyVision.VisionRadius) {
                         // Debug.Log($"Vision - Found target!");
                         friendlyVision.CurrentTarget = world.PackEntity(enemyEntity);
+                        continue;
                     }
                 }
             }

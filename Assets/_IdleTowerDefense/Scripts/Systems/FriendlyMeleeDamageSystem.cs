@@ -25,6 +25,7 @@ public class FriendlyMeleeDamageSystem : IEcsPreInitSystem, IEcsRunSystem {
         EcsPool<Destroy> destroyPool = world.GetPool<Destroy>();
 
         foreach (int friendlyEntity in friendlyMeleeFilter) {
+            ref Position position = ref positionPool.Get(friendlyEntity);
             ref FriendlyVision vision = ref friendlyVisionPool.Get(friendlyEntity);
             ref FriendlyMeleeDamage meleeDamage = ref friendlyMeleeDamagePool.Get(friendlyEntity);
 
@@ -36,13 +37,14 @@ public class FriendlyMeleeDamageSystem : IEcsPreInitSystem, IEcsRunSystem {
 
             if (vision.CurrentTarget.Unpack(world, out int targetEntity)) {
                 if (meleeDamage.DamageCooldownRemaining <= 0) {
-                    Debug.Log($"Entity {friendlyEntity} attacking!");
-
+                    // Debug.Log($"Entity {friendlyEntity} attacking!");
                     ref Health targetHealth = ref healthPool.Get(targetEntity);
                     ref Position targetPosition = ref positionPool.Get(targetEntity);
+                    Vector2 attackAnimationVector = ((Vector2)targetPosition - (Vector2)position).normalized * vision.AttackRange;
 
                     meleeDamage.DamageCooldownRemaining = meleeDamage.DamageCooldown;
                     targetHealth.CurrentHealth -= meleeDamage.Damage;
+                    meleeDamage.OnDamageDealt?.Invoke(meleeDamage.Damage, attackAnimationVector);
                     UltimateTextDamageManager.Instance.Add(meleeDamage.Damage.ToString("N0"), (Vector2)targetPosition);
 
                     if (targetHealth.CurrentHealth <= 0 && !destroyPool.Has(targetEntity)) {
