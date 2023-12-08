@@ -31,10 +31,12 @@ public class FriendlyVisionSystem : IEcsPreInitSystem, IEcsRunSystem
             // If entity has a target, continue. Else try and find one
             if (friendlyVision.CurrentTarget.Unpack(world, out int unpackedEnemyEntity)) {
                 // Debug.Log($"Vision - Entity already has target!");
+                friendlyVision.InAttackRange = true;
                 continue;
             }
             else {
                 // Debug.Log($"Vision - Trying to find target...");
+                friendlyVision.InAttackRange = false;
                 foreach (int enemyEntity in enemyFilter) {
                     ref Position enemyPosition = ref positionPool.Get(enemyEntity);
                     if (Vector2.Distance(position, enemyPosition) < friendlyVision.VisionRadius) {
