@@ -23,12 +23,13 @@ public class ECSWorld : MonoBehaviour {
             .Add(new TowerTargetingSystem())
             .Add(new TowerFiringSystem())
             .Add(new EnemySpawnSystem())
-            .Add(new EnemyDamageSystem())
+            .Add(new EnemyMeleeDamageSystem())
             .Add(new HealthRegenerationSystem())
             .Add(new DestroySystem())
             .Add(new WorldDebugSystem("Main World"))
             .Add(new EnemyMovementSystem())
             .Add(new FriendlyMovementSystem())
+            .Add(new FriendlyMeleeDamageSystem())
             .Add(new FriendlyVisionSystem());
 
         _systems.Init();

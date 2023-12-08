@@ -34,11 +34,13 @@ public class FriendlyMovementSystem : IEcsPreInitSystem, IEcsRunSystem
                 if (Vector2.Distance(position, targetPosition) > movement.StopRadius) {
                     movement.Stopped = false;
                     movement.Velocity = movement.Speed*((Vector2)targetPosition - (Vector2)position).normalized;
+                    friendlyVision.InAttackRange = false;
                     // Debug.Log($"Movement - Entity ({targetEntity}) out of range of target, moving! Speed: {movement.Speed}, Velocity: {movement.Velocity}");
                 }
                 else {
                     movement.Stopped = true;
                     movement.Velocity = Vector2.zero;
+                    friendlyVision.InAttackRange = true;
                     // Debug.Log($"Movement - Entity in range of target, stopping!");
                 }
             }
@@ -46,6 +48,7 @@ public class FriendlyMovementSystem : IEcsPreInitSystem, IEcsRunSystem
                 // Debug.Log($"Movement - Entity has no target, stopping!");
                 movement.Stopped = true;
                 movement.Velocity = Vector2.zero;
+                friendlyVision.InAttackRange = false;
             }
 
             if (((Vector2)position).magnitude > movement.StopRadius)

@@ -53,14 +53,14 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem {
         EcsPool<Position> positionPool = world.GetPool<Position>();
         EcsPool<Movement> movementPool = world.GetPool<Movement>();
         EcsPool<Health> healthPool = world.GetPool<Health>();
-        EcsPool<MeleeDamage> meleeDamagePool = world.GetPool<MeleeDamage>();
+        EcsPool<EnemyMeleeDamage> meleeDamagePool = world.GetPool<EnemyMeleeDamage>();
         EcsPool<CurrencyDrop> currencyDropPool = world.GetPool<CurrencyDrop>();
 
         ref Enemy enemy = ref enemyPool.Add(entity);
         ref Position position = ref positionPool.Add(entity);
         ref Movement movement = ref movementPool.Add(entity);
         ref Health health = ref healthPool.Add(entity);
-        ref MeleeDamage meleeDamage = ref meleeDamagePool.Add(entity);
+        ref EnemyMeleeDamage enemyMeleeDamage = ref meleeDamagePool.Add(entity);
         ref CurrencyDrop currencyDrop = ref currencyDropPool.Add(entity);
 
         // Setup View
@@ -76,9 +76,9 @@ public class EnemySpawnSystem : IEcsPreInitSystem, IEcsRunSystem {
         health.MaxHealth = enemyView.StartingHealth * enemyHealthMultiplier;
         health.CurrentHealth = enemyView.StartingHealth * enemyHealthMultiplier;
         health.OnKilled += () => GameManager.Instance.EnemiesKilled++;
-        meleeDamage.Damage = enemyView.Damage;
-        meleeDamage.DamageCooldown = enemyView.DamageCooldown;
-        meleeDamage.OnDamageDealt += (damage, enemyTransform) => UltimateTextDamageManager.Instance.AddStack(damage, enemyTransform, "normal");
+        enemyMeleeDamage.Damage = enemyView.Damage;
+        enemyMeleeDamage.DamageCooldown = enemyView.DamageCooldown;
+        enemyMeleeDamage.OnDamageDealt += (damage, enemyTransform) => UltimateTextDamageManager.Instance.AddStack(damage, enemyTransform, "normal");
         currencyDrop.Drops = new Dictionary<CurrencyTypes, float> {
             {
                 CurrencyTypes.Exp, 1.0f

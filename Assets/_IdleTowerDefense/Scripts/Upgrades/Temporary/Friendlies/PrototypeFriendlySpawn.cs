@@ -31,14 +31,14 @@ public class PrototypeFriendlySpawn : TemporaryFriendlySpawnBase
         EcsPool<Position> positionPool = world.GetPool<Position>();
         EcsPool<Movement> movementPool = world.GetPool<Movement>();
         EcsPool<Health> healthPool = world.GetPool<Health>();
-        EcsPool<MeleeDamage> meleeDamagePool = world.GetPool<MeleeDamage>();
+        EcsPool<FriendlyMeleeDamage> friendlyMeleeDamagePool = world.GetPool<FriendlyMeleeDamage>();
         
         ref Friendly friendly = ref friendlyPool.Add(entity);
         ref FriendlyVision friendlyVision = ref friendlyVisionPool.Add(entity);
         ref Position position = ref positionPool.Add(entity);
         ref Movement movement = ref movementPool.Add(entity);
         ref Health health = ref healthPool.Add(entity);
-        ref MeleeDamage meleeDamage = ref meleeDamagePool.Add(entity);
+        ref FriendlyMeleeDamage friendlyMeleeDamage = ref friendlyMeleeDamagePool.Add(entity);
         
         // Setup View
         FriendlyView friendlyView = Instantiate(FriendlyViewPrefab);
@@ -55,9 +55,9 @@ public class PrototypeFriendlySpawn : TemporaryFriendlySpawnBase
         health.MaxHealth = friendlyView.StartingHealth;
         health.CurrentHealth = friendlyView.StartingHealth;
         // health.OnKilled += () => GameManager.Instance.EnemiesKilled++;
-        meleeDamage.Damage = friendlyView.Damage;
-        meleeDamage.DamageCooldown = friendlyView.DamageCooldown;
-        meleeDamage.OnDamageDealt += (damage, enemyTransform) => UltimateTextDamageManager.Instance.AddStack(damage, enemyTransform, "normal");
+        friendlyMeleeDamage.Damage = friendlyView.Damage;
+        friendlyMeleeDamage.DamageCooldown = friendlyView.DamageCooldown;
+        friendlyMeleeDamage.OnDamageDealt += (damage, enemyTransform) => UltimateTextDamageManager.Instance.AddStack(damage, enemyTransform, "normal");
         friendlyVision.VisionRadius = friendlyView.VisionRadius;
         friendlyVision.AttackRange = friendlyView.AttackRange;
 

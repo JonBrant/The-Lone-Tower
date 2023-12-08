@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct MeleeDamage
+public struct EnemyMeleeDamage
 {
     public float Damage;
     public float DamageCooldown;

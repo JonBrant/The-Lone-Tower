@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Leopotam.EcsLite;
 using UnityEngine;
 
-public class EnemyDamageSystem : IEcsPreInitSystem, IEcsRunSystem
+public class EnemyMeleeDamageSystem : IEcsPreInitSystem, IEcsRunSystem
 {
     private EcsWorld world;
     private EcsFilter enemyFilter;
@@ -16,7 +16,7 @@ public class EnemyDamageSystem : IEcsPreInitSystem, IEcsRunSystem
         world = systems.GetWorld();
         enemyFilter = world.Filter<Enemy>()
             .Inc<Movement>()
-            .Inc<MeleeDamage>()
+            .Inc<EnemyMeleeDamage>()
             .End();
         towerFilter = world.Filter<Tower>()
             .Inc<Health>()
@@ -26,7 +26,7 @@ public class EnemyDamageSystem : IEcsPreInitSystem, IEcsRunSystem
     public void Run(EcsSystems systems)
     {
         EcsPool<Health> healthPool = world.GetPool<Health>();
-        EcsPool<MeleeDamage> meleeDamagePool = world.GetPool<MeleeDamage>();
+        EcsPool<EnemyMeleeDamage> meleeDamagePool = world.GetPool<EnemyMeleeDamage>();
         EcsPool<Movement> movementPool = world.GetPool<Movement>();
         
         foreach (int tower in towerFilter)
@@ -41,19 +41,19 @@ public class EnemyDamageSystem : IEcsPreInitSystem, IEcsRunSystem
                     continue;
                 }
                 
-                ref MeleeDamage enemyMeleeDamage = ref meleeDamagePool.Get(enemy);
-                enemyMeleeDamage.DamageCooldownRemaining -= Time.deltaTime;
-                if (enemyMeleeDamage.DamageCooldownRemaining <= 0)
+                ref EnemyMeleeDamage enemyEnemyMeleeDamage = ref meleeDamagePool.Get(enemy);
+                enemyEnemyMeleeDamage.DamageCooldownRemaining -= Time.deltaTime;
+                if (enemyEnemyMeleeDamage.DamageCooldownRemaining <= 0)
                 {
-                    enemyMeleeDamage.DamageCooldownRemaining = enemyMeleeDamage.DamageCooldown;
+                    enemyEnemyMeleeDamage.DamageCooldownRemaining = enemyEnemyMeleeDamage.DamageCooldown;
                     
-                    towerHealth.CurrentHealth -= enemyMeleeDamage.Damage;
+                    towerHealth.CurrentHealth -= enemyEnemyMeleeDamage.Damage;
                     if (towerHealth.CurrentHealth <= 0)
                     {
                         towerHealth.CurrentHealth = 0;
                         towerHealth.OnKilled?.Invoke();
                     }
-                    enemyMeleeDamage.OnDamageDealt?.Invoke(enemyMeleeDamage.Damage, sharedData.TowerView.transform);
+                    enemyEnemyMeleeDamage.OnDamageDealt?.Invoke(enemyEnemyMeleeDamage.Damage, sharedData.TowerView.transform);
                     towerHealth.OnDamaged?.Invoke();
                 }
             }

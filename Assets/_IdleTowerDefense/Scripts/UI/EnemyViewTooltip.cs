@@ -39,7 +39,7 @@ public class EnemyViewTooltip : MonoBehaviour {
 
         EcsPool<Health> healthPool = world.GetPool<Health>();
         EcsPool<Movement> movementPool = world.GetPool<Movement>();
-        EcsPool<MeleeDamage> damagePool = world.GetPool<MeleeDamage>();
+        EcsPool<EnemyMeleeDamage> damagePool = world.GetPool<EnemyMeleeDamage>();
         EcsPool<CurrencyDrop> currencyDropPool = world.GetPool<CurrencyDrop>();
 
 

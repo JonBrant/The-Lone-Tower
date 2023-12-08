@@ -48,5 +48,9 @@ public class EnemyView : MonoBehaviour {
                 healthBar.gameObject.SetActive(true);
             }
         }
+        else {
+            Debug.Log($"Entity failed to unpack, destroying!");
+            Destroy(gameObject);
+        }
     }
 }
