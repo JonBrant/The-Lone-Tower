@@ -8,10 +8,14 @@ public class TowerTargetingSystem : IEcsPreInitSystem, IEcsRunSystem
     private EcsWorld world;
     private EcsFilter enemyFilter;
     private EcsFilter towerTargetSelectorFilter;
+    private SharedData sharedData;
 
     public void PreInit(EcsSystems systems)
     {
         world = systems.GetWorld();
+        sharedData = systems.GetShared<SharedData>();
+        sharedData.EntitiesInTowerRange = new List<int>();
+        
         enemyFilter = world.Filter<Enemy>()
             .Inc<Position>()
             .End();
@@ -33,16 +37,10 @@ public class TowerTargetingSystem : IEcsPreInitSystem, IEcsRunSystem
             ref TowerWeapon towerWeapon = ref towerWeaponPool.Get(towerEntity);
             List<int> sortedEntities = null;
 
-            // Make sure tower is ready to fire before acquiring targets to avoid unnecessary calculation
-            if (towerWeapon.AttackCooldownRemaining >= 0)
-            {
-                towerTargetSelector.CurrentTargets = null;
-                return;
-            }
-            
             // Get a list of enemy entities, sorted by distance and checked against firing range
             sortedEntities = GetSortedTargets(ref towerTargetSelector);
-
+            sharedData.EntitiesInTowerRange = sortedEntities;
+            
             // Set CurrentTargets to sorted list entries, up to MaxTargets
             towerTargetSelector.CurrentTargets = new List<int>();
             for (int i = 0; i < towerTargetSelector.MaxTargets && i < sortedEntities.Count; i++)

@@ -5,8 +5,11 @@ public class FriendlyMovementSystem : IEcsPreInitSystem, IEcsRunSystem {
     private EcsWorld world;
     private EcsFilter friendlyFilter;
     private EcsFilter towerTargetSelectorFilter;
+    private SharedData sharedData;
+
     public void PreInit(EcsSystems systems) {
         world = systems.GetWorld();
+        sharedData = systems.GetShared<SharedData>();
         friendlyFilter = world.Filter<Position>().Inc<Movement>().Inc<Friendly>().End();
         towerTargetSelectorFilter = GameManager.Instance.World.Filter<Tower>().Inc<TowerTargetSelector>().End();
     }
@@ -18,28 +21,39 @@ public class FriendlyMovementSystem : IEcsPreInitSystem, IEcsRunSystem {
         EcsPool<FriendlyVision> friendlyVisionPool = world.GetPool<FriendlyVision>();
 
         float towerRange = -1;
-        foreach (int entity in towerTargetSelectorFilter)
-        {
+
+        foreach (int entity in towerTargetSelectorFilter) {
             ref TowerTargetSelector towerWeapon = ref targetSelectorPool.Get(entity);
             towerRange = towerWeapon.TargetingRange;
         }
+
         Debug.Assert(towerRange != -1, "Failed to get Tower Range!");
-        
+
         foreach (int entity in friendlyFilter) {
             ref Position position = ref positionPool.Get(entity);
             ref Movement movement = ref movementPool.Get(entity);
             ref FriendlyVision friendlyVision = ref friendlyVisionPool.Get(entity);
 
+
+
+
+
             // If has target, and not in range, move toward it. Else stop
             if (friendlyVision.CurrentTarget.Unpack(world, out int targetEntity)) {
                 ref Position enemyPosition = ref positionPool.Get(targetEntity);
+                float enemyDistanceFromTower = ((Vector2)enemyPosition).magnitude;
+
+                // Target closest enemy to tower if target out of leash range + attack range
+                if (enemyDistanceFromTower > towerRange + friendlyVision.AttackRange && sharedData.EntitiesInTowerRange != null && sharedData.EntitiesInTowerRange.Count > 0) {
+                    friendlyVision.CurrentTarget = world.PackEntity(sharedData.EntitiesInTowerRange[0]);
+                }
 
                 if (Vector2.Distance(position, enemyPosition) > movement.StopRadius) {
                     movement.Stopped = false;
                     movement.Velocity = movement.Speed * ((Vector2)enemyPosition - (Vector2)position).normalized;
                     friendlyVision.InAttackRange = false;
                     // Debug.Log($"Movement - Entity ({targetEntity}) out of range of target, moving! Speed: {movement.Speed}, Velocity: {movement.Velocity}");
-                    
+
                 }
                 else {
                     movement.Stopped = true;
@@ -56,7 +70,7 @@ public class FriendlyMovementSystem : IEcsPreInitSystem, IEcsRunSystem {
             }
 
             // Prevent movement outside tower radius
-            if (Vector2.SqrMagnitude(position) > towerRange*towerRange) {
+            if (Vector2.SqrMagnitude(position) > towerRange * towerRange) {
                 // Debug.Log($"Out of range! Distance: {Vector2.SqrMagnitude(position)}, Range: {towerRange}");
                 movement.Velocity = -(Vector2)position;
             }

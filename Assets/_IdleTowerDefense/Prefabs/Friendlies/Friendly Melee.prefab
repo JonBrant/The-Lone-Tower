@@ -222,7 +222,7 @@ MonoBehaviour:
   Damage: 10
   DamageCooldown: 1
   VisionRadius: 10
-  AttackRange: 0.5
+  AttackRange: 0.2
   model: {fileID: 3938781522497842036}
   healthBar: {fileID: 1374273605779650090}
 --- !u!50 &-9166989117302009329
